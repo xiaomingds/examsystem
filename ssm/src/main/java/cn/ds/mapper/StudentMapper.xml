@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.ds.mapper.StudentMapper">
+
+    <!-- 用户登录的方法 id与方法名中相同  持久层-->
+    <select id="login" parameterType="cn.ds.pojo.Student" resultType="Student">
+        select * from student where username = #{username}
+    </select>
+</mapper>
