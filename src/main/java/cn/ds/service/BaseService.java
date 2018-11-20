@@ -29,14 +29,12 @@ public interface BaseService<T> {
      * @param t
      */
     void create(T t);
-
     /**
      * 删除（批量）
      *
      * @param id
      */
     void delete(Long id);
-
     /**
      * 修改
      *

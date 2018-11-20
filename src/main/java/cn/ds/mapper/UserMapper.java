@@ -20,9 +20,9 @@ public interface UserMapper {
     void createpoint2(Point2 point2);
     List<Point1>Point1All();
     void createchoice(Choice choice);
-    Choice findBychId(Long id);
+     Choice findBychId(Long id);
     List<Choice> findChoiceAll();
-    void updatech(Choice choice);
+     void updatech(Choice choice);
     void deletech(Long id);
     List<ReadProgram> findreadprogramAll();
 

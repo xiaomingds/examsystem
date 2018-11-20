@@ -1,30 +1,28 @@
 package cn.ds.pojo;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Point1 {
 
-    private Long id;
+
+
+    private long id;
     //知识点名
     private String pointname;
    private List<Point2> point2;//使用一个List来表示二级目录
 
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
-
 
     public String getPointname() {
         return pointname;
     }
-
     public void setPointname(String pointname) {
         this.pointname = pointname;
     }

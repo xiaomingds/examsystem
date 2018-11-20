@@ -53,5 +53,9 @@
 
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置上传文件大小-->
+        <property name="maxInMemorySize" value="5000000"/>
+    </bean>
 
 </beans>

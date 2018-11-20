@@ -4,8 +4,47 @@
 
 <mapper namespace="cn.ds.mapper.StudentMapper">
 
+
+    <resultMap type="cn.ds.pojo.Student" id="BaseResultMap">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="classname" property="classname"  />
+        <result column="num" property="num"  />
+    </resultMap>
+    <sql id="Base_Column_List" >
+      id, username, password,classname,num
+  </sql>
     <!-- 用户登录的方法 id与方法名中相同  持久层-->
     <select id="login" parameterType="cn.ds.pojo.Student" resultType="Student">
         select * from student where username = #{username}
     </select>
+    <insert id="insertInfoBatch" parameterType="java.util.List">
+        insert into student (id, username, password,classname,num)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{id,jdbcType=INT},
+            #{userName,jdbcType=VARCHAR},
+            #{password,jdbcType=VARCHAR} ,
+            #{classname,jdbcType=VARCHAR},
+            #{num,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long"  >
+        select *from student
+        where id = #{id}
+    </select>
+    <insert id="insert" parameterType="cn.ds.pojo.Student" >
+    insert into Student (id, username, password,classname,num)
+    values (#{id}, #{username}, #{password},
+            #{classname}, #{num})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="cn.ds.pojo.Student" >
+    update student
+    set username = #{username},
+      password = #{password},
+            classname = #{classname},
+      num = #{num}
+    where id = #{id}
+  </update>
 </mapper>

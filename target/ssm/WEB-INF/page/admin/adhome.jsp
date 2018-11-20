@@ -91,7 +91,7 @@
                 <li><a href=""><span class="glyphicon glyphicon-cog"></span> 基础设置 </a></li>
             </ul>
             <div  style="margin: 10px ; text-align: right" class="info">
-                <span style="color: gray">欢迎您：**老师</span>
+                <span style="color: gray">欢迎您：${sessionScope.usersession.username }老师</span>
                 <em>|</em>
                 <a  href="">退出</a>
             </div>

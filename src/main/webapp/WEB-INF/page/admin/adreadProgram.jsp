@@ -94,7 +94,7 @@
                 <li><a href=""><span class="glyphicon glyphicon-cog"></span> 基础设置 </a></li>
             </ul>
             <div  style="margin: 10px ; text-align: right" class="info">
-                <span style="color: gray">欢迎您：**老师</span>
+                <span style="color: gray">欢迎您：${sessionScope.usersession.username }老师</span>
                 <em>|</em>
                 <a  href="">退出</a>
             </div>
@@ -128,13 +128,13 @@
             type:"GET",
             success:function(data) {
                 for(var i = 0; i < data.length; i++) {
-                    var str ="";
-                    str = data[i].content;
+                    var str =data[i].content;
+                    str = str.replace(/\t/g,"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
+                    str = str.replace( /\r\n/g,"<br/>");
+                    /*str = data[i].content;
                     str= str.replace(/</g,"&lt;");
                     str = str.replace(/>/g,"&gt;");
-                    str = str.replace( /\r\n/g,"<br/>");
-                    str = str.replace(/\t/g,"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
-                    console.log("第二次替换"+str);
+                    console.log("第二次替换"+str);*/
                     $("#found").append(str);
                 }
             }

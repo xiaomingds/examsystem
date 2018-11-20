@@ -2,7 +2,6 @@ package cn.ds.service;
 
 import cn.ds.pojo.Customer;
 import cn.ds.pojo.PageBean;
-import cn.ds.pojo.Teacher;
 
 /**
  * @author ds
@@ -18,7 +17,5 @@ public interface CustomerService extends BaseService<Customer> {
      * @return
      */
     PageBean findByPage(Customer customer, int pageCode, int pageSize);
- Customer findById(Long id);
-
-
+   Customer findById(Long id);
 }

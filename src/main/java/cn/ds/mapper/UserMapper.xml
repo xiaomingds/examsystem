@@ -5,7 +5,7 @@
 <mapper namespace="cn.ds.mapper.UserMapper">
 
     <!-- 用户登录的方法 id与方法名中相同  持久层-->
-    <select id="login" parameterType="cn.ds.pojo.User" resultType="User">
+     <select id="login" parameterType="cn.ds.pojo.User" resultType="User">
         select * from tb_user where username = #{username}
     </select>
 
@@ -72,7 +72,7 @@
     <select id="Point1All" resultType="Point1">
         select * from point1
     </select>
-    <!--所有选择题-->
+  <!--所有选择题-->
     <select id="findChoiceAll"  resultType="cn.ds.pojo.Choice">
         select * from choicequestion
     </select>
@@ -84,8 +84,8 @@
     <select id="findBychId" parameterType="Long" resultType="cn.ds.pojo.Choice">
         select * from choicequestion where id = #{id}
     </select>
-    <!-- 更新选择信息的方法 -->
-    <update id="updatech" parameterType="cn.ds.pojo.Choice">
+    <!-- 更新老师信息的方法 -->
+    <update id="updatech" parameterType="Choice">
         update choicequestion set
             id = #{id},
             content= #{content}, aoption =#{aoption},

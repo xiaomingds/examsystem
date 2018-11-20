@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -20,10 +21,11 @@ public class TeacherController {
     private TeacherService teacherService;
 
     @RequestMapping(value = "/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model) {
+    public String login(@RequestParam String username, @RequestParam String password, Model model,HttpSession session ) {
         Teacher teacher = teacherService.login(username);
         if (teacher != null) {
             if (teacher.getPassword().equals(password)) {
+                session.setAttribute("teachersession",teacher);
                 return "page/teacher/teahome";
             } else {
                 model.addAttribute("message", "你输入的密码有误");
@@ -37,7 +39,10 @@ public class TeacherController {
     }
 
 
-
+    @RequestMapping("/stuinfo")
+    public  String stuifnopage(){
+        return "page/teacher/studentinfo";
+    }
     /**
      * 更新客户信息的方法
      *

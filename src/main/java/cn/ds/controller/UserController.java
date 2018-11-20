@@ -2,6 +2,7 @@ package cn.ds.controller;
 
 import cn.ds.pojo.*;
 import cn.ds.service.UserService;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -26,14 +28,16 @@ public class UserController {
 
     // 用户登录
     @RequestMapping(value = "/login")
-    public String login(@RequestParam String username,@RequestParam String password, Model model) {
+    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
         User user = userService.login(username);
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 //登录成功
-                //return "page/page";
+               //return "page/page";
+                session.setAttribute("usersession",user);
+
                 return "page/admin/adhome";
             } else {
                 model.addAttribute("message", "密码错误");
@@ -45,10 +49,10 @@ public class UserController {
         }
     }
 
-    //显示所有老师
+   //显示所有老师
     @RequestMapping("/findallteacher")
     public String findTeacherAll(Model model){
-        List<Teacher>teachers  = userService.findTeacherAll();
+               List<Teacher>teachers  = userService.findTeacherAll();
         for(int i = 0 ; i < teachers.size() ; i++) {
             System.out.println(teachers.get(i));
         }
@@ -65,7 +69,7 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:findallteacher.do";
+           return "redirect:findallteacher.do";
     }
     //老师删除的方法
     @RequestMapping(value = "/delete")
@@ -99,18 +103,11 @@ public class UserController {
         return "redirect:findallteacher.do";
     }
     //查找知识点
-    @RequestMapping("/findpoint1")
+  @RequestMapping("/findpoint1")
     public String findPoint1All(Model model){
         List<Point1>point1  = userService.findPoint1All();
-        for (Point1 c : point1) {
-            System.out.println(c);
-            List<Point2> ps = c.getPoint2();
-            for (Point2 p : ps) {
-                System.out.println("\t"+p);
-            }
-        }
-        model.addAttribute("point1",point1);
-        return "page/admin/adpoint";
+      model.addAttribute("point1",point1);
+      return "page/admin/adpoint";
     }
 
     //保存point1
@@ -137,7 +134,7 @@ public class UserController {
         return "redirect:findpoint1.do";
     }
     @RequestMapping("/addchoice")//添加选择题
-    public String createchoice(Choice choice, Model model){
+    public String createchoice(Choice choice,Model model){
         try{
             userService.createchoice(choice);
             model.addAttribute("message", "保存章节成功");
@@ -148,12 +145,12 @@ public class UserController {
     }
     //显示point1
     @RequestMapping("/allpoint1")
-    @ResponseBody
+   @ResponseBody
     public List<Point1> point1All(Model model){
         List<Point1>pt1  = userService.Point1All();
-        System.out.println("啦啦啦"+pt1);
-        //  model.addAttribute("pt1",pt1);
-        return pt1;
+         System.out.println("啦啦啦"+pt1);
+      //  model.addAttribute("pt1",pt1);
+    	return pt1;
     }
 
     //查找所有知识点
@@ -177,7 +174,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/findBychId")
     public Choice findBychId(@RequestBody Choice choice) {
-        Choice choice_info = userService.findBychId(choice.getId());
+       Choice choice_info = userService.findBychId(choice.getId());
         System.out.println("这是找到的数据"+choice_info.getDifficulty());
         if (choice_info != null) {
             return choice_info;
@@ -209,13 +206,15 @@ public class UserController {
     @RequestMapping("/readall")
     @ResponseBody
     public List<ReadProgram> pointReadProgramPAll(Model model){
-        List<ReadProgram>readPrograms  = userService.findreadprogramAll();
+        List<ReadProgram>readPrograms  = userService.findReadprogramAll();
         model.addAttribute("readPrograms",readPrograms);
         return  readPrograms;
     }
-
-
-
+   /* public static void main(String[] args){
+        String s = "<<< >>>&";
+         String ss = StringEscapeUtils.escapeHtml4(s);
+        System.out.println(ss);
+    }*/
     //跳转到老师列表页面
     @RequestMapping(value = "/ListTeacher")
     public String toListPage(Model model) {
@@ -243,5 +242,9 @@ public class UserController {
     @RequestMapping("/toallread")
     public  String toAllRead(){
         return "page/admin/adreadProgram";
+    }
+    @RequestMapping("/stuinfo")
+    public  String stuifnopage(){
+        return "page/teacher/studentinfo";
     }
 }

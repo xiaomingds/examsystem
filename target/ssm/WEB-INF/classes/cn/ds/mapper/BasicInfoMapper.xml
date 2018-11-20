@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ds.mapper.BasicInfoMapper">
+    <select id="findAll" parameterType="Long" resultType="Semester">
+        select seid,sename from semester
+    </select>
+    <select id="findMaAll" parameterType="Long" resultType="Major">
+        select maid,maname from major where seid = #{seid}
+    </select>
+    <select id="findCiAll" parameterType="Long" resultType="Class">
+        select cid,cname from class where maid = #{maid}
+    </select>
+</mapper>

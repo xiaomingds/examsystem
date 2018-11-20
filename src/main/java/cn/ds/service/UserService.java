@@ -5,8 +5,6 @@ import cn.ds.pojo.*;
 import java.util.List;
 
 /**
-
-/**
  * @author ds
  * @date 业务层
  */
@@ -26,6 +24,6 @@ public interface UserService extends BaseService<User> {
     Teacher findById(Long id);
     void updatech(Choice choice);
     void deletech(Long id);
-    List<ReadProgram> findreadprogramAll();
+    List<ReadProgram> findReadprogramAll();
 
 }

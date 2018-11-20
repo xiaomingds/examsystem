@@ -1,0 +1,22 @@
+package cn.ds.pojo.BasicInfo;
+
+public class Major {
+      private  long maid;
+         private String maname;
+
+    public long getMaid() {
+        return maid;
+    }
+
+    public void setMaid(long maid) {
+        this.maid = maid;
+    }
+
+    public String getManame() {
+        return maname;
+    }
+
+    public void setManame(String maname) {
+        this.maname = maname;
+    }
+}

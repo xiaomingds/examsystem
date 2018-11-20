@@ -95,7 +95,7 @@
                 <li><a href=""><span class="glyphicon glyphicon-cog"></span> 基础设置 </a></li>
             </ul>
             <div  style="margin: 10px ; text-align: right" class="info">
-                <span style="color: gray">欢迎您：**老师</span>
+                <span style="color: gray">欢迎您：${sessionScope.usersession.username }老师</span>
                 <em>|</em>
                 <a  href="">退出</a>
             </div>
@@ -116,7 +116,7 @@
 <c:forEach items="${requestScope.choice}" var="ch">
     <br/>
     <br/>
-<form>
+    <form>
     <td>
         <a href="#" onclick="return edit(${ch.id})" style="text-decoration: none;">
             <span class="fa fa-edit fa-fw"></span>
@@ -127,17 +127,17 @@
         </a>
     </td>
     <fieldset id="fieldset1">
-        <p>${ch.id}.${ch.content}</p>
+        <p>${ch.content}</p>
                A: ${ch.aoption}<br/>
                B: ${ch.boption}<br/>
                C: ${ch.coption}<br/>
                D: ${ch.doption}<br/>
                <h5> 答案：${ch.answer}</h5>
                <h5> 分析：${ch.analysis}</h5>
-               <h5> 所属知识点：${ch.chapter}-${ch.chaptertwo}</h5>
+               <h5> 所属知识点：${ch.chaptertwo}</h5>
                <h5> 难度：${ch.difficulty}</h5>
     </fieldset>
-</form>
+    </form>
 </c:forEach>
 </div>
 </div>
@@ -191,10 +191,10 @@
                         <label class="col-sm-2 control-label">答案</label>
                         <div class="col-sm-5">
                             <select class="form-control" id="answer" name = "answer">
-                                <option value="1">A</option>
-                                <option value="1">B</option>
-                                <option value="1">C</option>
-                                <option value="1">D</option></select>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option></select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -284,10 +284,10 @@
                         <label class="col-sm-2 control-label">答案</label>
                         <div class="col-sm-5">
                             <select class="form-control" id="upanswer" name = "answer">
-                                <option value="1">A</option>
-                                <option value="1">B</option>
-                                <option value="1">C</option>
-                                <option value="1">D</option></select>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option></select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -350,7 +350,7 @@
 </body>
 <script>
     $("#add").click(function(){
-         getpoint();
+       getpoint();
         $("#addch").modal({
         backdrop:"static"
         });

@@ -3,10 +3,13 @@ package cn.ds.service.impl;
 import cn.ds.mapper.UserMapper;
 import cn.ds.pojo.*;
 import cn.ds.service.UserService;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
+
 /**
  * @author ds
  *
@@ -32,7 +35,7 @@ public class UserServiceImpl implements UserService {
     //x新建老师
     @Override
     public void create(Teacher teacher) {
-        userMapper.create(teacher);
+            userMapper.create(teacher);
     }
     //知识点一级目录
     @Override
@@ -45,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public void createpoint2(Point2 point2) {
-        userMapper.createpoint2(point2);
+         userMapper.createpoint2(point2);
     }
     @Override
     public List<Point1> Point1All() {
@@ -75,7 +78,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-     @Override
+    @Override
     public Teacher findById(Long id) {
         return userMapper.findById(id);
     }
@@ -91,10 +94,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ReadProgram> findreadprogramAll() {
-        return userMapper.findreadprogramAll();
+    public List<ReadProgram> findReadprogramAll() {
+        List<ReadProgram>readPrograms  = userMapper.findreadprogramAll();
+        for(int i = 0;i < readPrograms.size();i++){
+            String s = StringEscapeUtils.escapeHtml4(readPrograms.get(i).getContent());
+            readPrograms.get(i).setContent(s);
+            System.out.println(readPrograms.get(i).getContent());
+        }
+        return readPrograms;
     }
-
     public void create(User user) {
     }
     public void delete(Long id) {
