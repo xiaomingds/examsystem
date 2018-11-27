@@ -40,7 +40,6 @@ public class ExcelUtils {
         Sheet sheet = null;  //页数
         Row row = null;  //行数
         Cell cell = null;  //列数
-
         list = new ArrayList<List<Object>>();
         //遍历Excel中所有的sheet
         for (int i = 0; i < work.getNumberOfSheets(); i++) {
@@ -51,7 +50,6 @@ public class ExcelUtils {
             for (int j = sheet.getFirstRowNum(); j <= sheet.getLastRowNum(); j++) {
                 row = sheet.getRow(j);
                 if(row==null||row.getFirstCellNum()==j){continue;}
-
                 //遍历所有的列
                 List<Object> li = new ArrayList<Object>();
                 for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {

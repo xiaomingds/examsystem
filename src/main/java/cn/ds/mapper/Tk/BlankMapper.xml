@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.ds.mapper.Tk.BlankMapper">
+    <!-- 一对多查询 -->
+    <resultMap type="Blank" id="categoryBean">
+        <id column="id" property="id" />
+        <result column="content" property="content" />
+        <result column="analysis" property="analysis" />
+        <result column="chapter" property="chapter" />
+        <result column="chaptertwo" property="chaptertwo" />
+        <result column="difficulty" property="difficulty" />
+        <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+        <collection property="answer" ofType="Answer">
+            <id column="answer_id" property="answer_id" />
+            <result column="answer" property="answer" />
+        </collection>
+    </resultMap>
+    <select id="findBlankAll" resultMap="categoryBean">
+            select c.*, p.*
+            from blank c
+            left join answer p on c.id = p.blank_id
+       </select>
+    <select id="findById" parameterType="Long" resultType="Blank">
+        select c.*, p.* from blank c left join  answer p on c.id = p.blank_id where id = #{id}
+    </select>
+    <delete id="DeleteById" >
+        DELETE FROM answer  WHERE answer.blank_id = #{id};
+        delete  from  blank WHERE  id = #{id}
+    </delete>
+
+</mapper>

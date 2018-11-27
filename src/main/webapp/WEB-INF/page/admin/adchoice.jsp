@@ -10,7 +10,6 @@
 <%@ page isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%@ page import="java.util.*" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
@@ -374,7 +373,7 @@
                 }
               for (var j = 0; j < data[0].point2.length; j++) {
                   chaptertwo.append("<option value='" + data[0].point2[j].pname + "'>" + data[0].point2[j].pname + "</option>");
-                  upchaptertwo.append("<option value='" + data[0].point2[j].pname + "'>" + data[0].point2[j].pname + "</option>");
+                 upchaptertwo.append("<option value='" + data[0].point2[j].pname + "'>" + data[0].point2[j].pname + "</option>");
 
               }
               //select1绑定change事件
@@ -388,7 +387,6 @@
                       // console.log("啦啦啦2"+data[p].point2);
                        //遍历p2的数组
                        for (var j = 0; j < data[p].point2.length; j++) {
-                          // console.log("这里面有 ￥"+ data[p].point2[j].pname);
                            chaptertwo.append("<option value='" + data[p].point2[j].pname+ "'>" + data[p].point2[j].pname+ "</option>");
                        }
                 });
@@ -417,7 +415,6 @@
                 type: 'POST',
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8',
-
                 data: JSON.stringify({
                     id: id
                 }),
@@ -432,9 +429,8 @@
                     $("#editch answer").val(data.answer);
                     $("#upanalysis").val(data.analysis);
                     $("#editch upchapter").val(data.chapter);
-                   // console.log(data.chapter);
+                    console.log(data.chapter);
                     $("#editch upchaptertwo").val(data.chaptertwo);
-                   // console.log(data.chaptertwo);
                     $("#editch updifficulty").val(data.difficulty);
                     $("#editch").modal('show');
                 },

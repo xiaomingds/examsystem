@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 小鸣ds
-  Date: 2018/11/4
-  Time: 20:13
+  Date: 2018/11/27
+  Time: 13:54
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -70,8 +70,6 @@
 
 </head>
 <body>
-
-
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -100,74 +98,7 @@
         </div>
     </div><!-- /.container -->
 </div>  <!-- 抬头 -->
-<br/>
-<br/>
-<script src="<%=basePath%>/js/jquery-3.3.1.min.js"></script>
-<script src="<%=basePath%>/js/bootstrap.min.js"></script>
-<script src="<%=basePath%>/js/index.js"></script>
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="<%=basePath%>/css/style.css" media="screen" type="text/css" />
-<div>
-    <div><button class="btn btn-primary" id="showread">查看</button>
-    </div>
-    <div>
-            <br/>
-            <br/>
-            <form  id="found">
-            </form>
-        <p id = "answer"></p>
-    </div>
-</div>
+
 
 </body>
-
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-2.1.1.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $.ajax({
-            url : "${APP_PATH}/login/user/readall.do",	//请求url
-            type : "POST",	//请求类型  post|get
-            // data : "key=value&key1=value2",	//后台用 request.getParameter("key");
-            dataType : "json",  //返回数据的 类型 text|json|html--
-            success:function(data) {
-                for(var i = 0; i < data.length; i++) {
-                    var str =data[i].content;
-                    var an = data[i].answer;
-                    str = str.replace(/\t/g,"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
-                    str = str.replace( /\r\n/g,"<br/>");
-                    an = an.replace(/\t/g,"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
-                    an = an.replace( /\r\n/g,"<br/>");
-                    /*str = data[i].content;
-                    str= str.replace(/</g,"&lt;");
-                    str = str.replace(/>/g,"&gt;");
-                    console.log("第二次替换"+str);*/
-                    $("#found").append(str);
-                    $("#answer").append(an);
-                }
-            }
-        });
-    });
-</script>
-<script>
-    $("#showread").click(function(){
-        $.ajax({
-            url:"${APP_PATH}/login/user/readall.do",
-            type:"GET",
-            success:function(data) {
-                for(var i = 0; i < data.length; i++) {
-                    var str =data[i].content;
-                    console.log("题目",str);
-                    var s = data[i].answer;
-                    str = str.replace(/\t/g,"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
-                    str = str.replace( /\r\n/g,"<br/>");
-                    /*str = data[i].content;
-                    str= str.replace(/</g,"&lt;");
-                    str = str.replace(/>/g,"&gt;");
-                    console.log("第二次替换"+str);*/
-                    $("#found").append(str);
-                }
-            }
-        });
-    });
-</script>
 </html>

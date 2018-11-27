@@ -56,7 +56,14 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public List<Choice> findChoiceAll() {
-        return userMapper.findChoiceAll();
+        List<Choice>choices = userMapper.findChoiceAll();
+        //转义字符的实现方法
+        for(int i = 0;i < choices.size();i++){
+            String s = StringEscapeUtils.escapeHtml4(choices.get(i).getContent());
+            choices.get(i).setContent(s);
+            System.out.println(choices.get(i).getContent());
+        }
+        return choices;
     }
     @Override
     public void createchoice(Choice choice) {

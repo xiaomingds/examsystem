@@ -84,7 +84,7 @@
     <select id="findBychId" parameterType="Long" resultType="cn.ds.pojo.Choice">
         select * from choicequestion where id = #{id}
     </select>
-    <!-- 更新老师信息的方法 -->
+    <!-- 更新选择题的方法 -->
     <update id="updatech" parameterType="Choice">
         update choicequestion set
             id = #{id},

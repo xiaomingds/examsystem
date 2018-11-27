@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 小鸣ds
-  Date: 2018/11/4
-  Time: 20:13
+  Date: 2018/11/26
+  Time: 19:04
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -108,66 +108,86 @@
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<%=basePath%>/css/style.css" media="screen" type="text/css" />
 <div>
-    <div><button class="btn btn-primary" id="showread">查看</button>
+    <div><button class="btn btn-primary" id="add">新增</button>
     </div>
     <div>
+        <c:forEach items="${requestScope.blanks}" var="ch">
             <br/>
             <br/>
-            <form  id="found">
+            <form>
+                <td>
+                    <a href="#" onclick="return edit(${ch.id})" style="text-decoration: none;">
+                        <span class="fa fa-edit fa-fw"></span>
+                    </a>
+                    <a href="#" onclick="return trash(${ch.id})" style="text-decoration: none;"
+                       data-toggle="modal" data-target="#trashModal">
+                        <span class="fa fa-trash-o fa-fw"></span>
+                    </a>
+                </td>
+                <fieldset id="fieldset1">
+                    <p>${ch.content}</p>
+            <c:forEach items="${ch.answer}" var="t">
+            <h5> 答案：${t.answer}</h5>
+            </c:forEach>
+                    <h5> 分析：${ch.analysis}</h5>
+                    <h5> 所属知识点：${ch.chaptertwo}</h5>
+                    <h5> 难度：${ch.difficult}</h5>
+                </fieldset>
             </form>
-        <p id = "answer"></p>
+        </c:forEach>
     </div>
 </div>
 
+<!-- 删除的模态框 -->
+<div class="modal fade" id="trashModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- 模糊框头部 -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title">删除！</h4>
+            </div>
+            <!-- 模糊框主体 -->
+            <div class="modal-body">
+                <strong>你确定要删除吗？</strong>
+            </div>
+            <!-- 模糊框底部 -->
+            <div class="modal-footer">
+                <button type="button" class="delSure btn btn-info" data-dismiss="modal">确定</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
-
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-2.1.1.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $.ajax({
-            url : "${APP_PATH}/login/user/readall.do",	//请求url
-            type : "POST",	//请求类型  post|get
-            // data : "key=value&key1=value2",	//后台用 request.getParameter("key");
-            dataType : "json",  //返回数据的 类型 text|json|html--
-            success:function(data) {
-                for(var i = 0; i < data.length; i++) {
-                    var str =data[i].content;
-                    var an = data[i].answer;
-                    str = str.replace(/\t/g,"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
-                    str = str.replace( /\r\n/g,"<br/>");
-                    an = an.replace(/\t/g,"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
-                    an = an.replace( /\r\n/g,"<br/>");
-                    /*str = data[i].content;
-                    str= str.replace(/</g,"&lt;");
-                    str = str.replace(/>/g,"&gt;");
-                    console.log("第二次替换"+str);*/
-                    $("#found").append(str);
-                    $("#answer").append(an);
-                }
-            }
-        });
-    });
-</script>
 <script>
-    $("#showread").click(function(){
-        $.ajax({
-            url:"${APP_PATH}/login/user/readall.do",
-            type:"GET",
-            success:function(data) {
-                for(var i = 0; i < data.length; i++) {
-                    var str =data[i].content;
-                    console.log("题目",str);
-                    var s = data[i].answer;
-                    str = str.replace(/\t/g,"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
-                    str = str.replace( /\r\n/g,"<br/>");
-                    /*str = data[i].content;
-                    str= str.replace(/</g,"&lt;");
-                    str = str.replace(/>/g,"&gt;");
-                    console.log("第二次替换"+str);*/
-                    $("#found").append(str);
-                }
-            }
-        });
-    });
+    //删除
+    function trash(id) {
+        if (!id) {
+            alert("error");
+        } else {
+            $(".delSure").click(function () {
+                $.ajax({
+                    url: '<%=basePath%>/tk/deleteblank.do?id=' + id,
+                    type: 'POST',
+                    success: function (data) {
+                        $("body").html(data);
+                    }
+                });
+            });
+        }
+    }
+    //编辑
+    function edit(id) {
+                $.ajax({
+                    url: '<%=basePath%>/tk/byId.do?id=' + id,
+                    type: 'POST',
+                    success: function (data) {
+
+                    }
+                });
+    }
 </script>
 </html>
+

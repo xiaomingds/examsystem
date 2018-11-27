@@ -124,7 +124,7 @@
             <td  contenteditable="true">null</td>
         </tr>
         <tr>
-            <td><a href=""> 填空题 </a></td>
+            <td><a href="<%=basePath%>/tk/blankall.do"> 填空题 </a></td>
             <td  contenteditable="true">100</td>
         </tr>
         <tr>
@@ -140,8 +140,6 @@
             <td  contenteditable="true">120</td>
         </tr>
     </table>
-
-
 </div>
 
 </body>
