@@ -99,7 +99,7 @@
     </div><!-- /.container -->
 </div>  <!-- 抬头 -->
 
-<form action="<%=basePath%>/user/readall.do" method="post">
+<form action="<%=basePath%>/user/findallchoice.do" method="post">
         <tr>
             <td><input type="submit" value="test" /></td>
         </tr>

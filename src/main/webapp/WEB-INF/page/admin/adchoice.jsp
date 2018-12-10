@@ -153,10 +153,9 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">题目</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="content" class="form-control" id="content" placeholder="题目">
-                            <span class="help-block"></span>
-                        </div>
+
+                            <textarea class="form-control" rows="3" name="content" id="content"></textarea>
+
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">A:</label>
@@ -246,10 +245,8 @@
                     <input name="id" id="id" hidden="hidden"/>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">题目</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="content" class="form-control" id="upcontent" placeholder="题目">
-                            <span class="help-block"></span>
-                        </div>
+                        <textarea class="form-control" rows="3" name="content" id="upcontent"></textarea>
+
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">A:</label>

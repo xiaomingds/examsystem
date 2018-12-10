@@ -48,7 +48,7 @@
             <ul class="nav navbar-nav">
                 <li  ><a href=""><span class="glyphicon glyphicon-home"></span> 知识点 </a></li>
                 <li  ><a href=""><span class="glyphicon glyphicon-home"></span> 题库 </a></li>
-                <li><a href=""><span class="glyphicon glyphicon-briefcase"></span> 考试 </a></li>
+                <li><a href="<%=basePath%>/teacher/exam.do"><span class="glyphicon glyphicon-briefcase"></span> 考试 </a></li>
                 <li class = "dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" ></span> 学生 <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<%=basePath%>/user/stuinfo.do" style="font-size: 20px">学生信息</a></li>

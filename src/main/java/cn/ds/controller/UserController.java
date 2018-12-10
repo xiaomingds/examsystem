@@ -1,8 +1,10 @@
 package cn.ds.controller;
 
+import cn.ds.exception.CustomException;
 import cn.ds.pojo.*;
+import cn.ds.pojo.Tk.Choice;
+import cn.ds.pojo.Tk.ReadProgram;
 import cn.ds.service.UserService;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,9 +37,9 @@ public class UserController {
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 //登录成功
-               //return "page/page";
-                session.setAttribute("usersession",user);
 
+               session.setAttribute("usersession",user);
+                // return "page/page";
                 return "page/admin/adhome";
             } else {
                 model.addAttribute("message", "密码错误");
@@ -86,6 +88,9 @@ public class UserController {
     @RequestMapping("/findById")
     public Teacher findById(@RequestBody Teacher teacher) {
         Teacher teacher_info = userService.findById(teacher.getId());
+        System.out.println(teacher.getId());
+        System.out.println(teacher.getUsername());
+        System.out.println(teacher.getPassword());
         if (teacher_info != null) {
             return teacher_info;
         } else {
@@ -134,7 +139,7 @@ public class UserController {
         return "redirect:findpoint1.do";
     }
     @RequestMapping("/addchoice")//添加选择题
-    public String createchoice(Choice choice,Model model){
+    public String createchoice(Choice choice, Model model){
         try{
             userService.createchoice(choice);
             model.addAttribute("message", "保存章节成功");
@@ -210,6 +215,15 @@ public class UserController {
         model.addAttribute("readPrograms",readPrograms);
         return  readPrograms;
     }
+
+
+
+
+
+
+
+
+
    /* public static void main(String[] args){
         String s = "<<< >>>&";
          String ss = StringEscapeUtils.escapeHtml4(s);

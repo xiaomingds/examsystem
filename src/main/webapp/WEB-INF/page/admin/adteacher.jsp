@@ -92,7 +92,7 @@
                     <td>${ts.username}</td>
                     <td>${ts.password}</td>
                     <td>
-                        <a href="#" onclick="return edit(${ts.id})" style="text-decoration: none;" id="teacheredit">
+                        <a href="#" onclick="return edit('${ts.id}','${ts.username}','${ts.password}')" style="text-decoration: none;" id="teacheredit">
                             <span class="fa fa-edit fa-fw" ></span>
                         </a>
                         <a href="#" onclick="return trash(${ts.id})" style="text-decoration: none;"
@@ -105,7 +105,7 @@
             </tbody>
         </table>
     </div>
-    <!-- 员工添加的模态框 -->
+    <!-- 添加的模态框 -->
     <div class="modal fade" id="tchadd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -232,7 +232,7 @@
         }
     }
     // 编辑信息的方法
-    function edit(id) {
+    function edit(id,username,password) {
         if (!id) {
             alert("error");
         } else {
@@ -243,7 +243,9 @@
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8',
                 data: JSON.stringify({
-                    id: id
+                    id: id,
+                    username:username,
+                    password:password
                 }),
                 success: function (data) {
                     console.log("老师"+data);

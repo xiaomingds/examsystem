@@ -21,7 +21,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by codingBoy on 16/11/15.
  */
 @Controller
 //定义url的根路径，访问时根路径+方法名的url

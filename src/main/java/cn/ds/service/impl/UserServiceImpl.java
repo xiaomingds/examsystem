@@ -2,11 +2,12 @@ package cn.ds.service.impl;
 
 import cn.ds.mapper.UserMapper;
 import cn.ds.pojo.*;
+import cn.ds.pojo.Tk.Choice;
+import cn.ds.pojo.Tk.ReadProgram;
 import cn.ds.service.UserService;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
 
@@ -60,6 +61,7 @@ public class UserServiceImpl implements UserService {
         //转义字符的实现方法
         for(int i = 0;i < choices.size();i++){
             String s = StringEscapeUtils.escapeHtml4(choices.get(i).getContent());
+
             choices.get(i).setContent(s);
             System.out.println(choices.get(i).getContent());
         }

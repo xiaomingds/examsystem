@@ -1,17 +1,14 @@
 package cn.ds.controller;
 
-
+import cn.ds.pojo.Exam.Score;
 import cn.ds.pojo.Student;
+import cn.ds.service.ExamService;
 import cn.ds.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import javax.imageio.metadata.IIOMetadataNode;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +17,8 @@ import javax.servlet.http.HttpSession;
 public class StudentController {
     @Autowired
     private StudentService studentService;
-
+   @Autowired
+    private ExamService examService;
     @RequestMapping(value = "/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model,HttpSession session) {
         Student student = studentService.login(username);
@@ -42,6 +40,20 @@ public class StudentController {
             return "page/loginInfo";
         }
     }
+
+    @RequestMapping("/savescore")
+    @ResponseBody
+    public  String SaveScore(@RequestBody Score score, Model model){
+         System.out.println(score.getAllscore());
+         System.out.println(score.getExamname());
+         examService.CreateScore(score);
+         //model.addAttribute(score);
+          return "score";
+    }
+
+
+
+
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession();

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ds.mapper.exam.ExamMapper">
+    <insert id="insert" parameterType = "ExamInfo">
+        insert into exam_info(examname, exnumber,score)
+        values( #{examname},
+                  #{exnumber},
+                  #{score})
+    </insert>
+    <select id="FindAll" resultType="ExamInfo">
+        select *from exam_info
+    </select>
+
+    <select id="findById" parameterType="Long" resultType="ExamInfo">
+        select * from exam_info where id = #{id}
+    </select>
+    <!--随机获取数据-->
+    <select id="RandId" resultType="Choice">
+         select * from choicequestion order by RAND() limit #{exnumber}
+    </select>
+    <insert id="CreateScore" parameterType="Score">
+        insert  into stu_score(examname, allscore)
+        values (
+             #{examname},
+             #{allscore}
+        )
+    </insert>
+</mapper>

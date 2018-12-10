@@ -1,6 +1,8 @@
 package cn.ds.mapper;
 
 import cn.ds.pojo.*;
+import cn.ds.pojo.Tk.Choice;
+import cn.ds.pojo.Tk.ReadProgram;
 
 import java.util.List;
 

@@ -3,14 +3,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 %>
 <!DOCTYPE html>
 <html>
-<head>
 
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,7 +46,7 @@
             <ul class="nav navbar-nav"> <!-- 下列class="active"  为那个高亮 -->
                 <li  ><a href=""><span class="glyphicon glyphicon-home"></span> 知识点 </a></li>
                 <li  ><a href=""><span class="glyphicon glyphicon-home"></span> 题库 </a></li>
-                <li><a href=""><span class="glyphicon glyphicon-briefcase"></span> 考试 </a></li>
+                <li><a href="<%=basePath%>/teacher/findexam.do"><span class="glyphicon glyphicon-briefcase"></span> 考试 </a></li>
                 <li class = "dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" ></span> 学生 <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="" style="font-size: 20px">学生信息导入</a></li>

@@ -182,7 +182,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.4</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -195,7 +194,13 @@
             <version>1.2</version>
             <scope>provided</scope>
         </dependency>
-
+        <!-- Serialization:序列化，使Java对象到Json字符串的过程。
+            Deserialization：反序列化，字符串转换成Java对象-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3.1</version>
+        </dependency>
     </dependencies>
 
 

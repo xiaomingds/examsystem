@@ -22,6 +22,11 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!--
+全局异常处理器
+只要类实现了HandlerExceptionResolver接口，就是一个全局异常处理器哦
+-->
+    <bean class="cn.ds.exception.CustomExceptionResolver"/>
 
     <mvc:resources mapping="/images/**" location="/images/" />
 
@@ -30,4 +35,12 @@
     <mvc:default-servlet-handler/>
     <!-- 配置注解驱动 映射动态请求 支持springmvc一些高级功能，比如JSR303校验，快捷AJAX请求-->
     <mvc:annotation-driven/>
+
+    <!--访问拦截
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="cn.ds.controller.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
 </beans>
