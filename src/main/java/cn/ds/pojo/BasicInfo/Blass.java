@@ -1,9 +1,9 @@
 package cn.ds.pojo.BasicInfo;
 
-public class Class {
+public class Blass {
     private  long cid;
     private  String cname;
-
+    private  long maid;
     public String getCname() {
         return cname;
     }
@@ -18,5 +18,13 @@ public class Class {
 
     public void setCid(long cid) {
         this.cid = cid;
+    }
+
+    public long getMaid() {
+        return maid;
+    }
+
+    public void setMaid(long maid) {
+        this.maid = maid;
     }
 }

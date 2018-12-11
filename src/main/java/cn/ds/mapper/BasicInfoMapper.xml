@@ -8,7 +8,30 @@
     <select id="findMaAll" parameterType="Long" resultType="Major">
         select maid,maname from major where seid = #{seid}
     </select>
-    <select id="findCiAll" parameterType="Long" resultType="Class">
+    <select id="findCiAll" parameterType="Long" resultType="Blass">
         select cid,cname from class where maid = #{maid}
+    </select>
+    <insert id="CreateSemester" parameterType="Semester">
+        insert into semester(sename) values (#{sename})
+    </insert>
+    <!--批量删除-->
+    <delete id="deleteSemester" parameterType="int">
+        delete from semester where seid in
+        <foreach item="seid" collection="array"  separator=",">
+             #{seid}
+        </foreach>
+    </delete>
+    <insert id="CreateMajor" parameterType="Major">
+        insert into major(maname,seid) values (#{maname},#{seid})
+    </insert>
+    <insert id="CreateBlass" parameterType="Blass">
+        insert into class(cname,maid) values (#{cname},#{maid})
+    </insert>
+    <insert id="CreateStudent" parameterType="Student">
+        insert into student(username,password,classname,num) values (#{username},#{password},#{classname},#{num})
+    </insert>
+     <!-- 查找某个班级下的学生-->
+    <select id="findClass" parameterType="String" resultType="Student">
+        select id,username,password, num,classname from student where classname = #{classname}
     </select>
 </mapper>

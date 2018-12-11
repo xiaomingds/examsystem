@@ -3,7 +3,7 @@ package cn.ds.pojo.BasicInfo;
 public class Major {
       private  long maid;
          private String maname;
-
+       private  Long seid;
     public long getMaid() {
         return maid;
     }
@@ -18,5 +18,13 @@ public class Major {
 
     public void setManame(String maname) {
         this.maname = maname;
+    }
+
+    public Long getSeid() {
+        return seid;
+    }
+
+    public void setSeid(Long seid) {
+        this.seid = seid;
     }
 }

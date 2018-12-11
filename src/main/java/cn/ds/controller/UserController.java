@@ -40,7 +40,7 @@ public class UserController {
 
                session.setAttribute("usersession",user);
                 // return "page/page";
-                return "page/admin/adhome";
+                return "page/admin/home";
             } else {
                 model.addAttribute("message", "密码错误");
                 return "page/loginInfo";
