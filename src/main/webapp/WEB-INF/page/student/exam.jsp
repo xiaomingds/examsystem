@@ -35,7 +35,6 @@
             <br />
         </fieldset>
     </form>
-
 </c:forEach>
             <button type="submit" class="delSure btn btn-info" data-dismiss="modal" onclick="getValue()">提交</button>
         </div>

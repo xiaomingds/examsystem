@@ -35,9 +35,9 @@
     </thead>
     <c:choose>
            <c:when test="${fn:length(requestScope.examInfo) > 0 }">
-            <c:forEach items="${requestScope.examInfo}" var="ex">
 
-        <tbody>
+
+        <tbody> <c:forEach items="${requestScope.examInfo}" var="ex">
             <tr class="text-center">
                 <td >${ex.examname}</td>
                 <td>
@@ -49,10 +49,10 @@
                     </form>
                 </td>
             </tr>
-
+        </c:forEach>
         </tbody>
     </table>
-            </c:forEach>
+
         </c:when>
         <c:otherwise>
             <div class="jumbotron">

@@ -89,7 +89,7 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="../../Knowledge_points/Knowledge_points.html"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
                     </li>
                     <li>
                         <a href="teacher.html"><i class="fa fa-edit fa-fw"></i>教师</a>

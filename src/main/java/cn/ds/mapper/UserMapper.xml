@@ -64,6 +64,18 @@
     <insert id="createpoint1" parameterType="Point1">
         insert into point1( pointname) values( #{pointname})
     </insert>
+    <!--删除poin1-->
+    <delete id="deletep1" parameterType="Long">
+        delete from point2 where aid = #{id}
+    </delete>
+
+    <delete id="deletepp1" parameterType="Long">
+       delete from point1 where id= #{id}
+    </delete>
+    <!--删除poin2-->
+    <delete id="deletep2" parameterType="String">
+        delete from point2 where pname = #{chaptertwo}
+    </delete>
     <!-- 保存point2 -->
     <insert id="createpoint2" parameterType="Point2">
         insert into point2( pname,aid) values( #{pname},#{aid})

@@ -97,6 +97,7 @@ public class UserController {
             return null;
         }
     }
+
     @RequestMapping(value = "/update")
     public String update(Teacher teacher, Model model) {
         try {
@@ -112,7 +113,7 @@ public class UserController {
     public String findPoint1All(Model model){
         List<Point1>point1  = userService.findPoint1All();
       model.addAttribute("point1",point1);
-      return "page/admin/adpoint";
+      return "page/admin/point";
     }
 
     //保存point1
@@ -126,7 +127,21 @@ public class UserController {
         }
         return "redirect:findpoint1.do";
     }
-
+  //删除point1
+    @RequestMapping("/delep1")
+    public  String DeleteP1(@RequestParam int id){
+        System.out.println("删除的章节id" + id);
+        userService.deletep1((long) id);
+        userService.deletepp1((long) id);
+        return "redirect:findpoint1.do";
+    }
+    //删除point2
+    @RequestMapping("/delep2")
+    public  String DeleteP2(@RequestParam String chaptertwo){
+        System.out.println("删除的章节id" + chaptertwo);
+       userService.deletep2(chaptertwo);
+        return "redirect:findpoint1.do";
+    }
     //保存point2
     @RequestMapping("/addpoint2")
     public String createpoint2(Point2 point2, Model model) {
@@ -138,6 +153,7 @@ public class UserController {
         }
         return "redirect:findpoint1.do";
     }
+
     @RequestMapping("/addchoice")//添加选择题
     public String createchoice(Choice choice, Model model){
         try{

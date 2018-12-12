@@ -51,6 +51,23 @@ public class UserServiceImpl implements UserService {
     public void createpoint2(Point2 point2) {
          userMapper.createpoint2(point2);
     }
+
+    @Override
+    public void deletep1(Long id) {
+        userMapper.deletep1(id);
+    }
+
+    @Override
+    public void deletepp1(Long id) {
+        userMapper.deletepp1(id);
+    }
+
+    @Override
+    public void deletep2(String chaptertwo) {
+        userMapper.deletep2(chaptertwo);
+    }
+
+
     @Override
     public List<Point1> Point1All() {
         return userMapper.Point1All();

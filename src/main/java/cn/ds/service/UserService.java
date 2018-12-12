@@ -19,6 +19,9 @@ public interface UserService extends BaseService<User> {
     List<Point1> findPoint1All();
     void createpoint1(Point1 point1 );
     void createpoint2(Point2 point2);
+    void deletep1(Long id);
+    void deletepp1(Long id);
+    void deletep2(String chaptertwo);
     List<Point1>Point1All();
     List<Choice> findChoiceAll();
     void createchoice(Choice choice);

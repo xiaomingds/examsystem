@@ -370,7 +370,6 @@
               for (var j = 0; j < data[0].point2.length; j++) {
                   chaptertwo.append("<option value='" + data[0].point2[j].pname + "'>" + data[0].point2[j].pname + "</option>");
                  upchaptertwo.append("<option value='" + data[0].point2[j].pname + "'>" + data[0].point2[j].pname + "</option>");
-
               }
               //select1绑定change事件
               $("#chapter").change(function () {
