@@ -13,7 +13,7 @@ public interface BasicInfoMapper {
     void CreateSemester(Semester semester);
     void CreateMajor(Major major);
     void CreateBlass(Blass blass);
-    void CreaStudent(Student student);
+    void CreateStudent(Student student);
     List<Student>findClass(String classname);
 
      Integer deleteSemester(int[] id_arr);//批量删除

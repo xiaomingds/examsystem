@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/student")
 public class StudentController {
@@ -42,13 +43,12 @@ public class StudentController {
     }
 
     @RequestMapping("/savescore")
-    @ResponseBody
-    public  String SaveScore(@RequestBody Score score, Model model){
-         System.out.println(score.getAllscore());
-         System.out.println(score.getExamname());
-         examService.CreateScore(score);
-         //model.addAttribute(score);
-          return "score";
+    public  String SaveScore(@RequestParam int allscore, @RequestParam String examname,Model model){
+         System.out.println(allscore);
+         System.out.println(examname);
+         //examService.CreateScore(score);
+         model.addAttribute("score",allscore);
+          return "page/student/score";
     }
 
 

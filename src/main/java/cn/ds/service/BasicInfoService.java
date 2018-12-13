@@ -15,7 +15,7 @@ public interface BasicInfoService {
     Integer deleteSemester(int[] id_arr);//批量删除
     void CreateMajor(Major major);
     void CreateBlass(Blass blass);
-    void CreaStudent(Student student);
+    void CreateStudent(Student student);
     List<Student>findClass(String classname);
 
 }

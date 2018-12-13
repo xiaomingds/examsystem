@@ -52,9 +52,10 @@ public class BasicInfoImpl implements BasicInfoService {
     }
 
     @Override
-    public void CreaStudent(Student student) {
-     basicInfoMapper.CreaStudent(student);
+    public void CreateStudent(Student student) {
+        basicInfoMapper.CreateStudent(student);
     }
+
 
     @Override
     public List<Student> findClass(String classname) {

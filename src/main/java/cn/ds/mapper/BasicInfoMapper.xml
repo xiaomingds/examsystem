@@ -32,6 +32,6 @@
     </insert>
      <!-- 查找某个班级下的学生-->
     <select id="findClass" parameterType="String" resultType="Student">
-        select id,username,password, num,classname from student where classname = #{classname}
+        select id,username,password, num,classname from student where classname = #{classname} order by  id asc
     </select>
 </mapper>

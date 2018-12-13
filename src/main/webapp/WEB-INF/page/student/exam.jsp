@@ -66,19 +66,21 @@
           console.log("dd"+ allscore);
           console.log("aa"+'${examname}')
           alert("当前考试分数为：" + allscore);
-          $.ajax({
-              url: '<%=basePath%>/student/savescore.do',
-              type: 'POST',
-              dataType: 'json',
-              contentType: 'application/json;charset=UTF-8',
-              data: JSON.stringify({
-                  allscore: allscore,
-                  examname:'${examname}'
-              }),
-              success: function () {
-                alert("你本次的考试成绩为" + allscore);
-              },
-          });
+          location.href = "<%=basePath%>/student/savescore.do?allscore="+allscore+"&examname="+'${examname}';
+
+          <%--$.ajax({--%>
+              <%--url: '<%=basePath%>/student/savescore.do',--%>
+              <%--type: 'POST',--%>
+              <%--dataType: 'json',--%>
+              <%--contentType: 'application/json;charset=UTF-8',--%>
+              <%--data: JSON.stringify({--%>
+                  <%--allscore: allscore,--%>
+                  <%--examname:'${examname}'--%>
+              <%--}),--%>
+              <%--success: function () {--%>
+                <%--alert("你本次的考试成绩为" + allscore);--%>
+              <%--},--%>
+          <%--});--%>
       }
 </script>
 </html>

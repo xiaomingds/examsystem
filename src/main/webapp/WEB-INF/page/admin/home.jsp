@@ -77,7 +77,7 @@
                                 <a href="Completion%20question_query.html">填空题查询</a>
                             </li>
                             <li>
-                                <a href="Fill_in_blanks%20question_query.html">程序填空查询</a>
+                                <a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>
                             </li>
                             <li>
                                 <a href="Read_program_results%20question_query.html">读程序写结果查询</a>

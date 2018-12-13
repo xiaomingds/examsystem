@@ -8,7 +8,7 @@ public class Student {
     //用户密码
     private String password;
     private String classname;
-    private  String num;
+    private  String  num;
 
     public Long getId(String stringCellValue) {
         return id;
@@ -34,15 +34,6 @@ public class Student {
         this.password = password;
     }
 
-
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
-    }
-
     public void setUserName(String valueOf) {
         this.username = username == null ? null : username.trim();
     }
@@ -53,5 +44,13 @@ public class Student {
 
     public void setClassname(String classname) {
         this.classname = classname;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
     }
 }

@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-  <p1>此次考试成绩为</p1> ${allscore}
+  <p1>此次考试成绩为</p1> ${score}
 </body>
 </html>
