@@ -12,4 +12,9 @@ public interface TkService {
     void CreateProgramFill(ProgramFill programFill);
     void updateProgramFill(ProgramFill programFill);
 
+    List<Blank> findBlankAll();
+    Blank findBlankId(Long id);
+    void  DeleteBlank(Long id);
+    void  CreateBlank(Blank blank);
+    void UpdateBlank(Blank blank);
 }

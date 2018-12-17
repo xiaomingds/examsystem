@@ -10,13 +10,6 @@ public class Student {
     private String classname;
     private  String  num;
 
-    public Long getId(String stringCellValue) {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -52,5 +45,13 @@ public class Student {
 
     public void setNum(String num) {
         this.num = num;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

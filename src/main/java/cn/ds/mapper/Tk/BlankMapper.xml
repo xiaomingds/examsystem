@@ -3,31 +3,43 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.ds.mapper.Tk.BlankMapper">
-    <!-- 一对多查询 -->
-    <resultMap type="Blank" id="categoryBean">
-        <id column="id" property="id" />
-        <result column="content" property="content" />
-        <result column="analysis" property="analysis" />
-        <result column="chapter" property="chapter" />
-        <result column="chaptertwo" property="chaptertwo" />
-        <result column="difficulty" property="difficulty" />
-        <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
-        <collection property="answer" ofType="Answer">
-            <id column="answer_id" property="answer_id" />
-            <result column="answer" property="answer" />
-        </collection>
-    </resultMap>
-    <select id="findBlankAll" resultMap="categoryBean">
-            select c.*, p.*
-            from blank c
-            left join answer p on c.id = p.blank_id
+    <!--&lt;!&ndash; 一对多查询 &ndash;&gt;-->
+    <!--<resultMap type="Blank" id="categoryBean">-->
+        <!--<id column="id" property="id" />-->
+        <!--<result column="content" property="content" />-->
+        <!--<result column="analysis" property="analysis" />-->
+        <!--<result column="chapter" property="chapter" />-->
+        <!--<result column="chaptertwo" property="chaptertwo" />-->
+        <!--<result column="difficulty" property="difficulty" />-->
+        <!--&lt;!&ndash; property: 指的是集合属性的值, ofType：指的是集合中元素的类型 &ndash;&gt;-->
+        <!--<collection property="answer" ofType="Answer">-->
+            <!--<id column="answer_id" property="answer_id" />-->
+            <!--<result column="answer" property="answer" />-->
+        <!--</collection>-->
+    <!--</resultMap>-->
+    <select id="findBlankAll" resultType="Blank">
+            select *from tk_blank
        </select>
-    <select id="findById" parameterType="Long" resultType="Blank">
-        select c.*, p.* from blank c left join  answer p on c.id = p.blank_id where id = #{id}
+    <select id="findBlankId" parameterType="Long" resultType="Blank">
+        select  * from tk_blank  where id = #{id}
     </select>
-    <delete id="DeleteById" >
-        DELETE FROM answer  WHERE answer.blank_id = #{id};
-        delete  from  blank WHERE  id = #{id}
+    <delete id="DeleteBlank" >
+        delete  from  tk_blank WHERE  id = #{id}
     </delete>
-
+    <insert id="CreateBlank" parameterType="Blank">
+        insert into tk_blank(content,answer,chapter,chaptertwo,analysis,difficulty)
+        values (#{content},#{answer},#{chapter},#{chaptertwo},#{analysis},#{difficulty})
+    </insert>
+    <!-- 更新的方法 -->
+    <update id="UpdateBlank" parameterType="Blank">
+        update tk_blank set
+            id = #{id},
+            content = #{content},
+            answer= #{answer},
+            analysis = #{analysis},
+              chapter = #{chapter},
+            chaptertwo= #{chaptertwo},
+            difficulty= #{difficulty}
+        where id = #{id}
+    </update>
 </mapper>

@@ -15,7 +15,6 @@ public interface BasicInfoMapper {
     void CreateBlass(Blass blass);
     void CreateStudent(Student student);
     List<Student>findClass(String classname);
-
      Integer deleteSemester(int[] id_arr);//批量删除
 
 }

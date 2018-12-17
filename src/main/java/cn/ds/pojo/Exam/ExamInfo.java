@@ -1,10 +1,19 @@
 package cn.ds.pojo.Exam;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+
 public class ExamInfo {
     private long id;
     private String examname;
-    private  long exnumber;
-    private long score;
+  private Date begindate;
+    private Time begintime;
+    private Date enddate;
+    private Time endtime;
+    private String password;
+  private int state;
+  private String teacher;
     public long getId() {
         return id;
     }
@@ -20,21 +29,59 @@ public class ExamInfo {
     public void setExamname(String examname) {
         this.examname = examname;
     }
-
-
-
-    public long getScore() {
-        return score;
+    public String getPassword() {
+        return password;
     }
 
-    public void setScore(long score) {
-        this.score = score;
-    }
-    public long getExnumber() {
-        return exnumber;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setExnumber(long exnumber) {
-        this.exnumber = exnumber;
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
+    public Date getBegindate() {
+        return begindate;
+    }
+
+    public void setBegindate(Date begindate) {
+        this.begindate = begindate;
+    }
+
+    public Time getBegintime() {
+        return begintime;
+    }
+
+    public void setBegintime(Time begintime) {
+        this.begintime = begintime;
+    }
+
+    public Date getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(Date enddate) {
+        this.enddate = enddate;
+    }
+
+    public Time getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(Time endtime) {
+        this.endtime = endtime;
     }
 }

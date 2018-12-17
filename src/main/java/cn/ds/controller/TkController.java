@@ -2,8 +2,6 @@ package cn.ds.controller;
 
 import cn.ds.pojo.Tk.Blank;
 import cn.ds.pojo.Tk.ProgramFill;
-import cn.ds.pojo.Tk.ReadProgram;
-import cn.ds.service.BlankService;
 import cn.ds.service.TkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,15 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.jws.WebParam;
 import java.util.List;
 
 @Controller
 @RequestMapping("/tk")
 public class TkController {
-    @Autowired
-    BlankService blankService;
+
     @Autowired
     TkService tkService;
 
@@ -65,24 +60,37 @@ public class TkController {
 
     @RequestMapping("/blankall")
     public String blanksAll(Model model){
-        List<Blank>blanks  = blankService.findBlankAll();
+        List<Blank>blanks  = tkService.findBlankAll();
         model.addAttribute("blanks",blanks);
-        return "page/admin/blank";
+        return "page/admin/tk_blank";
     }
-    @RequestMapping("/byId")
-    public String findById(@RequestParam long id, Model model){
-        Blank blank = blankService.findById(id);
-        model.addAttribute("blank",blank);
+    @RequestMapping("/findblankId")
+    @ResponseBody
+    public Blank findById(@RequestBody Blank blank){
+        Blank blanks =tkService.findBlankId(blank.getId());
         System.out.println("查找成功");
-        return "page/admin/editblank";
+        return blanks;
     }
     @RequestMapping(value = "/deleteblank")
     public String delete(@RequestParam Long id) {
         try {
-            blankService.DeleteById(id);
+            tkService.DeleteBlank(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "redirect:blankall.do";
+    }
+    @RequestMapping("/createblank")
+    public String CreateBlank(Blank blank){
+        System.out.println("内容"+ blank.getContent());
+        tkService.CreateBlank(blank);
+        return "redirect:blankall.do";
+    }
+    @RequestMapping("/upblank")
+    public String UpBlank(Blank blank){
+        System.out.println("后台的请求数据"+blank.getAnalysis());
+        System.out.println("后台的请求数据"+blank.getDifficulty());
+        tkService.UpdateBlank(blank);
         return "redirect:blankall.do";
     }
 }

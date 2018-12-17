@@ -1,11 +1,10 @@
 <%--
   Created by IntelliJ IDEA.
   User: 小鸣ds
-  Date: 2018/12/10
-  Time: 8:54
+  Date: 2018/12/14
+  Time: 8:35
   To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+--%><%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath();
@@ -14,6 +13,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,10 +70,10 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>题库<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
+                                <a href="Choice%20question_query.html">选择题查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/tk/blankall.do">填空题查询</a>
+                                <a href="Completion%20question_query.html">填空题查询</a>
                             </li>
                             <li>
                                 <a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>
@@ -88,22 +88,34 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href=""><i class="fa fa-table fa-fw"></i>考试<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="check_exam.html">查看考试信息</a>
+                            </li>
+                            <li>
+                                <a href="exam.html">创建新考试</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>学生<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="student_Information_import.html">学生信息查询</a>
+                            </li>
+                            <li>
+                                <a href="score_query.html">学生成绩查询</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
                     </li>
-                    <li>
-                        <a href="<%=basePath%>/teacher/allexam.do"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
-                    </li>
-                    <li>
-                        <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
-                    </li>
+
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
-        </div>
-        <!-- /.navbar-static-side -->
+        </div>>
     </nav>
 
     <!-- Page Content -->
@@ -131,4 +143,3 @@
 </body>
 
 </html>
-

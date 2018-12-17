@@ -3,10 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ds.mapper.exam.ExamMapper">
     <insert id="insert" parameterType = "ExamInfo">
-        insert into exam_info(examname, exnumber,score)
-        values( #{examname},
-                  #{exnumber},
-                  #{score})
+        insert into exam_info(examname,begindate,begintime,enddate,endtime,password,state,teacher)
+        values(#{examname},
+         #{begindate},
+           #{begintime},
+           #{enddate},
+                  #{endtime},
+                  #{password},
+                   #{state},
+                    #{teacher})
     </insert>
     <select id="FindAll" resultType="ExamInfo">
         select *from exam_info
@@ -19,11 +24,17 @@
     <select id="RandId" resultType="Choice">
          select * from choicequestion order by RAND() limit #{exnumber}
     </select>
-    <insert id="CreateScore" parameterType="Score">
-        insert  into stu_score(examname, allscore)
-        values (
-             #{examname},
-             #{allscore}
-        )
-    </insert>
+    <!-- 更新的方法 -->
+    <update id="UpExaminfo" parameterType="ExamInfo">
+        update exam_info set
+            id = #{id},
+             begindate =  #{begindate},
+          begintime =  #{begintime},
+          enddate = #{enddate},
+          endtime = #{endtime},
+              password= #{password},
+                 state =  #{state},
+                   teacher=  #{teacher}
+        where id = #{id}
+    </update>
 </mapper>

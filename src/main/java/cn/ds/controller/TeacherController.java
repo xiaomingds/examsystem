@@ -10,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("/teacher")
@@ -55,9 +57,22 @@ public class TeacherController {
         List<ExamInfo>examInfos = examService.FindAll();
 
         model.addAttribute("examInfo",examInfos);
-        return "page/student/examInfo";
+        return "page/admin/exam_info";
     }
+    @RequestMapping("/upexam")
+    public  String UpExam(ExamInfo examInfo){
+        examService.UpExaminfo(examInfo);
+        return "redirect:allexam.do";
+    }
+    @RequestMapping("/byexamid")
+    @ResponseBody
+    public ExamInfo ExamId(@RequestBody ExamInfo examInfo){
+        System.out.println("Find" + examInfo.getId());
+        ExamInfo examInfos = examService.findById(examInfo.getId() );
+        System.out.println("Find" + examInfos.getExamname());
+        return examInfos;
 
+    }
     @RequestMapping("/exambegin")
     public String findById(@RequestParam String examname,@RequestParam int exnumber,@RequestParam int  score, Model model) {
         System.out.println("题目数量"+exnumber);
@@ -69,9 +84,6 @@ public class TeacherController {
        return "page/student/exam";
     }
 
-//    public static void main(String[] args) {
-//
-//    }
 
     @RequestMapping("/stuinfo")
     public  String stuifnopage(){

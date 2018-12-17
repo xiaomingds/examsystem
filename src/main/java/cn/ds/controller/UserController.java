@@ -1,6 +1,5 @@
 package cn.ds.controller;
 
-import cn.ds.exception.CustomException;
 import cn.ds.pojo.*;
 import cn.ds.pojo.Tk.Choice;
 import cn.ds.pojo.Tk.ReadProgram;
@@ -59,7 +58,14 @@ public class UserController {
             System.out.println(teachers.get(i));
         }
         model.addAttribute("teachers",teachers);
-        return  "page/admin/adteacher";
+        return  "page/admin/teacher";
+    }
+    @ResponseBody
+    @RequestMapping("/listteacher")
+    public List<Teacher> Listteacher(){
+        List<Teacher>teachers = userService.findTeacherAll();
+        System.out.println("老师" + teachers.get(0).getUsername());
+        return teachers;
     }
 
     //保存老师
@@ -189,7 +195,7 @@ public class UserController {
         List<Choice>choice = userService.findChoiceAll();
         System.out.println("啦啦啦"+choice);
         model.addAttribute("choice",choice);
-        return  "page/admin/adchoice";
+        return  "page/admin/tk_choice";
     }
     //根据id查询选择
     @ResponseBody

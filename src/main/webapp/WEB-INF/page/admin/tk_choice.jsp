@@ -1,19 +1,19 @@
 <%--
   Created by IntelliJ IDEA.
   User: 小鸣ds
-  Date: 2018/12/13
-  Time: 10:21
+  Date: 2018/12/17
+  Time: 9:32
   To change this template use File | Settings | File Templates.
 --%>
+<
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 %>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -36,7 +36,7 @@
     <!-- Custom CSS -->
     <link href="<%=basePath%>/vendor/dist/css/sb-admin-2.css" rel="stylesheet">
 
-    <link href="<%=basePath%>/vendor/css/editTable.css" type="text/css" rel="stylesheet" />
+    <link href="<%=basePath%>/vendor/css/editTable.css" type="text/css" rel="stylesheet"/>
     <script language="javascript" type="text/javascript" src="<%=basePath%>/vendor/js/jquery-1.7.2.min.js"></script>
     <script language="javascript" type="text/javascript" src="<%=basePath%>/vendor/js/editTable.js"></script>
     <!-- Custom Fonts -->
@@ -49,18 +49,17 @@
 
 </head>
 <style>
-    .line
-    {
-        width:70px;
+    .line {
+        width: 70px;
         overflow: hidden;
-        text-align:left;
-        text-overflow:ellipsis;
+        text-align: left;
+        text-overflow: ellipsis;
         white-space: nowrap;
     }
-    .select {
-        float: left;
-        display: inline;
-        width:300px;
+
+    textarea:focus {
+        border-color: #719ECE;
+        box-shadow: 0 0 10px #719ECE;
     }
 </style>
 <body>
@@ -76,7 +75,6 @@
             <a class="navbar-brand" href="#">C语言在线考试系统</a>
         </div>
         <!-- /.navbar-header -->
-
         <ul class="nav navbar-top-links navbar-right">
             <!-- /.dropdown -->
             <li class="dropdown">
@@ -89,7 +87,7 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="../login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="<%=basePath%>/user/index.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -97,7 +95,6 @@
             <!-- /.dropdown -->
         </ul>
         <!-- /.navbar-top-links -->
-
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -108,44 +105,41 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>题库<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="Choice%20question_query.html">选择题查询</a>
+                                <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="Completion%20question_query.html">填空题查询</a>
+                                <a href="<%=basePath%>/user/findallblank.do">填空题查询</a>
                             </li>
                             <li>
-                                <a href="Fill_in_blanks%20question_query.html">程序填空查询</a>
+                                <a href="#">程序填空查询</a>
                             </li>
                             <li>
-                                <a href="Read_program_results%20question_query.html">读程序写结果查询</a>
-                            </li><li>
-                            <a href="Program_design%20question_query.html">程序设计查询</a>
-                        </li>
-
+                                <a href="#">读程序写结果查询</a>
+                            </li>
+                            <li>
+                                <a href="#">程序设计查询</a>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="knowledge%20point.html"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href="#"><i class="fa fa-table fa-fw"></i>知识点</a>
                     </li>
                     <li>
-                        <a href="teacher.html"><i class="fa fa-edit fa-fw"></i>教师</a>
+                        <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
                     </li>
                     <li>
-                        <a href="exam.html"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
+                        <a href="#"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
                     </li>
                     <li>
-                        <a href="base_year.html"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
-
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
                     </li>
-
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
         </div>
         <!-- /.navbar-static-side -->
     </nav>
-
     <!-- Page Content -->
     <div id="page-wrapper">
         <br>
@@ -153,7 +147,7 @@
         <table class="edtitable">
             <thead>
             <tr>
-                <th colspan="4" style="text-align:center">程序填空题</th>
+                <th colspan="4" style="text-align:center">选择题</th>
             </tr>
             </thead>
             <tbody>
@@ -163,41 +157,38 @@
                 <td>难度</td>
                 <td class="del-col">操作</td>
             </tr>
-            <c:set var="index" value="0"/>
-            <c:forEach items="${readPrograms}" var="re">
-            <tr>
-                <c:set var="index" value="${index+1}"/>
-                <td>${index}</td>
-                <td class="line">${re.content}</td>
-                <td>${re.difficult}</td>
-                <td class="del-col">
-                    <a href="#" onclick="return edit(${re.id})" style="text-decoration: none;">
-                        <span class="fa fa-edit fa-fw"></span>
-                    </a>
-                    <a href="#" onclick="return trash(${re.id})" style="text-decoration: none;"
-                       data-toggle="modal" data-target="#trashModal">
-                        <span class="fa fa-trash-o fa-fw"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-plus" onclick="add()"></span>
-                    </a>
-                </td>
-
-                </td>
-            </tr>
+            <c:forEach items="${requestScope.choice}" var="ch">
+                <tr>
+                    <c:set var="index" value="${index+1}"/>
+                    <td>${index}</td>
+                    <td class="line">${ch.content}</td>
+                    <td>${ch.difficulty}</td>
+                    <td class="del-col">
+                        <a href="#" onclick="return edit(${ch.id})" style="text-decoration: none;">
+                            <span class="fa fa-edit fa-fw"></span>
+                        </a>
+                        <a href="#" onclick="return trash(${ch.id})" style="text-decoration: none;"
+                           data-toggle="modal" data-target="#trashModal">
+                            <span class="fa fa-trash-o fa-fw"></span>
+                        </a>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-plus" onclick="add()"></span>
+                        </a>
+                    </td>
+                </tr>
             </c:forEach>
             </tbody>
         </table>
-
-        <!-- 编辑的模态框 -->
-        <div class="modal fade" id="editch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <!-- Modal编辑模态框 -->
+        <div class="modal fade" id="editch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title" id="myedit">编辑</h4>
                     </div>
-                    <form class="form-horizontal" action="<%=basePath%>/tk/updf.do" method="post">
+                    <form class="form-horizontal" action="<%=basePath%>/user/updatech.do" method="post">
                         <div class="modal-body">
                             <input name="id" id="id" hidden="hidden"/>
                             <div class="form-group input-group">
@@ -205,8 +196,31 @@
                                 <textarea class="form-control" rows="3" name="content" id="upcontent"></textarea>
                             </div>
                             <div class="form-group input-group">
+                                <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">A:</span>
+                                <textarea class="form-control" rows="3" name="aoption" id="upaoption"></textarea>
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">B:</span>
+                                <textarea class="form-control" rows="3" name="boption" id="upboption"></textarea>
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">C:</span>
+                                <textarea class="form-control" rows="3" name="coption" id="upcoption"></textarea>
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">D:</span>
+                                <textarea class="form-control" rows="3" name="doption" id="updoption"></textarea>
+                            </div>
+                            <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">答案：</span>
-                                <textarea class="form-control" rows="3" name="answer" id="upanswer"></textarea>
+                                <div class="col-sm-5">
+                                    <select class="form-control" id="upanswer" name="answer">
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">分析：</span>
@@ -215,20 +229,15 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">知识点</label>
                                 <div class="col-sm-6">
-                                    <select class="form-control" id="upchapter" name = "chapter">
-                                        <%--<option value="1">1</option>--%>
-                                        <%--<option value="2">2</option>--%>
+                                    <select class="form-control" id="upchapter" name="chapter">
                                     </select>
-                                    <select class="form-control" id="upchaptertwo" name = "chaptertwo">
-                                        <%--<option value="1">1</option>--%>
-                                        <%--<option value="2">2</option>--%>
-                                    </select>
+                                    <select class="form-control" id="upchaptertwo" name="chaptertwo"></select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">难度</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" id="updifficulty" name = "difficult">
+                                    <select class="form-control" id="updifficulty" name = "difficulty">
                                         <option value="1">热血青铜</option>
                                         <option value="2">不屈白银</option>
                                         <option value="3">英勇黄金</option>
@@ -239,29 +248,60 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="submit" class="btn btn-primary" id = "upaddbut">提交</button>
+                            <button type="submit" class="btn btn-primary" id="upaddbut">提交</button>
                         </div>
                     </form>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
- <!--添加-->
-        <div class="modal fade" id="addpf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        </td>
+        </tr>
+        <!-- Button trigger modal -->
+        <!-- /.modal -->
+        <!-- Modal添加的模态框 -->
+        <div class="modal fade" id="addch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myadd"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="my" style="text-align:center">添加题目</h4>
                     </div>
-                    <form class="form-horizontal" action="<%=basePath%>/tk/createpf.do" method="post">
+                    <form class="form-horizontal" action="<%=basePath%>/user/addchoice.do" method="post">
                         <div class="modal-body">
+                            <input name="id" id="id" hidden="hidden"/>
                             <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">题目：</span>
                                 <textarea class="form-control" rows="3" name="content" id="content"></textarea>
                             </div>
                             <div class="form-group input-group">
+                                <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">A:</span>
+                                <textarea class="form-control" rows="3" name="aoption" id="aoption"></textarea>
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">B:</span>
+                                <textarea class="form-control" rows="3" name="boption" id="boption"></textarea>
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">C:</span>
+                                <textarea class="form-control" rows="3" name="coption" id="coption"></textarea>
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">D:</span>
+                                <textarea class="form-control" rows="3" name="doption" id="doption"></textarea>
+                            </div>
+                            <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">答案：</span>
-                                <textarea class="form-control" rows="3" name="answer" id="answer"></textarea>
+                                <div class="col-sm-5">
+                                    <select class="form-control" id="answer" name="answer">
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">分析：</span>
@@ -270,16 +310,15 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">知识点</label>
                                 <div class="col-sm-6">
-                                    <select class="form-control" id="chapter" name = "chapter">
+                                    <select class="form-control" id="chapter" name="chapter">
                                     </select>
-                                    <select class="form-control" id="chaptertwo" name = "chaptertwo">
-                                    </select>
+                                    <select class="form-control" id="chaptertwo" name="chaptertwo"></select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">难度</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" id="difficult" name = "difficult">
+                                    <select class="form-control" id="difficulty" name = "difficulty">
                                         <option value="1">热血青铜</option>
                                         <option value="2">不屈白银</option>
                                         <option value="3">英勇黄金</option>
@@ -290,13 +329,17 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="submit" class="btn btn-primary" id = "addbut">提交</button>
+                            <button type="submit" class="btn btn-primary" id="addbut">提交</button>
                         </div>
                     </form>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
-        <!-- 删除的模态框 -->
+        </td>
+        </tr>
+        <!--删除的模态框-->
         <div class="modal fade" id="trashModal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -318,74 +361,30 @@
                 </div>
             </div>
         </div>
-        </td>
-        </tr>
+
+        <!-- /.container-fluid -->
     </div>
+
+    <!-- /#page-wrapper -->
 </div>
-<script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
-<script src="<%=basePath%>/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="<%=basePath%>/vendor/metisMenu/metisMenu.min.js"></script>
-<script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
 
-</body>
+<!-- /#wrapper -->
 <script>
-    //添加
-    function add(){
-       getpt();
-        $("#addpf").modal({
-            backdrop:"static"
+    function add() {
+        getpoint();
+        $("#addch").modal({
+            backdrop: "static"
         });
-    }
-    // 编辑信息的方法
-    function edit(id) {
-        // 先去查询数据
-        $.ajax({
-            url: '<%=basePath%>/tk/bypfId.do',
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json;charset=UTF-8',
-            data: JSON.stringify({
-                id: id
-            }),
-            success: function (data) {
-              getpoint(data.chapter);
-                $("#id").val(data.id);
-                $("#upcontent").val(data.content);
-                $("#upanswer").val(data.answer);
-                $("#upanalysis").val(data.analysis);
-                console.log("数据库的 id" + data.chapter);
+    };
 
-                $("#upchapter").val(data.chapter);
-                $("#upchaptertwo").val(data.chaptertwo);
-                $("#updifficulty").val(data.difficult);
-                $("#editch").modal('show');
-            }
-        });
-    }
-    //删除
-    function trash(id) {
-        if (!id) {
-            alert("error");
-        } else {
-            $(".delSure").click(function () {
-                $.ajax({
-                    url: '<%=basePath%>/tk/deletepf.do?id=' + id,
-                    type: 'POST',
-                    success: function (data) {
-                        $("body").html(data);
-                    }
-                });
-            });
-        }
-    }
-    function getpt() {
+    function getpoint() {
         $.ajax({
-            url:"${APP_PATH}/login/user/pointall.do",
-            type:"GET",
-            success:function(data) {
+            url: "<%=basePath%>/user/pointall.do",
+            type: "GET",
+            success: function (data) {
                 console.log(data);
-                var chapter =$(document).find("#chapter");
-                var chaptertwo =$(document).find("#chaptertwo");
+                var chapter = $(document).find("#chapter");
+                var chaptertwo = $(document).find("#chaptertwo");
                 for (var i = 0; i < data.length; i++) {
                     chapter.append("<option value='" + data[i].id + "'>" + data[i].pointname + "</option>");
                 }
@@ -396,30 +395,65 @@
                 //select1绑定change事件
                 $("#chapter").change(function () {
                     var p = this.value;
-                    console.log("第几个"+p);
-                    p = p-1;
+                    console.log("第几个" + p);
+                    p = p - 1;
                     //删除原来的信息
                     $("#chaptertwo").empty();
+                    // console.log("啦啦啦2"+data[p].point2);
+                    //遍历p2的数组
                     for (var j = 0; j < data[p].point2.length; j++) {
-                        chaptertwo.append("<option value='" + data[p].point2[j].pname+ "'>" + data[p].point2[j].pname+ "</option>");
+                        chaptertwo.append("<option value='" + data[p].point2[j].pname + "'>" + data[p].point2[j].pname + "</option>");
                     }
                 });
             }
         });
     }
-    function getpoint(chid) {
+
+    // 编辑信息的方法
+    function edit(id) {
+        // 先去查询数据
+        $.ajax({
+            url: '<%=basePath%>/user/findBychId.do',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify({
+                id: id
+            }),
+            success: function (data) {
+                getpt(data.chapter);
+                $("#id").val(data.id);
+                $("#upcontent").val(data.content);
+                $("#upaoption").val(data.aoption);
+                $("#upboption").val(data.boption);
+                $("#upcoption").val(data.coption);
+                $("#updoption").val(data.doption);
+                $("#upanswer").val(data.answer);
+                $("#upanalysis").val(data.analysis);
+                $("#upchapter").val(data.chapter);
+                console.log(data.chapter);
+                $("#upchaptertwo").val(data.chaptertwo);
+                $("#updifficulty").val(data.difficulty);
+                $("#editch").modal('show');
+            },
+            error: function () {
+                alert("错误");
+            }
+        });
+    }
+    function getpt(chid) {
         console.log("当前复选框" + chid);
         $.ajax({
-            url:"${APP_PATH}/login/user/pointall.do",
+            url:"<%=basePath%>/user/pointall.do",
             type:"GET",
-            success:function(data) {
+            success:function (data) {
                 console.log(data);
-                var upchapter =$(document).find("#upchapter");
-                var upchaptertwo =$(document).find("#upchaptertwo");
-                for (var i = 0; i < data.length; i++) {
-                    upchapter.append("<option value='" + data[i].id + "'>" + data[i].pointname + "</option>");
-                }
-                for (var j = 0; j < data[chid-1].point2.length; j++) {
+                var upchapter = $(document).find("#upchapter");
+                var upchaptertwo = $(document).find("#upchaptertwo");
+                for(var i = 0; i < data.length; i++){
+                    upchapter.append("<option value='" + data[i].id + "'>" + data[i].pointname + "</option>")
+                }for (var j = 0; j < data[chid-1].point2.length; j++) {
+                    console.log("当前位置" + chid-1 + "内容为" + data[chid-1].point2[j].pname);
                     upchaptertwo.append("<option value='" + data[chid-1].point2[j].pname + "'>" + data[chid-1].point2[j].pname + "</option>");
                 }
                 //select1绑定change事件
@@ -434,8 +468,38 @@
                     }
                 });
             }
-        });
+        })
+    }
+    //删除
+    function trash(id) {
+        if (!id) {
+            alert("error");
+        } else {
+            $(".delSure").click(function () {
+                $.ajax({
+                    url: '<%=basePath%>/user/deletech.do?id=' + id,
+                    type: 'POST',
+                    success: function (data) {
+                        $("body").html(data);
+                    }
+                });
+            });
+        }
     }
 </script>
+<!-- jQuery -->
+<script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="<%=basePath%>/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="<%=basePath%>/vendor/metisMenu/metisMenu.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
+
+</body>
+
 </html>
 

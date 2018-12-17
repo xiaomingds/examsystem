@@ -40,5 +40,10 @@ public class ExamServiceImpl implements ExamService {
         examMapper.CreateScore(score);
     }
 
+    @Override
+    public void UpExaminfo(ExamInfo examInfo) {
+        examMapper.UpExaminfo(examInfo);
+    }
+
 
 }

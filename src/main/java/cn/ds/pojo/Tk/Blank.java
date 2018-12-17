@@ -1,16 +1,15 @@
 package cn.ds.pojo.Tk;
 
-import java.util.List;
 
 public class Blank {
     private long id;
     private  String content;
+    private  String answer;
     private String analysis;
     private String chapter;
     private String chaptertwo;
-    private String difficult;
+    private String difficulty;
 
-    private List<Answer> answer;
     public long getId() {
         return id;
     }
@@ -25,14 +24,6 @@ public class Blank {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public List<Answer> getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(List<Answer> answer) {
-        this.answer = answer;
     }
     @Override
     public String toString() {
@@ -63,11 +54,19 @@ public class Blank {
         this.chaptertwo = chaptertwo;
     }
 
-    public String getDifficult() {
-        return difficult;
+    public String getDifficulty() {
+        return difficulty;
     }
 
-    public void setDifficult(String difficult) {
-        this.difficult = difficult;
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }

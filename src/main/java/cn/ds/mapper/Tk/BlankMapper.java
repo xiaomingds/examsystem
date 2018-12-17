@@ -7,7 +7,10 @@ import java.util.List;
 public interface BlankMapper {
     List<Blank> findBlankAll();
 
-    Blank findById(Long id);
+    Blank findBlankId(Long id);
 
-    void  DeleteById(Long id);
+    void  DeleteBlank(Long id);
+    void  CreateBlank(Blank blank);
+    void UpdateBlank(Blank blank);
+    TkNumber findnumber();
 }
