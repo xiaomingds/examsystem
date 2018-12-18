@@ -91,7 +91,7 @@
                         <a href=""><i class="fa fa-table fa-fw"></i>考试<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="check_exam.html">查看考试信息</a>
+                                <a href="<%=basePath%>/teacher/stuinfo.do">查看考试信息</a>
                             </li>
                             <li>
                                 <a href="exam.html">创建新考试</a>
@@ -103,7 +103,7 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>学生<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="student_Information_import.html">学生信息查询</a>
+                                <a href="<%=basePath%>/teacher/stuinfo.do">学生信息查询</a>
                             </li>
                             <li>
                                 <a href="score_query.html">学生成绩查询</a>

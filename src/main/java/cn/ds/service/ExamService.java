@@ -13,5 +13,6 @@ public interface ExamService {
     List<Choice> RandId(Long exnumber);
     void CreateScore(Score score);
     void UpExaminfo(ExamInfo examInfo);
+    void DeleteExam(Long id);
 
 }

@@ -1,6 +1,5 @@
 package cn.ds.controller;
 
-import cn.ds.pojo.Exam.Score;
 import cn.ds.pojo.Student;
 import cn.ds.service.ExamService;
 import cn.ds.service.StudentService;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/student")
@@ -27,7 +27,6 @@ public class StudentController {
         {
             if(student.getPassword().equals(password))
             {
-
                 session.setAttribute("studentsession",student);
                 return "page/student/stuhome";
             }
@@ -42,6 +41,20 @@ public class StudentController {
         }
     }
 
+    @ResponseBody
+   @RequestMapping("/byclassname")
+   public List<Student> ByClass(@RequestParam String classname){
+        //如果使用注解@RequestBody  接收到的classname = ( classname =  1601312)
+        System.out.println("查找的班级学生" + classname);
+       List<Student>students = studentService.ByClass(classname);
+       return students;
+   }
+    @RequestMapping("detelestu")
+    public String DeleteStu(@RequestParam String num){
+        System.out.println("删除的id" +num);
+        studentService.deleteStudent(num);
+        return "page/teacher/stuinformation";
+    }
     @RequestMapping("/savescore")
     public  String SaveScore(@RequestParam int allscore, @RequestParam String examname,Model model){
          System.out.println(allscore);
@@ -50,10 +63,6 @@ public class StudentController {
          model.addAttribute("score",allscore);
           return "page/student/score";
     }
-
-
-
-
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession();

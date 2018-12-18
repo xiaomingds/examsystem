@@ -37,4 +37,8 @@
                    teacher=  #{teacher}
         where id = #{id}
     </update>
+    <!--删除考试-->
+    <delete id="DeleteExam" parameterType="Long" >
+        DELETE FROM exam_info  WHERE id = #{id}
+    </delete>
 </mapper>

@@ -47,4 +47,12 @@
       num = #{num}
     where id = #{id}
   </update>
+    <select id="ByClass" resultMap="BaseResultMap" parameterType="String">
+        select   * from student
+        where classname = #{classname} ORDER BY (num+0)ASC
+    </select>
+    <!--删除-->
+    <delete id="deleteStudent" parameterType="String">
+        delete from student where num = #{num}
+    </delete>
 </mapper>

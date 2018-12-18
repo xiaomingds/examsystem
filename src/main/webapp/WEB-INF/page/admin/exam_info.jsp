@@ -174,8 +174,8 @@
             <c:forEach items="${examInfo}" var="ex">
                 <tr>
                     <td><a href="exam_score.html">${ex.examname}</a></td>
-                    <td>${ex.begindate}-${ex.begintime}</td>
-                    <td>${ex.enddate}-${ex.endtime}</td>
+                    <td>${ex.begindate}&nbsp;${ex.begintime}</td>
+                    <td>${ex.enddate}&nbsp;${ex.endtime}</td>
                     <c:choose>
                         <c:when test="${empty ex.password}">
                             <td>公开</td>
@@ -203,7 +203,7 @@
                     </c:choose>
                     <td>${ex.teacher}</td>
                     <td >
-                        <input  class="btn btn-outline btn-primary" type="button" value="删除" onclick="$(':checkbox:checked').closest('tr').remove()">
+                        <input  class="btn btn-outline btn-primary" type="button" value="删除" onclick="return trash(${ex.id})" data-toggle="modal" data-target="#trashModal">
                         <input  class="btn btn-outline btn-primary" type="button" value="更改" onclick="edit('${ex.id}')">
                     </td>
                 </tr>
@@ -231,14 +231,14 @@
                     <div class="form-group has-success" >
                         <label  >请选择更改后的考试开始时间:</label>
                         <div >
-                            <input style="width: 45%" type="date" id="upbegintimedate"value="2015-09-24"/>
-                            <input style="width: 45%" type="time" id="upbegintime"value="13:00:59"/>
+                            <input style="width: 45%" type="date" id="upbegindate" name="begindate" value="2018-09-24"/>
+                            <input style="width: 45%" type="time" id="upbegintime" name="begintime" value="13:00:59"/>
                         </div>
 
                         <label >请选择更改后的考试结束时间:</label>
                         <div>
-                            <input style="width: 45%" type="date" id="upendtimedate" value="2015-09-24"/>
-                            <input style="width: 45%" type="time" id="upendtime" value="13:00:59"/>
+                            <input style="width: 45%" type="date" id="upenddate" name="enddate" value="2018-12-24"/>
+                            <input style="width: 45%" type="time" id="upendtime" name="endtime" value="13:00:59"/>
                         </div>
                     </div>
                     <div class="form-group input-group">
@@ -261,58 +261,27 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <!-- 添加模态框  data-toggle="modal" data-target="#myModa_n" -->
-    <div class="modal fade" id="addexam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- 删除的模态框 -->
+    <div class="modal fade" id="trashModal">
         <div class="modal-dialog">
             <div class="modal-content">
+                <!-- 模糊框头部 -->
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="">考试信息更改</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title">删除！</h4>
                 </div>
-                <div class="modal-body" style="text-align:left">
-                    <div class="form-group input-group">
-                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入考试名称：</span>
-                        <input type="text" style="height: 40px" class="form-control" id="examname" name="examname">
-                    </div>
-
-                    <div class="form-group has-success" >
-                        <label  >请选择更改后的考试开始时间:</label>
-                        <div >
-                            <input style="width: 45%" type="date" id="begindate" name="begindate" value="2018-12-24"/>
-                            <input style="width: 45%" type="time" id="begintime" name="begintime" value="13:00:59"/>
-                        </div>
-
-                        <label >请选择更改后的考试结束时间:</label>
-                        <div>
-                            <input style="width: 45%" type="date" id="enddate" name="enddate" value="2018-09-24"/>
-                            <input style="width: 45%" type="time" id="endtime" name="endtime" value="14:00:59"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>请选择考试类型</label>
-                        <select class="form-control" id="state" name="state">
-                            <option value="1">private</option>
-                            <option value="0">public</option>
-                        </select>
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入考试密码：</span>
-                        <input type="text" style="height: 40px" class="form-control" id="password" name="password">
-                    </div>
-                    <div class="form-group">
-                        <label>请选择考试命题人</label>
-                        <select class="form-control" id="teacher" name="teacher">
-                        </select>
-                    </div>
+                <!-- 模糊框主体 -->
+                <div class="modal-body">
+                    <strong>你确定要删除吗？</strong>
                 </div>
+                <!-- 模糊框底部 -->
                 <div class="modal-footer">
-                    <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
-                    <button type="submit"  class="btn btn-outline btn-primary">确定</button>
+                    <button type="button" class="delSure btn btn-info" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
 </div>
 
@@ -323,6 +292,23 @@
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
 </body>
 <script>
+
+    //删除
+    function trash(id) {
+        if (!id) {
+            alert("error");
+        } else {
+            $(".delSure").click(function () {
+                $.ajax({
+                    url: '<%=basePath%>/teacher/deleteexam.do?id=' + id,
+                    type: 'POST',
+                    success: function (data) {
+                        $("body").html(data);
+                    }
+                });
+            });
+        }
+    }
     function edit(id) {
         console.log("id" + id);
         // 先去查询数据

@@ -9,7 +9,7 @@
         select * from tb_user where username = #{username}
     </select>
 
-    <!-- -条件查询 -->
+    <!-- -查询 -->
     <select id="findTeacherAll" resultType="cn.ds.pojo.Teacher">
         select * from teacher
     </select>

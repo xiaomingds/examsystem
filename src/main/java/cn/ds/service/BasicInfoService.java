@@ -17,5 +17,4 @@ public interface BasicInfoService {
     void CreateBlass(Blass blass);
     void CreateStudent(Student student);
     List<Student>findClass(String classname);
-
 }

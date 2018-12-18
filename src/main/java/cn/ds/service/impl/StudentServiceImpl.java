@@ -69,11 +69,11 @@ public class StudentServiceImpl implements StudentService {
                 System.out.println("没有新增");
             }
 
-            vo.setId(Long.valueOf(String.valueOf(lo.get(0))));
-            vo.setUsername(String.valueOf(lo.get(1)));
-            vo.setPassword(String.valueOf(lo.get(2)));
-            vo.setClassname(String.valueOf(lo.get(3)));
-            vo.setNum(String.valueOf(lo.get(4)));
+            //vo.setId(Long.valueOf(String.valueOf(lo.get(0))));
+            vo.setUsername(String.valueOf(lo.get(0)));
+            vo.setPassword(String.valueOf(lo.get(1)));
+            vo.setClassname(String.valueOf(lo.get(2)));
+            vo.setNum(String.valueOf(lo.get(3)));
             if(j == null)
             {
                 studentmapper.insert(vo);
@@ -84,5 +84,15 @@ public class StudentServiceImpl implements StudentService {
             }
         }
         return "success";
+    }
+
+    @Override
+    public List<Student> ByClass(String classname) {
+        return studentmapper.ByClass(classname);
+    }
+
+    @Override
+    public void deleteStudent(String num) {
+        studentmapper.deleteStudent(num);
     }
 }

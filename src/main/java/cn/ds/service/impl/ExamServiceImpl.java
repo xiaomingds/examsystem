@@ -45,5 +45,10 @@ public class ExamServiceImpl implements ExamService {
         examMapper.UpExaminfo(examInfo);
     }
 
+    @Override
+    public void DeleteExam(Long id) {
+        examMapper.DeleteExam(id);
+    }
+
 
 }

@@ -14,7 +14,7 @@ public interface ExamMapper {
     ExamInfo findById(Long id);
     List<Choice> RandId(Long exnumber);
     void CreateScore(Score score);
-    void DeleteExam();
+    void DeleteExam(Long id);
     void UpExaminfo(ExamInfo examInfo);
 
 }

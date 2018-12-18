@@ -17,4 +17,5 @@ public interface BasicInfoMapper {
     List<Student>findClass(String classname);
      Integer deleteSemester(int[] id_arr);//批量删除
 
+
 }

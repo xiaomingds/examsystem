@@ -7,11 +7,13 @@ import java.util.List;
 
 public interface StudentMapper {
     Student login(String username);
-    int deleteByPrimaryKey(Long id);
+    void deleteStudent(String num);
      int insert(Student record);
     int insertSelective(Student record);
     Student selectByPrimaryKey(Long id);
     int updateByPrimaryKeySelective(Student record);
     int updateByPrimaryKey(Student record);
     void insertInfoBatch(List<Student> list);
+
+    List<Student>ByClass(String classname);
 }

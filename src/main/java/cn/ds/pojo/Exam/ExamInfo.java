@@ -1,19 +1,23 @@
 package cn.ds.pojo.Exam;
 
+
+
 import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
+
 
 public class ExamInfo {
     private long id;
     private String examname;
-  private Date begindate;
+    private Date begindate;
     private Time begintime;
+
     private Date enddate;
     private Time endtime;
     private String password;
   private int state;
   private String teacher;
+
     public long getId() {
         return id;
     }
@@ -29,6 +33,31 @@ public class ExamInfo {
     public void setExamname(String examname) {
         this.examname = examname;
     }
+
+    public Time getBegintime() {
+        return begintime;
+    }
+
+    public void setBegintime(Time begintime) {
+        this.begintime = begintime;
+    }
+
+    public Date getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(Date enddate) {
+        this.enddate = enddate;
+    }
+
+    public Time getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(Time endtime) {
+        this.endtime = endtime;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -59,29 +88,5 @@ public class ExamInfo {
 
     public void setBegindate(Date begindate) {
         this.begindate = begindate;
-    }
-
-    public Time getBegintime() {
-        return begintime;
-    }
-
-    public void setBegintime(Time begintime) {
-        this.begintime = begintime;
-    }
-
-    public Date getEnddate() {
-        return enddate;
-    }
-
-    public void setEnddate(Date enddate) {
-        this.enddate = enddate;
-    }
-
-    public Time getEndtime() {
-        return endtime;
-    }
-
-    public void setEndtime(Time endtime) {
-        this.endtime = endtime;
     }
 }
