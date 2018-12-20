@@ -36,7 +36,6 @@ public class UserController {
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 //登录成功
-
                session.setAttribute("usersession",user);
                 // return "page/page";
                 return "page/admin/home";

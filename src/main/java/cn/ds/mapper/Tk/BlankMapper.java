@@ -12,4 +12,5 @@ public interface BlankMapper {
     void  DeleteBlank(Long id);
     void  CreateBlank(Blank blank);
     void UpdateBlank(Blank blank);
+
 }

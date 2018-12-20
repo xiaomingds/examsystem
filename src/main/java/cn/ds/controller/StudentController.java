@@ -28,7 +28,7 @@ public class StudentController {
             if(student.getPassword().equals(password))
             {
                 session.setAttribute("studentsession",student);
-                return "page/student/stuhome";
+                return "page/student/home";
             }
             else {
                 model.addAttribute("message", "你输入的密码有误");
@@ -50,10 +50,17 @@ public class StudentController {
        return students;
    }
     @RequestMapping("detelestu")
-    public String DeleteStu(@RequestParam String num){
+    @ResponseBody
+    public String DeleteStu( String num){
         System.out.println("删除的id" +num);
         studentService.deleteStudent(num);
-        return "page/teacher/stuinformation";
+        return num;
+    }
+    @RequestMapping("upstu")
+    @ResponseBody
+    public Student UpStu(Student student){
+        studentService.UpStudent(student);
+        return student;
     }
     @RequestMapping("/savescore")
     public  String SaveScore(@RequestParam int allscore, @RequestParam String examname,Model model){

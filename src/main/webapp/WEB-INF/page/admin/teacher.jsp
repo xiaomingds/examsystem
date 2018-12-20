@@ -189,7 +189,6 @@
             <!-- /.dropdown -->
         </ul>
         <!-- /.navbar-top-links -->
-
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -203,38 +202,33 @@
                                 <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="#">填空题查询</a>
+                                <a href="<%=basePath%>/tk/blankall.do">填空题查询</a>
                             </li>
                             <li>
-                                <a href="#">程序填空查询</a>
+                                <a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>
                             </li>
                             <li>
-                                <a href="#">读程序写结果查询</a>
-                            </li>
-                            <li>
-                                <a href="#">程序设计查询</a>
-                            </li>
+                                <a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>
+                            </li><li>
+<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
                     </li>
                     <li>
                         <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
+                        <a href="<%=basePath%>/teacher/allexam.do"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
-
+                        <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
                     </li>
                 </ul>
             </div>
-            <!-- /.sidebar-collapse -->
         </div>
-        <!-- /.navbar-static-side -->
     </nav>
 
     <!-- Page Content -->

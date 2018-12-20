@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.ds.mapper.Tk.ProgramFillMapper">
+<mapper namespace="cn.ds.mapper.Tk.ReadProgramMapper">
     <!-- 读程序写结果查询 -->
-    <select id="ProgramFillAll" resultType="ProgramFill">
-        select * from tk_pgfillblank
+    <select id="ReadProgramAll" resultType="ReadProgram">
+        select * from tk_readpg
     </select>
-    <select id="ByProgramFillId" parameterType="Long" resultType="ProgramFill">
-        select * from tk_pgfillblank where id = #{id}
+    <select id="ByReadProgramId" parameterType="Long" resultType="ReadProgram">
+        select * from tk_readpg where id = #{id}
     </select>
-    <delete id="DeleteProgramFill" parameterType="Long" >
-        DELETE FROM tk_pgfillblank  WHERE id = #{id}
+    <delete id="DeleteReadProgram" parameterType="Long" >
+        DELETE FROM tk_readpg  WHERE id = #{id}
     </delete>
-    <insert id="CreateProgramFill" parameterType="ProgramFill">
-        insert into tk_pgfillblank(content,answer,chapter,chaptertwo,analysis,difficulty)
+    <insert id="CreateReadProgram" parameterType="ReadProgram">
+        insert into tk_readpg(content,answer,chapter,chaptertwo,analysis,difficulty)
         values (#{content},#{answer},#{chapter},#{chaptertwo},#{analysis},#{difficulty})
     </insert>
     <!-- 更新的方法 -->
-    <update id="updateProgramFill" parameterType="ProgramFill">
-        update tk_pgfillblank set
+    <update id="updateReadProgram" parameterType="ReadProgram">
+        update tk_readpg set
             id = #{id},
             content = #{content},
             answer= #{answer},

@@ -94,6 +94,8 @@
             </li>
             <!-- /.dropdown -->
         </ul>
+        <!-- /.navbar-top-links -->
+
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -115,24 +117,38 @@
                             <li>
                                 <a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>
                             </li><li>
-<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
+                            <a href="Program_design%20question_query.html">程序设计查询</a>
+                        </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa fa-table fa-fw"></i>考试<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/teacher/examall.do">查看考试信息</a>
+                            </li>
+                            <li>
+                                <a href="exam.html">创建新考试</a>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>学生<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/teacher/stuinfo.do">学生信息查询</a>
+                            </li>
+                            <li>
+                                <a href="score_query.html">学生成绩查询</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
                     </li>
-                    <li>
-                        <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
-                    </li>
-                    <li>
-                        <a href="<%=basePath%>/teacher/allexam.do"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
-                    </li>
-                    <li>
-                        <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
-                    </li>
+
                 </ul>
             </div>
+            <!-- /.sidebar-collapse -->
         </div>
         <!-- /.navbar-static-side -->
     </nav>
@@ -374,8 +390,6 @@
     };
 
     function getpoint() {
-        $("#chapter").empty();
-        $("#chaptertwo").empty();
         $.ajax({
             url: "<%=basePath%>/user/pointall.do",
             type: "GET",
@@ -429,11 +443,8 @@
                 $("#upanswer").val(data.answer);
                 $("#upanalysis").val(data.analysis);
                 $("#upchapter").val(data.chapter);
-                console.log("题目的chapter" + data.chapter);
-                console.log("select当前的value" +   $("#upchapter").val());
                 console.log(data.chapter);
                 $("#upchaptertwo").val(data.chaptertwo);
-                console.log(data.chaptertwo);
                 $("#updifficulty").val(data.difficulty);
                 $("#editch").modal('show');
             },
@@ -444,25 +455,23 @@
     }
     function getpt(chid) {
         console.log("当前复选框" + chid);
-        $("#upchapter").empty();
-        $("#upchaptertwo").empty();
         $.ajax({
             url:"<%=basePath%>/user/pointall.do",
             type:"GET",
-            success:function (data){
+            success:function (data) {
                 console.log(data);
                 var upchapter = $(document).find("#upchapter");
                 var upchaptertwo = $(document).find("#upchaptertwo");
                 for(var i = 0; i < data.length; i++){
-                    console.log("当前select的option="+ data[i].id);
-                    upchapter.append("<option value='" + data[i].id + "'>" + data[i].pointname + "</option>");
-                    console.log("当前chapter的value" + data[i].id);
-                }for(var j = 0; j < data[chid-1].point2.length; j++) {
+                    upchapter.append("<option value='" + data[i].id + "'>" + data[i].pointname + "</option>")
+                }for (var j = 0; j < data[chid-1].point2.length; j++) {
+                    console.log("当前位置" + chid-1 + "内容为" + data[chid-1].point2[j].pname);
                     upchaptertwo.append("<option value='" + data[chid-1].point2[j].pname + "'>" + data[chid-1].point2[j].pname + "</option>");
                 }
                 //select1绑定change事件
                 $("#upchapter").change(function () {
                     var p = this.value;
+                    console.log("第几个"+p);
                     p = p-1;
                     //删除原来的信息
                     $("#upchaptertwo").empty();

@@ -78,7 +78,6 @@
             <!-- /.dropdown -->
         </ul>
         <!-- /.navbar-top-links -->
-
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -89,19 +88,18 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>题库<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="Choice%20question_query.html">选择题查询</a>
+                                <a href="<%=basePath%>/tea_tk/tea_findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="Completion%20question_query.html">填空题查询</a>
+                                <a href="<%=basePath%>/tea_tk/tea_blankall.do">填空题查询</a>
                             </li>
                             <li>
-                                <a href="Fill_in_blanks%20question_query.html">程序填空查询</a>
+                                <a href="<%=basePath%>/tea_tk/tea_allReadFill.do">程序填空查询</a>
                             </li>
                             <li>
-                                <a href="Read_program_results%20question_query.html">读程序写结果查询</a>
+                                <a href="<%=basePath%>/tea_tk/tea_allReadProgram.do">读程序写结果查询</a>
                             </li><li>
-                            <a href="Program_design%20question_query.html">程序设计查询</a>
-                        </li>
+<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
 
                         </ul>
                         <!-- /.nav-second-level -->
@@ -110,7 +108,7 @@
                         <a href=""><i class="fa fa-table fa-fw"></i>考试<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="check_exam.html">查看考试信息</a>
+                                <a href="<%=basePath%>/teacher/examall.do">查看考试信息</a>
                             </li>
                             <li>
                                 <a href="exam.html">创建新考试</a>
@@ -119,10 +117,10 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="score_query.html"><i class="fa fa-bar-chart-o fa-fw"></i>学生<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>学生<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="student_Information_import.html">学生信息导入</a>
+                                <a href="<%=basePath%>/teacher/stuinfo.do">学生信息查询</a>
                             </li>
                             <li>
                                 <a href="score_query.html">学生成绩查询</a>
@@ -143,21 +141,28 @@
         <br>
         <h2>数据导入：</h2>
         <br>
-        <div aria-orientation="horizontal">
-            <label style="font-size: large" > 学年：</label>
-            <select id="semester">  <!--  下拉框  -->
-                <option>--学年选择--</option>
+
+        &nbsp;&nbsp;&nbsp;
+        <div class="form-group" style="width: 10%; margin: 0px ;display: inline" >
+            <label style="font-size: large" > 入学时间：</label>
+            <select class="form-control" style="width: 10% ;margin: 0px ;display: inline " id="semester">
+                <<option>--学年选择--</option>
             </select>
-            &nbsp;        &nbsp;        &nbsp;
+        </div>
+        &nbsp;&nbsp;&nbsp;
+        <div class="form-group" style="width: 10%; margin: 0px ;display: inline" >
             <label style="font-size: large">专业：</label>
-            <select id="major">  <!--  下拉框  -->
+            <select class="form-control" style="width: 10% ;margin: 0px ;display: inline " id="major">
                 <option>--专业选择--</option>
             </select>
-            &nbsp;        &nbsp;        &nbsp;
+        </div>
+        &nbsp;&nbsp;&nbsp;
+        <div class="form-group" style="width: 10%; margin: 0px ;display: inline" >
             <label style="font-size: large">班级：</label>
-            <select id="class">  <!--  下拉框  -->
+            <select class="form-control" style="width: 10% ;margin: 0px ;display: inline " id="class">
                 <option>--班级选择--</option>
             </select>
+        </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="btn btn-outline btn-primary" onclick="search()" id="btn">确定</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -165,13 +170,12 @@
                 <input style="display: inline" id="file" type="file" name="file"/>
                 <input style="display: inline ; width: 5%" type="submit" name="submit" id="submit" value="上传" />
             </form>
-        </div>
         <br>
 
 
         <!-- 信息上传 -->
         <div>
-            <table class="table table-striped" style="width: 90%" align="center" id="test">
+            <table class="table table-striped" style="width: 90%" align="center" id="test" >
                 <caption></caption>
                 <thead>
                 <tr>
@@ -182,30 +186,43 @@
                 </tr>
                 </thead>
                 <tbody>
-
-
                 </tbody>
             </table>
         </div>
-        <!-- 删除的模态框 -->
-        <div class="modal fade" id="trashModal">
-            <div class="modal-dialog">
+        <!-- 编辑的模态框 -->
+        <div class="modal fade" id="stuedit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <!-- 模糊框头部 -->
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
-                        </button>
-                        <h4 class="modal-title">删除！</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="Label">编辑</h4>
                     </div>
-                    <!-- 模糊框主体 -->
-                    <div class="modal-body">
-                        <strong>你确定要删除吗？</strong>
-                    </div>
-                    <!-- 模糊框底部 -->
-                    <div class="modal-footer">
-                        <button type="button" class="delSure btn btn-info" data-dismiss="modal">确定</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                    </div>
+                    <form class="form-horizontal">
+                        <div class="modal-body">
+                            <input name="num" id="upnum" hidden="hidden"/>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">姓名</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="username" class="form-control" id="username"
+                                           placeholder="数字或英语">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">密码</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="password" class="form-control" id="password"
+                                           placeholder="数字或英语">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="submit" class="btn btn-primary" id="editbtn">保存</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -240,36 +257,50 @@
                 var tempHtml = "";
                   for(var i = 0;i < data.length;i++){
                       id=data[i].id;
-                      var destu = " <button  class=\"btn btn-outline btn-primary\"   id=\"id\"  onclick=\"return trash(id)\">删除</button>";
-                      tempHtml += "<tr class=\"myclass\"><td>"+data[i].num+"</td><td>" + data[i].username+"</td><td>"+ data[i].password+ "</td><td>"+
-                          destu +
-                          ' <button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#myModa_n" >修改</button>'+"</td></tr>";
+                      var destu = "<a href=\"javascript:void(0)\" onclick=\"removeTr(this)\">删除</a>";
+                      var edit = "<a href=\"javascript:void(0)\" onclick=\"editTr(this)\">编辑</a>";
+                      tempHtml += "<tr class=\"myclass\"><td id='num'>"+data[i].num+"</td><td>" + data[i].username+"</td><td>"+ data[i].password+ "</td><td>"+
+                          destu + "&nbsp;"+edit+"</td></tr>";
                   }
                 $("table").append(tempHtml);
             }
         });
     }
-    // $("#deletestu").click(function(){
-    //     console.log("开始响应");
-    //     alert("开始响应");
-    //     var num = $(this).parents("tr").find("#num").text();
-    //     alert("当前班级" + num);
-    //     // $("#addp1").modal({
-    //     //     backdrop:"static"
-    //     // });
-    // });
-    //删除
-    function trash(id) {
-        var  num = $("table td:eq(0)").text();
-         alert(num);
-                $.ajax({
-                    url: '<%=basePath%>/student/detelestu.do? num=' + num,
-                    type: 'POST',
-                    success: function (data) {
-                        $("body").html(data);
-                    }
-                });
+    function removeTr(obj) {
+        var tr= $(obj).parent().parent();
+        var num=$(obj).parent().parent().children("td").get(0).innerHTML;
+        <%--location.href = "<%=basePath%>/student/detelestu.do?num="+num;--%>
+        $.ajax({
+        url: '<%=basePath%>/student/detelestu.do?num='+ num,
+        type: 'POST',
+        success: function (data) {
+            tr.remove();
+             }
+        });
+
     }
+    // 编辑信息的方法
+    function editTr(obj) {
+        var num=$(obj).parent().parent().children("td").get(0).innerHTML;
+        var name=$(obj).parent().parent().children("td").get(1).innerHTML;
+        var psw=$(obj).parent().parent().children("td").get(2).innerHTML;
+        //alert("num = " + num + "name = " + name +"psw = " + psw);
+                    $("#upnum").val(num);
+                     $("#username").val(name);
+                    $("#password").val(psw);
+                    $("#stuedit").modal('show');
+    }
+    $("#editbtn").click(function(){
+        alert($("#stuedit form").serialize())//序列化form上的数据
+        $.ajax({
+            url:"<%=basePath%>/student/upstu.do",
+            type:"POST",
+            data:$("#stuedit form").serialize(),
+            success:function(data) {
+                $("#addp2").modal('hide');
+            }
+        });
+    });
     $(function() {
         $.ajax({
             type: "POST",
@@ -294,6 +325,7 @@
                 success:function(data){
                     $("#major option").remove();
                     $("#class option").remove();
+                    $("#major").append("<option>" + "--专业选择--"+ "</option>");
                     for (var i = 0; i < data.length; i++) {
                         $("#major").append("<option value='" + data[i].maid + "'>" + data[i].maname + "</option>");
                     }
@@ -311,6 +343,7 @@
                 success:function(data){
                     //追加本机option前，先清除city和county的option，以免重选时干扰
                     $("#class option").remove();
+                    $("#class").append("<option>" + "--班级选择--"+ "</option>");
                     for (var i = 0; i < data.length; i++) {
                         $("#class").append("<option value='" + data[i].cid + "'>" + data[i].cname + "</option>");
                     }

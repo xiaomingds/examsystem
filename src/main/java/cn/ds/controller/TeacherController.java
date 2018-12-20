@@ -55,9 +55,20 @@ public class TeacherController {
     @RequestMapping("/allexam")
     public String AllExam(Model model){
         List<ExamInfo>examInfos = examService.FindAll();
-
         model.addAttribute("examInfo",examInfos);
         return "page/admin/exam_info";
+    }
+    @RequestMapping("/examall")
+    public String ExamAll(Model model){
+        List<ExamInfo>examInfos = examService.FindAll();
+        model.addAttribute("examInfo",examInfos);
+        return "page/teacher/exam_info";
+    }
+    @RequestMapping("/examallstu")
+    public String ExamStuAll(Model model){
+        List<ExamInfo>examInfos = examService.FindAll();
+        model.addAttribute("examInfo",examInfos);
+        return "page/student/exam_info";
     }
     @RequestMapping("/upexam")
     public  String UpExam(ExamInfo examInfo) {

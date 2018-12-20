@@ -11,5 +11,5 @@ public interface StudentService {
    String ajaxUploadExcel(HttpServletRequest request, HttpServletResponse response);
    List<Student> ByClass(String classname);
    void deleteStudent(String num);
-
+   void UpStudent(Student student);
 }

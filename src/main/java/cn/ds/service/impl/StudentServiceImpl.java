@@ -66,14 +66,17 @@ public class StudentServiceImpl implements StudentService {
                 j = studentmapper.selectByPrimaryKey(Long.valueOf(String.valueOf(lo.get(0))));
             } catch (NumberFormatException e) {
                 // TODO Auto-generated catch block
-                System.out.println("没有新增");
+              //  System.out.println("没有新增");
             }
 
             //vo.setId(Long.valueOf(String.valueOf(lo.get(0))));
             vo.setUsername(String.valueOf(lo.get(0)));
-            vo.setPassword(String.valueOf(lo.get(1)));
-            vo.setClassname(String.valueOf(lo.get(2)));
-            vo.setNum(String.valueOf(lo.get(3)));
+            String password = String.valueOf(lo.get(2));
+
+            System.out.println("密码" + password);
+            vo.setPassword(password);
+            vo.setClassname(String.valueOf(lo.get(1)));
+            vo.setNum(String.valueOf(lo.get(2)));
             if(j == null)
             {
                 studentmapper.insert(vo);
@@ -85,7 +88,6 @@ public class StudentServiceImpl implements StudentService {
         }
         return "success";
     }
-
     @Override
     public List<Student> ByClass(String classname) {
         return studentmapper.ByClass(classname);
@@ -94,5 +96,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void deleteStudent(String num) {
         studentmapper.deleteStudent(num);
+    }
+
+    @Override
+    public void UpStudent(Student student) {
+        studentmapper.UpStudent(student);
     }
 }

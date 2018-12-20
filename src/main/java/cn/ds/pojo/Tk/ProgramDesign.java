@@ -1,8 +1,8 @@
 package cn.ds.pojo.Tk;
 
-public class ProgramFill {
+public class ProgramDesign {
     private Long id;
-    private  String content;
+    private String content;
     private String answer;
     private String analysis;
     private String chapter;
@@ -12,6 +12,7 @@ public class ProgramFill {
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }

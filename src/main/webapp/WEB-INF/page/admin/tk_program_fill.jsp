@@ -97,7 +97,6 @@
             <!-- /.dropdown -->
         </ul>
         <!-- /.navbar-top-links -->
-
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -108,41 +107,37 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>题库<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="Choice%20question_query.html">选择题查询</a>
+                                <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="Completion%20question_query.html">填空题查询</a>
+                                <a href="<%=basePath%>/tk/blankall.do">填空题查询</a>
                             </li>
                             <li>
-                                <a href="Fill_in_blanks%20question_query.html">程序填空查询</a>
+                                <a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>
                             </li>
                             <li>
-                                <a href="Read_program_results%20question_query.html">读程序写结果查询</a>
+                                <a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>
                             </li><li>
-                            <a href="Program_design%20question_query.html">程序设计查询</a>
-                        </li>
-
+<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="knowledge%20point.html"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
                     </li>
                     <li>
-                        <a href="teacher.html"><i class="fa fa-edit fa-fw"></i>教师</a>
+                        <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
                     </li>
                     <li>
-                        <a href="exam.html"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
+                        <a href="<%=basePath%>/teacher/allexam.do"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
                     </li>
                     <li>
-                        <a href="base_year.html"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
-
+                        <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
                     </li>
-
                 </ul>
             </div>
-            <!-- /.sidebar-collapse -->
         </div>
+
         <!-- /.navbar-static-side -->
     </nav>
 
@@ -169,7 +164,7 @@
                 <c:set var="index" value="${index+1}"/>
                 <td>${index}</td>
                 <td class="line">${re.content}</td>
-                <td>${re.difficult}</td>
+                <td>${re.difficulty}</td>
                 <td class="del-col">
                     <a href="#" onclick="return edit(${re.id})" style="text-decoration: none;">
                         <span class="fa fa-edit fa-fw"></span>
@@ -228,7 +223,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">难度</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" id="updifficulty" name = "difficult">
+                                    <select class="form-control" id="updifficulty" name = "difficulty">
                                         <option value="1">热血青铜</option>
                                         <option value="2">不屈白银</option>
                                         <option value="3">英勇黄金</option>
@@ -279,7 +274,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">难度</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" id="difficult" name = "difficult">
+                                    <select class="form-control" id="difficulty" name = "difficulty">
                                         <option value="1">热血青铜</option>
                                         <option value="2">不屈白银</option>
                                         <option value="3">英勇黄金</option>
@@ -357,7 +352,7 @@
 
                 $("#upchapter").val(data.chapter);
                 $("#upchaptertwo").val(data.chaptertwo);
-                $("#updifficulty").val(data.difficult);
+                $("#updifficulty").val(data.difficulty);
                 $("#editch").modal('show');
             }
         });
@@ -379,6 +374,8 @@
         }
     }
     function getpt() {
+        $("#chapter").empty();
+        $("#chaptertwo").empty();
         $.ajax({
             url:"${APP_PATH}/login/user/pointall.do",
             type:"GET",
@@ -408,6 +405,8 @@
         });
     }
     function getpoint(chid) {
+        $("#upchapter").empty();
+        $("#upchaptertwo").empty();
         console.log("当前复选框" + chid);
         $.ajax({
             url:"${APP_PATH}/login/user/pointall.do",

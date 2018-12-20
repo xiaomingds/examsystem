@@ -1,9 +1,13 @@
 package cn.ds.service.impl;
 
 import cn.ds.mapper.Tk.BlankMapper;
+import cn.ds.mapper.Tk.ProgramDesignMapper;
 import cn.ds.mapper.Tk.ProgramFillMapper;
+import cn.ds.mapper.Tk.ReadProgramMapper;
 import cn.ds.pojo.Tk.Blank;
+import cn.ds.pojo.Tk.ProgramDesign;
 import cn.ds.pojo.Tk.ProgramFill;
+import cn.ds.pojo.Tk.ReadProgram;
 import cn.ds.service.TkService;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,10 @@ public class TkServiceImpl implements TkService {
     ProgramFillMapper programFillMapper;
      @Autowired
      BlankMapper blankMapper;
+     @Autowired
+    ReadProgramMapper readProgramMapper;
+     @Autowired
+    ProgramDesignMapper programDesignMapper;
     @Override
     public List<ProgramFill> ProgramFillAll() {
         List<ProgramFill>programFills = programFillMapper.ProgramFillAll();
@@ -78,5 +86,71 @@ public class TkServiceImpl implements TkService {
     @Override
     public void UpdateBlank(Blank blank) {
                 blankMapper.UpdateBlank(blank);
+    }
+
+    @Override
+    public List<ReadProgram> ReadProgramAll() {
+        List<ReadProgram>readPrograms = readProgramMapper.ReadProgramAll();
+        for(int i = 0; i< readPrograms.size();i++){
+            String s = StringEscapeUtils.escapeHtml4(readPrograms.get(i).getContent());
+
+            readPrograms.get(i).setContent(s);
+            System.out.println(readPrograms.get(i).getContent());
+        }
+        return readPrograms;
+    }
+
+    @Override
+    public ReadProgram ByReadProgramId(Long id) {
+        return readProgramMapper.ByReadProgramId(id);
+    }
+
+    @Override
+    public void DeleteReadProgram(Long id) {
+        readProgramMapper.DeleteReadProgram(id);
+
+    }
+
+    @Override
+    public void CreateReadProgram(ReadProgram readProgram) {
+        readProgramMapper.CreateReadProgram(readProgram);
+    }
+
+    @Override
+    public void updateReadProgram(ReadProgram readProgram) {
+        readProgramMapper.updateReadProgram(readProgram);
+    }
+
+
+    @Override
+    public List<ProgramDesign> ProgramDesignAll() {
+        List<ProgramDesign>programDesigns = programDesignMapper.ProgramDesignAll();
+        for(int i = 0;i<programDesigns.size();i++){
+            String s=StringEscapeUtils.escapeHtml4(programDesigns.get(i).getContent());
+
+            programDesigns.get(i).getContent();
+        }
+        return programDesigns;
+    }
+
+    @Override
+    public ProgramDesign ByProgramDesignId(Long id) {
+        return programDesignMapper.ByProgramDesignId(id);
+    }
+
+    @Override
+    public void DeleteProgramDesign(Long id) {
+        programDesignMapper.DeleteProgramDesign(id);
+    }
+
+    @Override
+    public void CreateProgramDesign(ProgramDesign programDesign) {
+        programDesignMapper.CreateProgramDesign(programDesign);
+
+    }
+
+    @Override
+    public void updateProgramDesign(ProgramDesign programDesign) {
+        programDesignMapper.updateProgramDesign(programDesign);
     }
 }

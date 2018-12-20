@@ -1,7 +1,9 @@
 package cn.ds.service;
 
 import cn.ds.pojo.Tk.Blank;
+import cn.ds.pojo.Tk.ProgramDesign;
 import cn.ds.pojo.Tk.ProgramFill;
+import cn.ds.pojo.Tk.ReadProgram;
 
 import java.util.List;
 
@@ -17,4 +19,18 @@ public interface TkService {
     void  DeleteBlank(Long id);
     void  CreateBlank(Blank blank);
     void UpdateBlank(Blank blank);
+
+
+    List<ReadProgram>ReadProgramAll();
+    ReadProgram ByReadProgramId(Long id);
+    void DeleteReadProgram(Long id);
+    void CreateReadProgram(ReadProgram readProgram);
+    void updateReadProgram(ReadProgram readProgram);
+
+
+    List<ProgramDesign>ProgramDesignAll();
+    ProgramDesign ByProgramDesignId(Long id);
+    void DeleteProgramDesign(Long id);
+    void CreateProgramDesign(ProgramDesign programDesign);
+    void updateProgramDesign(ProgramDesign programDesign);
 }

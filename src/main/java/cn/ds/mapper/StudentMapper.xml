@@ -55,4 +55,11 @@
     <delete id="deleteStudent" parameterType="String">
         delete from student where num = #{num}
     </delete>
+
+    <update id="UpStudent" parameterType="cn.ds.pojo.Student" >
+    update student
+    set username = #{username},
+      password = #{password}
+    where num = #{num}
+  </update>
 </mapper>
