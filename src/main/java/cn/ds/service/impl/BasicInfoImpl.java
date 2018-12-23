@@ -62,6 +62,20 @@ public class BasicInfoImpl implements BasicInfoService {
         return basicInfoMapper.findClass(classname);
     }
 
+    @Override
+    public void DeleteClass(String cname) {
+        basicInfoMapper.DeleteClass(cname);
+    }
+
+    @Override
+    public void DeleteMajor(Long maid) {
+        basicInfoMapper.DeleteMajor(maid);
+    }
+
+    @Override
+    public void DeleteYear(Long seid) {
+        basicInfoMapper.DeleteYear(seid);
+    }
 
 
 }

@@ -12,4 +12,8 @@ public interface StudentService {
    List<Student> ByClass(String classname);
    void deleteStudent(String num);
    void UpStudent(Student student);
+
+   Student selectByPrimaryKey(Long id);
+   void CreatStu(Student student);
+
 }

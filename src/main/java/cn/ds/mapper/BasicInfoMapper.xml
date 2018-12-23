@@ -34,5 +34,16 @@
     <select id="findClass" parameterType="String" resultType="Student">
         select id,username,password, num,classname from student where classname = #{classname} order by  id asc
     </select>
-
+    <!--删除班级-->
+    <delete id="DeleteClass" parameterType="String">
+        DELETE FROM class WHERE cname=#{cname}
+    </delete>
+    <!--删除专业-->
+    <delete id="DeleteMajor" parameterType="Long">
+        DELETE FROM major WHERE maid=#{maid}
+    </delete>
+    <!--删除学年-->
+    <delete id="DeleteYear" parameterType="Long">
+        DELETE FROM semester WHERE seid=#{seid}
+    </delete>
 </mapper>

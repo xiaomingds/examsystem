@@ -10,7 +10,7 @@ import java.util.List;
  * @author ds
  */
 public interface UserMapper {
-
+   void CreateAdmin(User user);
     User login(String username);
     void create(Teacher teacher);
     void delete(Long id);

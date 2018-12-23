@@ -16,6 +16,7 @@ public interface BasicInfoMapper {
     void CreateStudent(Student student);
     List<Student>findClass(String classname);
      Integer deleteSemester(int[] id_arr);//批量删除
-
-
+   void DeleteClass(String cname);
+    void DeleteMajor(Long maid);
+    void DeleteYear(Long seid);
 }

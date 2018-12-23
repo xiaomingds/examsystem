@@ -35,18 +35,19 @@
             border: 1px solid black;
             border-collapse: collapse;
             width: 500px;
+            text-align: center;
         }
         table th {
             border: 1px solid black;
-            width: 25%;
+            width: 2%;
+            text-align: center;
+
         }
         table td {
             align-items: center;
             border: 1px solid black;
             width: 25%;
-        }
-        table th {
-            background-color: #c6d0e9;
+            text-align: center;
         }
     </style>
     <script>
@@ -200,23 +201,22 @@
             </tr>
             </thead>
             <tr>
-                <th></th>
-                <th>学年</th>
+                <th>入学时间</th>
                 <th>操作</th>
             </tr>
             <c:forEach items="${semester}" var="se">
             <tr>
-                <td ><input type="checkbox" name="check_name" value="${se.seid}"></td>
                 <td style="margin-top: 50%"  ><a href="<%=basePath%>/basic/allmajor.do?seid=${se.seid}">${se.sename}</a></td>
                 <td >
                     <input style="width: 25%" class="btn btn-outline btn-primary"type="button" value="编辑" data-toggle="modal" data-target="#myModal" >
+                    <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deleteyear(${se.seid})" >
                 </td>
             </tr>
             </c:forEach>
         </table>
         <div align="center">
             <input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增" data-toggle="modal" data-target="#myModa_n">
-            <input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="getCheckAdIds()"/>
+            <%--<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="getCheckAdIds()"/>--%>
         </div>
         <br>
 
@@ -295,6 +295,31 @@
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
 
 </body>
-
+<script>
+    function deleteyear(seid) {
+        console.log("删除的学年" + seid);
+        $.ajax({
+            url: '<%=basePath%>/basic/findmaall.do?seid='+seid,
+            type: 'POST',
+            success: function (data) {
+                if (0 != data.length){
+                    alert("请先删除此班级下的所有专业"+data.length);
+                }
+                else {
+                    $.ajax({
+                        url: '<%=basePath%>/basic/deleteyear.do?seid='+ seid,
+                        type: 'POST',
+                        success: function (data) {
+                            location.reload();
+                           // alert("删除成功");
+                        }
+                    });
+                    location.reload();
+                    alert("删除成功");
+                }
+            }
+        });
+    }
+</script>
 </html>
 

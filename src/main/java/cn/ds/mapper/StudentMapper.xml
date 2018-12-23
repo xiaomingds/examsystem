@@ -62,4 +62,9 @@
       password = #{password}
     where num = #{num}
   </update>
+    <insert id="CreatStu" parameterType="cn.ds.pojo.Student" >
+    insert into Student (id, username, password,classname,num)
+    values (#{id}, #{username}, #{password},
+            #{classname}, #{num})
+  </insert>
 </mapper>

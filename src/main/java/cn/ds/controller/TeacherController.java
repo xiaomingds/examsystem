@@ -5,14 +5,11 @@ import cn.ds.pojo.Teacher;
 import cn.ds.pojo.Tk.Choice;
 import cn.ds.service.ExamService;
 import cn.ds.service.TeacherService;
-import cn.ds.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.*;

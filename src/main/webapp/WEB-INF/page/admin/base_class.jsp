@@ -35,18 +35,18 @@
             border: 1px solid black;
             border-collapse: collapse;
             width: 500px;
+            text-align: center;
         }
         table th {
             border: 1px solid black;
-            width: 25%;
+            width: 2%;
+            text-align: center;
         }
         table td {
             align-items: center;
             border: 1px solid black;
             width: 25%;
-        }
-        table th {
-            background-color: #c6d0e9;
+            text-align: center;
         }
     </style>
     <script>
@@ -185,25 +185,22 @@
                 <th colspan="4">班级设置</th>
             </tr>
             </thead>
-
             <tr>
-                <th></th>
                 <th>班级</th>
                 <th>操作</th>
             </tr>
             <c:forEach items="${cla}" var="cl">
                 <tr>
-                    <td ><input type="checkbox" value="${cl.cid}"></td>
                     <td style="margin-top: 50%"  ><a href="<%=basePath%>/basic/allstudent.do?cname=${cl.cname}">${cl.cname}</a></td>
-                    <td >
+                    <td>
                         <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="编辑" data-toggle="modal" data-target="#myModal" >
+                        <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deleteclass(${cl.cname})">
                     </td>
                 </tr>
             </c:forEach>
         </table>
         <div align="center">
-            <input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >
-            <input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="todelete()"/>
+            <input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增" data-toggle="modal" data-target="#myModa_n">
         </div>
         <br>
     </div>
@@ -287,5 +284,32 @@
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
 
 </body>
+<script>
+    function deleteclass(cname) {
+        console.log("删除的班级" + cname);
+        $.ajax({
+            url: '<%=basePath%>/basic/studentall.do?cname='+cname,
+            type: 'POST',
+            success: function (data) {
+                if (0 != data.length){
+                    alert("请先删除此班级下的所有学生"+data.length);
+                }
+                else {
+                    $.ajax({
+                        url: '<%=basePath%>/basic/deleteclass.do?cname='+ cname,
+                        type: 'POST',
+                        success: function (data) {
+                            location.reload();
+                            alert("删除成功");
+                        }
+                    });
+                    location.reload();
+                    alert("删除成功");
+            }
 
+            }
+        });
+
+    }
+</script>
 </html>

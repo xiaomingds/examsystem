@@ -325,6 +325,7 @@
                 success:function(data){
                     $("#major option").remove();
                     $("#class option").remove();
+                    $("#class").append("<option>" + "--班级选择--"+ "</option>");
                     $("#major").append("<option>" + "--专业选择--"+ "</option>");
                     for (var i = 0; i < data.length; i++) {
                         $("#major").append("<option value='" + data[i].maid + "'>" + data[i].maname + "</option>");

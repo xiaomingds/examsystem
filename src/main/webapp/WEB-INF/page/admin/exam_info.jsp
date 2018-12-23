@@ -189,7 +189,10 @@
                     <% request.setAttribute("currentTime", new Date()); %>
                     <c:choose>
                         <c:when test="${ex.enddate < currentTime}">
-                            <td>已结束</td>
+                        <td>已结束</td>
+                      </c:when>
+                        <c:when test="${ex.begindate < currentTime&&ex.enddate > currentTime}">
+                            <td>正在进行</td>
                         </c:when>
                         <c:otherwise>
                             <td>未开始</td>

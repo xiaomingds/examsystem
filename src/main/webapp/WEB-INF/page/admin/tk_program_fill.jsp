@@ -349,7 +349,6 @@
                 $("#upanswer").val(data.answer);
                 $("#upanalysis").val(data.analysis);
                 console.log("数据库的 id" + data.chapter);
-
                 $("#upchapter").val(data.chapter);
                 $("#upchaptertwo").val(data.chaptertwo);
                 $("#updifficulty").val(data.difficulty);

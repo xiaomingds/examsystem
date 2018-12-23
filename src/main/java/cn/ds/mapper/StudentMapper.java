@@ -14,7 +14,7 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
     int updateByPrimaryKey(Student record);
     void insertInfoBatch(List<Student> list);
-
     void UpStudent(Student student);
     List<Student>ByClass(String classname);
+    void CreatStu(Student student);
 }

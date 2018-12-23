@@ -23,10 +23,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>基础设置</title>
-
-    <link rel="stylesheet" href="<%=basePath%>/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
     <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
     <script src="<%=basePath%>/vendor/bootstrap/js/bootstrap.min.js"></script>
 
@@ -35,43 +33,95 @@
             border: 1px solid black;
             border-collapse: collapse;
             width: 500px;
+            text-align: center;
         }
         table th {
             border: 1px solid black;
-            width: 20%;
+            width:2%;
+            text-align: center;
+
         }
         table td {
             align-items: center;
             border: 1px solid black;
             width: 20%;
+            text-align: center;
         }
-        table th {
-            background-color: #c6d0e9;
-        }
+
     </style>
     <script>
-        //根据checkbox批量删除
-        function todelete() {
-            var msg = "确认删除选中试题";
-            if(confirm(msg)==true){
-                var chk_value = [];//定义一个数组
-                //利用将name等于ids的多选按钮得到
-                $("#tableId").find(":input[id='case']:checked").each(function(){
-                    //获取id值，因为id单元格在复选框单元格的下一个元素
-                    var val = $(this).parent().next().text();
-                    //将id值添加到数组
-                    chk_value.push(val);
+        //文档准备就绪
+        $(function () {
+            //设置 所有 td 居中
+            $('table td').attr("align","center");
+            //标签+属性选择所有<编辑>按钮
+            /*
+            $('input[value="编辑"]').click(function () {
+                //获取每一个<编辑>按钮的 下标（从0开始 所以需要+2 = 按钮在表格的所在行数）
+                var numId = $('input[value="编辑"]').index($(this))+2;
+                //选择表格中的所有tr 通过eq方法取得当前tr
+                var ttr = $('table tr').eq(numId);
+
+                ttr.find("td").each(function () {
+
+                    if($(this).children("input[type='checkbox']").length>0){
+                        return ;
+                    }
+                    if($(this).children("input[type='button']").length>0){
+                        return ;
+                    }
+                    if($(this).children("input[type='text']").length>0){
+                        return ;
+                    }
+                    var tdText = $(this).html();
+                    $(this).html("");
+                    var inputObj = $("<input type='text'>");
+                    inputObj.appendTo($(this));
+                    inputObj.css("width","95%");
+                    inputObj.val(tdText);
                 });
-                if (chk_value.length == 0) {
-                    alert("你还没有选择任何内容！");
+            });
+            */
+            //为每一个确定按钮设置点击事件
+            $('input[value="确定"]').click(function () {
+                /*通过parents方法获取<确定>按钮的父容器tr
+                 再为 tr中的每一个text设置function
+                 */
+                var ttr=$(this).parents("tr");
+                ttr.find('input[type="text"]').each(function () {
+                    var inputVal = $(this).val();
+                    $(this).parents('td').html(inputVal);
+                })
+            });
+            //全选/反选
+            $('#cha').click(function () {
+                //判断checkbox是否选中
+                if($(this).is(':checked')){
+                    $('input[type="checkbox"]').attr("checked","true");
+                }else{
+                    $('input[type="checkbox"]').removeAttr("checked");
                 }
-                if (chk_value.length > 0) {
-                    //在浏览器控制台打印信息
-                    console.log(chk_value);
-                    location.href = "${ctx}/tec/isdeleteMany.do?chk_value=" + chk_value;
-                }
-            }
-        }
+            });
+            //增加一行
+            $('#add').click(function () {
+                $('#tab1 tr').eq(3).clone(true).appendTo("#tab1");
+            });
+            //删除最后一行
+            $('#delete').click(function () {
+                $('table tr:last').remove();
+            });
+            //$('#deleteone').click(function () {
+            //   $('input[type="checkbox"]');
+            //});
+            // $(function(){
+            //    $("input[type='button']").click(function() {
+            //       $("input[id=\"cha\"]:checked").each(function() { // 遍历选中的checkbox
+            //           n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+            //            $("table#test_table").find("tr:eq("+n+")").remove();
+            //        });
+            //    });
+            // });
+        })
 
     </script>
 
@@ -122,7 +172,7 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="../login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -152,7 +202,7 @@
                             <li>
                                 <a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>
                             </li><li>
-<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
+                            <a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -181,56 +231,62 @@
         <table border="1" class="table table-bordered" id = "tab1">
             <thead>
             <tr>
-                <th colspan="5">${cname}学生信息设置</th>
+                <th colspan="4" style="text-align: center;font-size: 20px ">${cname}学生信息设置</th>
             </tr>
             </thead>
 
             <tr>
-                <th></th>
-                <th>学号</th>
-                <th>姓名</th>
-                <th>密码</th>
-                <th>操作</th>
+                <td>学号</td>
+                <td>姓名</td>
+                <td>密码</td>
+                <td>操作</td>
             </tr>
             <c:forEach items="${student}" var="st">
-                <tr>
-                    <td ><input type="checkbox"></td>
-                    <td style="margin-top: 50%"  >${st.num}</td>
-                    <td> <a href="base_test.html">${st.username}</a></td>
-                    <td>${st.password}</td>
-                    <td >
-                        <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="编辑" data-toggle="modal" data-target="#myModal" >
-                    </td>
-                </tr>
+            <tr>
+                <td style="margin-top: 50%"  >${st.num}</td>
+                <td> <a href="base_test.html">${st.username}</a></td>
+                <td>${st.password}</td>
+                <td >
+                    <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="编辑" onclick="edit('${st.id}')" >
+                    <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="删除"  onclick="removeTr(${st.num})">
+                </td>
+            </tr>
             </c:forEach>
         </table>
         <div align="center">
             <input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >
-            <input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="todelete()"/>
         </div>
         <br>
+        <!-- /#page-wrapper -->
     </div>
-
-    <!-- 编辑-->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- 编辑  data-toggle="modal" data-target="#myModa_n" -->
+    <div class="modal fade" id="editstu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">专业更改</h4>
+                    <h4 class="modal-title" id="myModalLabel">学生信息更改</h4>
                 </div>
                 <div class="modal-body" style="text-align:left">
-
+                    <form action="<%=basePath%>/student/upstu.do" method="post">
                     <div class="form-group input-group">
-                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入更改后的专业:</span>
-                        <input type="text" style="height: 40px " class="form-control">
+                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入更改后的学号：</span>
+                        <input type="text" style="height: 40px" class="form-control" disabled="disabled" id="upnum" name ="num">
+                    </div>
+                        <input name="num" id="num" hidden="hidden"/>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入更改后的姓名：</span>
+                        <input type="text" style="height: 40px" class="form-control" name="username" id="upusername">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入更改后的密码：</span>
+                        <input type="text" style="height: 40px" class="form-control" name="password" id="uppassword">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
-                    <button type="button"  class="btn btn-outline btn-primary">确定</button>
-
-                </div>
+                    <button type="submit"  class="btn btn-outline btn-primary">确定</button>
+                </div></form>
             </div>
             <!-- /.modal-content -->
         </div>
@@ -239,40 +295,43 @@
     </div>
     <!-- /#wrapper -->
     <br>
+
     <div>
         <tr class="append-row">
             <td colspan="5" align="right">
                 <!-- Modal -->
                 <div class="modal fade" id="myModa_n" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <form action="<%=basePath%>/basic/insertclass.do" method="post">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="myModalLabe2" style="text-align:center">添加选项</h4>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabe2" style="text-align:center">添加选项</h4>
+                            </div>
+                            <form action="<%=basePath%>/basic/creatstu.do" method="post">
+                            <div class="modal-body" style="text-align:left">
+                                <input name="classname" id="classname"  hidden="hidden" value="${cname}"/>
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入学号：</span>
+                                    <input type="text" style="height: 40px " class="form-control" name="num">
                                 </div>
-                                <input name="maid" id="maid"  value="${maid}" hidden="hidden"/>
-                                <div class="modal-body" style="text-align:left">
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入班级:</span>
-                                        <input type="text" style="height: 40px " class="form-control" name="cname">
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
-                                    <button type="submit"  class="btn btn-outline btn-primary">确定</button>
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入姓名：</span>
+                                    <input type="text" style="height: 40px" class="form-control" name="username">
                                 </div>
                             </div>
-                            <!-- /.modal-content -->
+                            <div class="modal-footer">
+                                <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
+                                <button type="submit"  class="btn btn-outline btn-primary">确定</button>
+                            </div>
+                            </form>
                         </div>
-                    </form>
+                        <!-- /.modal-content -->
+                    </div>
                     <!-- /.modal-dialog -->
                 </div>
             </td>
         </tr>
     </div>
-
 
 </div>
 <!-- /#wrapper -->
@@ -290,5 +349,32 @@
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
 
 </body>
+<script>
+    function edit(id) {
+        console.log("插在的id" + id);
+        $.ajax({
+            url: '<%=basePath%>/student/byId.do?id='+ id,
+            type: 'POST',
+            success: function (data) {
+                $("#upnum").val(data.num);
+                $("#num").val(data.num);
+                $("#upusername").val(data.username);
+                $("#uppassword").val(data.password);
+                $("#editstu").modal('show');
+             }
+        });
+    }
+    function removeTr(num) {
+        console.log("num" + num);
+        $.ajax({
+            url: '<%=basePath%>/student/detelestu.do?num='+ num,
+            type: 'POST',
+            success: function (data) {
+                location.reload();
+            }
+        });
 
+    }
+</script>
 </html>
+

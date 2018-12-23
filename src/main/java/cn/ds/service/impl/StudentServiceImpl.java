@@ -102,4 +102,14 @@ public class StudentServiceImpl implements StudentService {
     public void UpStudent(Student student) {
         studentmapper.UpStudent(student);
     }
+
+    @Override
+    public Student selectByPrimaryKey(Long id) {
+        return studentmapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void CreatStu(Student student) {
+        studentmapper.CreatStu(student);
+    }
 }

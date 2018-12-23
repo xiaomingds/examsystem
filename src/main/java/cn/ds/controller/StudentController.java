@@ -77,9 +77,15 @@ public class StudentController {
         return "index";
     }
     @ResponseBody
+    @RequestMapping("/byId")
+    public  Student FindId(@RequestParam Long id){
+        Student student = studentService.selectByPrimaryKey(id);
+        return student;
+    }
+
+    @ResponseBody
     @RequestMapping(value="ajaxUpload",method={RequestMethod.GET,RequestMethod.POST})
     public String ajaxUploadExcel(HttpServletRequest request,HttpServletResponse response) throws Exception {
-        System.out.println("这是请求");
          return studentService.ajaxUploadExcel(request, response);
     }
 }

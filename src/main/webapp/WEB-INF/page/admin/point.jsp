@@ -57,10 +57,6 @@
     ul {
         list-style-type: none;
     }
-
-    /** =======================
-     * Contenedor Principal
-     ===========================*/
     h1 {
         color: #FFF;
         font-size: 24px;

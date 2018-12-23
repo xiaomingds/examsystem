@@ -8,7 +8,10 @@
      <select id="login" parameterType="cn.ds.pojo.User" resultType="User">
         select * from tb_user where username = #{username}
     </select>
-
+    <!-- 添加管理员-->
+    <insert id="CreateAdmin" parameterType="User">
+        insert into tb_user( username,password) values( #{username},#{password})
+    </insert>
     <!-- -查询 -->
     <select id="findTeacherAll" resultType="cn.ds.pojo.Teacher">
         select * from teacher
@@ -86,19 +89,19 @@
     </select>
   <!--所有选择题-->
     <select id="findChoiceAll"  resultType="cn.ds.pojo.Tk.Choice">
-        select * from choicequestion
+        select * from tk_choice
     </select>
     <select id="createchoice" resultType="cn.ds.pojo.Tk.Choice">
-        insert into choicequestion(content, Aoption, Boption, Coption, Doption, answer, analysis, chapter, chaptertwo,difficulty)
+        insert into tk_choice(content, Aoption, Boption, Coption, Doption, answer, analysis, chapter, chaptertwo,difficulty)
         value (#{content}, #{aoption}, #{boption}, #{coption}, #{doption},#{answer},#{analysis},#{chapter},#{chaptertwo},#{difficulty})
     </select>
     <!-- 根据id查选择题-->
     <select id="findBychId" parameterType="Long" resultType="cn.ds.pojo.Tk.Choice">
-        select * from choicequestion where id = #{id}
+        select * from tk_choice where id = #{id}
     </select>
     <!-- 更新选择题的方法 -->
     <update id="updatech" parameterType="Choice">
-        update choicequestion set
+        update tk_choice set
             id = #{id},
             content= #{content}, aoption =#{aoption},
             boption = #{boption},coption= #{coption},
@@ -109,7 +112,7 @@
     </update>
     <!--单个删除选择-->
     <delete id="deletech" parameterType="Long">
-        delete from choicequestion where id = #{id}
+        delete from tk_choice where id = #{id}
     </delete>
     <!--所有选择题-->
     <select id="findreadprogramAll"  resultType="cn.ds.pojo.Tk.ReadProgram">

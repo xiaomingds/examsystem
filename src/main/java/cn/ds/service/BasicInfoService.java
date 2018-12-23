@@ -17,4 +17,9 @@ public interface BasicInfoService {
     void CreateBlass(Blass blass);
     void CreateStudent(Student student);
     List<Student>findClass(String classname);
+
+    void DeleteClass(String cname);
+    void DeleteMajor(Long maid);
+    void DeleteYear(Long seid);
+
 }

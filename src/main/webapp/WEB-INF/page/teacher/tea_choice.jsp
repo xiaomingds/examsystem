@@ -116,7 +116,7 @@
                             <li>
                                 <a href="<%=basePath%>/tea_tk/tea_allReadProgram.do">读程序写结果查询</a>
                             </li><li>
-<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
+                            <a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
 
                         </ul>
                         <!-- /.nav-second-level -->
@@ -391,6 +391,8 @@
     };
 
     function getpoint() {
+        $("#chapter").empty();
+        $("#chaptertwo").empty();
         $.ajax({
             url: "<%=basePath%>/user/pointall.do",
             type: "GET",
@@ -456,6 +458,8 @@
     }
     function getpt(chid) {
         console.log("当前复选框" + chid);
+        $("#upchapter").empty();
+        $("#upchaptertwo").empty();
         $.ajax({
             url:"<%=basePath%>/user/pointall.do",
             type:"GET",

@@ -22,6 +22,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Override
+    public void CreateAdmin(User user) {
+        userMapper.CreateAdmin(user);
+    }
+
     /**
      * 用户登录的方法
      */

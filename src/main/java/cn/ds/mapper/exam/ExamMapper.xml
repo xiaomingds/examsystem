@@ -22,7 +22,7 @@
     </select>
     <!--随机获取数据-->
     <select id="RandId" resultType="Choice">
-         select * from choicequestion order by RAND() limit #{exnumber}
+         select * from tk_choice order by RAND() limit #{exnumber}
     </select>
     <!-- 更新的方法 -->
     <update id="UpExaminfo" parameterType="ExamInfo">

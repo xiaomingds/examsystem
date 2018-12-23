@@ -117,25 +117,35 @@
                             </li>
                             <li>
                                 <a href="<%=basePath%>/tea_tk/tea_allReadProgram.do">读程序写结果查询</a>
-                            </li>
-                            <li><a href="<%=basePath%>/tea_tk/tea_allPgDesign.do">程序设计查询</a>
-                            </li>
+                            </li><li>
+                            <a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
 
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="knowledge%20point.html"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href=""><i class="fa fa-table fa-fw"></i>考试<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/teacher/examall.do">查看考试信息</a>
+                            </li>
+                            <li>
+                                <a href="exam.html">创建新考试</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="teacher.html"><i class="fa fa-edit fa-fw"></i>教师</a>
-                    </li>
-                    <li>
-                        <a href="exam.html"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
-                    </li>
-                    <li>
-                        <a href="base_year.html"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
-
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>学生<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/teacher/stuinfo.do">学生信息查询</a>
+                            </li>
+                            <li>
+                                <a href="score_query.html">学生成绩查询</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
                     </li>
 
                 </ul>
