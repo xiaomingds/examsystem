@@ -199,7 +199,7 @@
                         </c:otherwise>
                     </c:choose>
                     <td>${ex.teacher}</td>
-                    <td >
+                    <td>
                         <input  class="btn btn-outline btn-primary" type="button" value="删除" onclick="return trash(${ex.id})" data-toggle="modal" data-target="#trashModal">
                         <input  class="btn btn-outline btn-primary" type="button" value="更改" onclick="edit('${ex.id}')">
                     </td>

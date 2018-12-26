@@ -62,6 +62,14 @@ public class StudentController {
         studentService.UpStudent(student);
         return student;
     }
+    @RequestMapping("/creatstu")
+    public String CreatStu(Student student){
+        student.setPassword(student.getNum());
+        studentService.CreatStu(student);
+        return "redirect:byclassname.do?classname="+student.getClassname();
+    }
+
+
     @RequestMapping("/savescore")
     public  String SaveScore(@RequestParam int allscore, @RequestParam String examname,Model model){
          System.out.println(allscore);

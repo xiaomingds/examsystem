@@ -30,5 +30,8 @@ public interface UserService extends BaseService<User> {
     void updatech(Choice choice);
     void deletech(Long id);
     List<ReadProgram> findReadprogramAll();
+    User findByUsername(String username);
+
+    void deleteManyChoice(String chk_value);
 
 }

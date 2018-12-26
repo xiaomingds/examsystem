@@ -61,6 +61,33 @@
         box-shadow: 0 0 10px #719ECE;
     }
 </style>
+<script type="text/javascript">
+    $(function(){
+        //实现全选与反选 var ids=[];
+        $("#allAndNotAll").click(function() {
+            if (this.checked){
+                $("input[name='items']:checkbox").each(function(){
+                    $(this).attr("checked", true);
+                });
+            } else {
+                $("input[name='items']:checkbox").each(function() {
+                    $(this).attr("checked", false);
+                });
+            }
+        });
+        //获取被选中的id
+
+        $('#getAllSelectedId').click(function(){
+            var ids=new Array();
+            $("input[name='items']:checked").each(function(){
+                ids.push($(this).attr("id"));
+            });
+            var chk_value=ids.join(",");
+            location.href = "<%=basePath%>/user/deletechoiceall.do?chk_value="+chk_value;
+            alert("获取的id"+chk_value);
+        });
+    });
+</script>
 <body>
 
 <div id="wrapper">
@@ -142,11 +169,13 @@
         <table class="edtitable">
             <thead>
             <tr>
-                <th colspan="4" style="text-align:center">选择题</th>
+                <th colspan="5" style="text-align:left ;font-size: 20px"><button class="line btn btn-primary btn-sm" onclick="add()" >添加新题</button>&nbsp;&nbsp;&nbsp;
+                    <button class="line btn btn-primary btn-sm" id="getAllSelectedId">批量删除</button></th>
             </tr>
             </thead>
             <tbody>
             <tr>
+                <td ><input type="checkbox" id="allAndNotAll" />全选/反选</td>
                 <td>题号</td>
                 <td>题目</td>
                 <td>难度</td>
@@ -154,6 +183,7 @@
             </tr>
             <c:forEach items="${requestScope.choice}" var="ch">
                 <tr>
+                    <td ><input type="checkbox" name=items id="${ch.id}"/></td>
                     <c:set var="index" value="${index+1}"/>
                     <td>${index}</td>
                     <td class="line">${ch.content}</td>
@@ -371,7 +401,6 @@
             backdrop: "static"
         });
     };
-
     function getpoint() {
         $("#chapter").empty();
         $("#chaptertwo").empty();

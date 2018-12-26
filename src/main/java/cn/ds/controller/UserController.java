@@ -4,14 +4,13 @@ import cn.ds.pojo.*;
 import cn.ds.pojo.Tk.Choice;
 import cn.ds.pojo.Tk.ReadProgram;
 import cn.ds.service.UserService;
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -70,6 +69,9 @@ public class UserController {
     //保存老师
     @RequestMapping(value = "/save")
     public String create(Teacher teacher, Model model) {
+        System.out.println(teacher.getMajor());
+        System.out.println(teacher.getMail());
+        System.out.println(teacher.getLevel());
         try {
             userService.create(teacher);
             model.addAttribute("message", "保存客户信息系成功");
@@ -236,14 +238,34 @@ public class UserController {
         model.addAttribute("readPrograms",readPrograms);
         return  readPrograms;
     }
+    @RequestMapping(value="/validate",method = RequestMethod.POST)
+    @ResponseBody
+    public  boolean validate(@RequestParam String username) {
+        User user=userService.findByUsername(username);
+        if(null!=user) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+   @RequestMapping("/deletechoiceall")
+   public String ManyChoice(String chk_value){
+       System.out.println("获取的id——arr"+ chk_value);
+       userService.deleteManyChoice(chk_value);
+       return "redirect:findallchoice.do";
+   }
 
 
 
 
 
-
-
-
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.removeAttribute("usersession");
+        return "index";
+    }
 
    /* public static void main(String[] args){
         String s = "<<< >>>&";

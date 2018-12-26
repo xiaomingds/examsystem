@@ -113,6 +113,7 @@
                 <div class="loginBoxCenter">
                     <p><label for="username">用户名：</label></p>
                     <p><input type="text" id="username" name="username" class="loginInput" autofocus="autofocus" required="required" autocomplete="off" placeholder="请输入账号" value="" /></p>
+                    <p id="msage" hidden color="red">用户名不存在</p>
                     <!-- required 规定必需在提交之前填写输入字段-->
                     <p><label for="password">密码：</label></p>
                     <p><input type="password" id="password" name="password" class="loginInput" required="required" placeholder="请输入密码" value="" /></p>
@@ -159,5 +160,24 @@
 </script>
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(function(){
+        $("#username").keyup(function()
+        {           var username=$(this).val();
 
+            $.ajax({
+                url: "<%=basePath%>/user/validate.do",
+                type: "POST",
+                data: {"username": username},
+                success: function (result) {
+                    if (result) {
+                        $("#msage").hide();
+                    } else {
+                        $("#msage").show();
+                    }
+                }
+            })
+        })
+    })
+</script>
 </html>

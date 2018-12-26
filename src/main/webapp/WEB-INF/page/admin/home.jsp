@@ -72,16 +72,15 @@
                             <li>
                                 <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
                             </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/blankall.do">填空题查询</a>
-                            </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>
-                            </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>
-                            </li><li>
-                            <a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>
+                            <li><a href="<%=basePath%>/tk/blankall.do">判断题查询</a>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                                <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                                <%--<a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>--%>
+                            <%--</li><li>--%>
+                            <%--<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>--%>
                         </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -98,10 +97,12 @@
                     <li>
                         <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
                     </li>
+
+
                 </ul>
             </div>
         </div>
-        <!-- /.navbar-static-side --><
+        <!-- /.navbar-static-side -->
     </nav>
 
     <!-- Page Content -->

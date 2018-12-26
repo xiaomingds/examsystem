@@ -30,6 +30,7 @@ public interface UserMapper {
      void updatech(Choice choice);
     void deletech(Long id);
     List<ReadProgram> findreadprogramAll();
-
+ User findUsername (String username);
     //  List<Point1> findPoint();
+    void deleteManyChoice(String chk_value);
 }

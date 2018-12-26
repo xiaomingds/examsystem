@@ -88,7 +88,7 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="<%=basePath%>/login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="<%=basePath%>/user"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -205,7 +205,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title" id="myedit">编辑</h4>
                     </div>
-                    <form class="form-horizontal" action="<%=basePath%>/tk/updd.do" method="post">
+                    <form class="form-horizontal" action="<%=basePath%>/tea_tk/updd.do" method="post">
                         <div class="modal-body">
                             <input name="id" id="id" hidden="hidden"/>
                             <div class="form-group input-group">
@@ -257,7 +257,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title" id="myadd"></h4>
                     </div>
-                    <form class="form-horizontal" action="<%=basePath%>/tk/createpd.do" method="post">
+                    <form class="form-horizontal" action="<%=basePath%>/tea_tk/createpd.do" method="post">
                         <div class="modal-body">
                             <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">题目：</span>
@@ -358,7 +358,6 @@
                 $("#upanswer").val(data.answer);
                 $("#upanalysis").val(data.analysis);
                 console.log("数据库的 id" + data.chapter);
-
                 $("#upchapter").val(data.chapter);
                 $("#upchaptertwo").val(data.chaptertwo);
                 $("#updifficulty").val(data.difficulty);
@@ -373,7 +372,7 @@
         } else {
             $(".delSure").click(function () {
                 $.ajax({
-                    url: '<%=basePath%>/tk/deletepd.do?id=' + id,
+                    url: '<%=basePath%>/tea_tk/deletepd.do?id=' + id,
                     type: 'POST',
                     success: function (data) {
                         $("body").html(data);

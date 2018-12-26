@@ -211,4 +211,31 @@ public class Tk_TeacherController {
         tkService.updateProgramDesign(programDesign);
         return "redirect:tea_allPgDesign.do";
     }
+
+
+    @RequestMapping("/allPgDesign")
+    public String AllPgDesign(Model model){
+        List<ProgramDesign> readPrograml = tkService.ProgramDesignAll();
+        model.addAttribute("readPrograml",readPrograml);
+        return "page/teacher/tk_program_design";
+    }
+    @RequestMapping("/createpd")
+    public String CreateProgramDesign(ProgramDesign programDesign){
+        System.out.println("内容"+programDesign.getContent());
+        tkService.CreateProgramDesign(programDesign);
+        return "redirect:allPgDesign.do";
+    }
+    @RequestMapping("/deletepd")
+    public String DeleteProgramDesign(@RequestParam Long id){
+        System.out.println("删除的id为"+id);
+        tkService.DeleteProgramDesign(id);
+        return "redirect:allPgDesign.do";
+    }
+    @RequestMapping("/updd")
+    public String UpProgramDesign(ProgramDesign programDesign){
+        System.out.println("后台的请求数据"+programDesign.getAnalysis());
+        System.out.println("后台请求的数据"+programDesign.getDifficulty());
+        tkService.updateProgramDesign(programDesign);
+        return "redirect:allPgDesign.do";
+    }
 }

@@ -309,7 +309,7 @@
                             </div>
                             <form action="<%=basePath%>/basic/creatstu.do" method="post">
                             <div class="modal-body" style="text-align:left">
-                                <input name="classname" id="classname"  hidden="hidden" value="${cname}"/>
+                               <input name="classname" id="classname"  hidden="hidden" value="${cname}"/>
                                 <div class="form-group input-group">
                                     <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入学号：</span>
                                     <input type="text" style="height: 40px " class="form-control" name="num">

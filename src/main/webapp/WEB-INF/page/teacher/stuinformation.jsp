@@ -163,9 +163,11 @@
                 <option>--班级选择--</option>
             </select>
         </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <button class="btn btn-outline btn-primary" onclick="search()" id="btn">确定</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           &nbsp;&nbsp;&nbsp;&nbsp;
+           <button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#myModa_n">添加</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <form style="margin:0px;display:inline;"  action="<%=basePath%>/student/ajaxUpload.do" method="post" enctype="multipart/form-data">
                 <input style="display: inline" id="file" type="file" name="file"/>
                 <input style="display: inline ; width: 5%" type="submit" name="submit" id="submit" value="上传" />
@@ -225,6 +227,46 @@
                     </form>
                 </div>
             </div>
+        </div>
+        <%--添加模态框--%>
+        <div>
+            <tr class="append-row">
+                <td colspan="5" align="right">
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModa_n" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabe2" style="text-align:center">添加选项</h4>
+                                </div>
+                                <form action="<%=basePath%>/student/creatstu.do" method="post">
+                                    <div class="modal-body" style="text-align:left">
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入班级：</span>
+                                            <input type="text" style="height: 40px " class="form-control" name="classname" id="classname">
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入学号：</span>
+                                            <input type="text" style="height: 40px " class="form-control" name="num">
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入姓名：</span>
+                                            <input type="text" style="height: 40px" class="form-control" name="username">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
+                                        <button type="submit"  class="btn btn-outline btn-primary">确定</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                </td>
+            </tr>
         </div>
     </div>
     <!-- /#page-wrapper -->

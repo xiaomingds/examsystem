@@ -22,9 +22,15 @@
         insert into
         teacher(
           username,
+          major,
+          level,
+            mail,
         password)
         values(
           #{username},
+          #{major},
+          #{level},
+          #{mail},
           #{password}
         );
     </insert>
@@ -44,6 +50,9 @@
         update teacher set
             id = #{id},
             username = #{username},
+            major = #{major},
+            level = #{level},
+            mail = #{mail},
             password= #{password}
         where id = #{id}
     </update>
@@ -118,4 +127,13 @@
     <select id="findreadprogramAll"  resultType="cn.ds.pojo.Tk.ReadProgram">
         select * from  readprogram
     </select>
+    <select id="findUsername" parameterType="String" resultType="User">
+        select * from  tb_user where username =#{username}
+    </select>
+    <!--批量删除选择题-->
+    <delete id="deleteManyChoice" parameterType="String">
+        delete from tk_choice where id in
+        (${_parameter})
+    </delete>
+
 </mapper>

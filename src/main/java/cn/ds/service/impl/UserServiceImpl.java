@@ -110,6 +110,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void create(User user) {
+
+    }
+
+    @Override
     public Teacher findById(Long id) {
         return userMapper.findById(id);
     }
@@ -134,8 +139,16 @@ public class UserServiceImpl implements UserService {
         }
         return readPrograms;
     }
-    public void create(User user) {
+    @Override
+    public  User findByUsername(String username) {return userMapper.findUsername(username);}
+
+    @Override
+    public void deleteManyChoice(String chk_value) {
+        userMapper.deleteManyChoice(chk_value);
     }
+
+
+
     public void delete(Long id) {
         userMapper.delete(id);
     }

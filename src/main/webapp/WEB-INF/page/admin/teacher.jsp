@@ -46,9 +46,13 @@
         table td {
             align-items: center;
             border: 1px solid black;
-            width: 25%;
+            width: 14%;
         }
-
+        table td1 {
+            align-items: center;
+            border: 1px solid black;
+            width:8%;
+        }
         table th {
             background-color: #c6d0e9;
         }
@@ -160,7 +164,6 @@
 
 <div id="wrapper">
 
-    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -230,27 +233,34 @@
             </div>
         </div>
     </nav>
-
-    <!-- Page Content -->
     <div id="page-wrapper">
         <br>
         <div class="container">
-            <h1 class="text-center">教师信息页面</h1>
-            <hr/>
             <div class="table-responsive">
-
                 <table style="width: 90%" class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th style="text-align: center;">教师姓名</th>
-                        <th style="text-align: center;">密码</th>
-                        <th style="text-align: center;">操作</th>
+                        <th colspan="7"><button class="line btn btn-primary btn-sm" id="teacheradd">添加老师</button>
+                            &nbsp;&nbsp;&nbsp; <button class="line btn btn-primary btn-sm" >批量删除</button></th>
+                    </tr>
+                    <tr>
+                        <td ><input type="checkbox" id="allAndNotAll" />全选/反选</td>
+                        <td>教师姓名</td>
+                        <td>院系</td>
+                        <td>职称</td>
+                        <td>邮箱</td>
+                        <td>密码</td>
+                        <td>操作</td>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${requestScope.teachers}" var="ts">
                         <tr class="text-center">
+                            <td><input type="checkbox" name=items id="${ts.id}"/></td>
                             <td>${ts.username}</td>
+                            <td>${ts.major}</td>
+                            <td>${ts.level}</td>
+                            <td>${ts.mail}</td>
                             <td>${ts.password}</td>
                             <td>
                                 <a href="#" onclick="return edit(${ts.id})" style="text-decoration: none;"
@@ -267,9 +277,9 @@
                     </tbody>
                 </table>
             </div>
-            <div align="center">
-                <button style="width: 60%" class="btn btn-outline btn-primary" id="teacheradd">新增</button>
-            </div>
+            <%--<div align="center">--%>
+                <%--<button style="width: 60%" class="btn btn-outline btn-primary" id="teacheradd">新增</button>--%>
+            <%--</div>--%>
             <!-- 添加的模态框 -->
             <div class="modal fade" id="tchadd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
@@ -284,7 +294,35 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">姓名</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="username" class="form-control" id="name"
+                                        <input type="text" name="username" class="form-control" id="username"
+                                               placeholder="">
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">系别</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="major" name="major">
+                                            <option value="计算机科学与技术">计算机科学与技术</option>
+                                            <option value="软件工程">软件工程</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label">职称</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="level" name="level">
+                                            <option value="助教">助教</option>
+                                            <option value="讲师">讲师</option>
+                                            <option value="副教授">副教授</option>
+                                            <option value="教授">教授</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">邮箱</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="mail" class="form-control" id="mail"
                                                placeholder="">
                                         <span class="help-block"></span>
                                     </div>
@@ -292,7 +330,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="password" class="form-control" id="pwd"
+                                        <input type="text" name="password" class="form-control" id="password"
                                                placeholder="数字或英语">
                                         <span class="help-block"></span>
                                     </div>
@@ -343,7 +381,36 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">姓名</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="username" class="form-control" id="username"
+                                        <input type="text" name="username" class="form-control" id="upusername"
+                                               placeholder="">
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label">系别</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="upmajor" name="major">
+                                            <option value="软件工程">软件工程</option>
+                                            <option value="计算机科学与技术">计算机科学与技术</option>
+                                            <option value="大数据">大数据</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">职称</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="uplevel" name="level">
+                                            <option value="助教">助教</option>
+                                            <option value="讲师">讲师</option>
+                                            <option value="副教授">副教授</option>
+                                            <option value="教授">教授</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">邮箱</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="mail" class="form-control" id="upmail"
                                                placeholder="">
                                         <span class="help-block"></span>
                                     </div>
@@ -351,7 +418,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">密码</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="password" class="form-control" id="password"
+                                        <input type="text" name="password" class="form-control" id="uppassword"
                                                placeholder="数字或英语">
                                         <span class="help-block"></span>
                                     </div>
@@ -421,8 +488,11 @@
                 success: function (data) {
                     console.log("老师" + data);
                     $("#id").val(data.id);
-                    $("#username").val(data.username);
-                    $("#password").val(data.password);
+                    $("#upusername").val(data.username);
+                    $("#upmajor").val(data.major);
+                    $("#uplevel").val(data.level);
+                    $("#upmail").val(data.mail);
+                    $("#uppassword").val(data.password);
                     $("#tchedit").modal('show');
                 },
                 error: function () {
@@ -433,7 +503,6 @@
     }
 </script>
 
-</div>
 <!-- /#wrapper -->
 
 <!-- jQuery -->
@@ -447,9 +516,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
-
-
-</body>
 
 </html>
 
