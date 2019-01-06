@@ -90,10 +90,10 @@
                         <a href=""><i class="fa fa-table fa-fw"></i>考试<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<%=basePath%>/teacher/examall.do">查看考试信息</a>
+                                <a href="<%=basePath%>/exam/examall.do">查看考试信息</a>
                             </li>
                             <li>
-                                <a href="exam.html">创建新考试</a>
+                                <a href=<%=basePath%>/exam/addexam.do>创建新考试</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

@@ -1,11 +1,10 @@
 <%--
   Created by IntelliJ IDEA.
   User: 小鸣ds
-  Date: 2018/12/17
-  Time: 9:03
+  Date: 2018/12/27
+  Time: 9:28
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -57,12 +56,38 @@
         white-space: nowrap;
     }
 
-    .select {
-        float: left;
-        display: inline;
-        width: 300px;
+    textarea:focus {
+        border-color: #719ECE;
+        box-shadow: 0 0 10px #719ECE;
     }
 </style>
+<script type="text/javascript">
+    $(function(){
+        //实现全选与反选 var ids=[];
+        $("#allAndNotAll").click(function() {
+            if (this.checked){
+                $("input[name='items']:checkbox").each(function(){
+                    $(this).attr("checked", true);
+                });
+            } else {
+                $("input[name='items']:checkbox").each(function() {
+                    $(this).attr("checked", false);
+                });
+            }
+        });
+        //获取被选中的id
+
+        $('#getAllSelectedId').click(function(){
+            var ids=new Array();
+            $("input[name='items']:checked").each(function(){
+                ids.push($(this).attr("id"));
+            });
+            var chk_value=ids.join(",");
+            location.href = "<%=basePath%>/tk/deletemanyjudge.do?chk_value="+chk_value;
+            alert("获取的id"+chk_value);
+        });
+    });
+</script>
 <body>
 
 <div id="wrapper">
@@ -76,7 +101,6 @@
             <a class="navbar-brand" href="#">C语言在线考试系统</a>
         </div>
         <!-- /.navbar-header -->
-
         <ul class="nav navbar-top-links navbar-right">
             <!-- /.dropdown -->
             <li class="dropdown">
@@ -96,7 +120,6 @@
             </li>
             <!-- /.dropdown -->
         </ul>
-
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -110,50 +133,38 @@
                                 <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/tk/blankall.do">填空题查询</a>
+                                <a href="<%=basePath%>/tk/alljudge.do">判断题查询</a>
                             </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>
-                            </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>
-                            </li><li>
-                            <a href="Program_design%20question_query.html">程序设计查询</a>
-                        </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href=""><i class="fa fa-table fa-fw"></i>考试<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="<%=basePath%>/teacher/examall.do">查看考试信息</a>
-                            </li>
-                            <li>
-                                <a href="exam.html">创建新考试</a>
-                            </li>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tk/blankall.do">填空题查询</a>--%>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>--%>
+                            <%--</li><li>--%>
+                            <%--<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>--%>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>学生<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="<%=basePath%>/teacher/stuinfo.do">学生信息查询</a>
-                            </li>
-                            <li>
-                                <a href="score_query.html">学生成绩查询</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
+                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
                     </li>
-
+                    <li>
+                        <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
+                    </li>
+                    <li>
+                        <a href="<%=basePath%>/teacher/allexam.do"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
+                    </li>
+                    <li>
+                        <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
+                    </li>
                 </ul>
             </div>
-            <!-- /.sidebar-collapse -->
         </div>
         <!-- /.navbar-static-side -->
     </nav>
-
     <!-- Page Content -->
     <div id="page-wrapper">
         <br>
@@ -161,27 +172,30 @@
         <table class="edtitable">
             <thead>
             <tr>
-                <th colspan="4" style="text-align:center">填空题</th>
+                <th colspan="5" style="text-align:left ;font-size: 20px"><button class="line btn btn-primary btn-sm" onclick="add()" >添加新题</button>&nbsp;&nbsp;&nbsp;
+                    <button class="line btn btn-primary btn-sm" id="getAllSelectedId">批量删除</button></th>
             </tr>
             </thead>
             <tbody>
             <tr>
+                <td ><input type="checkbox" id="allAndNotAll" />全选/反选</td>
                 <td>题号</td>
                 <td>题目</td>
                 <td>难度</td>
                 <td class="del-col">操作</td>
             </tr>
-            <c:forEach items="${blanks}" var="bl">
+            <c:forEach items="${judge}" var="ch">
                 <tr>
+                    <td ><input type="checkbox" name=items id="${ch.id}"/></td>
                     <c:set var="index" value="${index+1}"/>
                     <td>${index}</td>
-                    <td class="line">${bl.content}</td>
-                    <td>${bl.difficulty}</td>
+                    <td class="line">${ch.content}</td>
+                    <td>${ch.difficulty}</td>
                     <td class="del-col">
-                        <a href="#" onclick="return edit(${bl.id})" style="text-decoration: none;">
+                        <a href="#" onclick="return edit(${ch.id})" style="text-decoration: none;">
                             <span class="fa fa-edit fa-fw"></span>
                         </a>
-                        <a href="#" onclick="return trash(${bl.id})" style="text-decoration: none;"
+                        <a href="#" onclick="return trash(${ch.id})" style="text-decoration: none;"
                            data-toggle="modal" data-target="#trashModal">
                             <span class="fa fa-trash-o fa-fw"></span>
                         </a>
@@ -193,8 +207,8 @@
             </c:forEach>
             </tbody>
         </table>
-        <!-- Modal编辑的模态框 -->
-        <div class="modal fade" id="editbl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <!-- Modal编辑模态框 -->
+        <div class="modal fade" id="editch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -202,8 +216,8 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title" id="myedit">编辑</h4>
                     </div>
-                    <form class="form-horizontal" action="<%=basePath%>/tk/upblank.do" method="post">
-                        <div class="modal-body" style="text-align:left">
+                    <form class="form-horizontal" action="<%=basePath%>/tk/upjudge.do" method="post">
+                        <div class="modal-body">
                             <input name="id" id="id" hidden="hidden"/>
                             <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">题目：</span>
@@ -211,7 +225,12 @@
                             </div>
                             <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">答案：</span>
-                                <textarea class="form-control" rows="3" name="answer" id="upanswer"></textarea>
+                                <div class="col-sm-5">
+                                    <select class="form-control" id="upanswer" name="answer">
+                                        <option value="正确">正确</option>
+                                        <option value="错误">错误</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">分析：</span>
@@ -228,13 +247,12 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">难度</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" id="updifficulty" name="difficulty">
+                                    <select class="form-control" id="updifficulty" name = "difficulty">
                                         <option value="1">热血青铜</option>
                                         <option value="2">不屈白银</option>
                                         <option value="3">英勇黄金</option>
                                         <option value="4">超级王牌</option>
-                                        <option value="5">无敌战神</option>
-                                    </select>
+                                        <option value="5">无敌战神</option></select>
                                 </div>
                             </div>
                         </div>
@@ -248,26 +266,34 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-
+        </td>
+        </tr>
         <!-- Button trigger modal -->
         <!-- /.modal -->
-        <!--添加-->
-        <div class="modal fade" id="addbl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <!-- Modal添加的模态框 -->
+        <div class="modal fade" id="addch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title" id="my" style="text-align:center">添加题目</h4>
                     </div>
-                    <form class="form-horizontal" action="<%=basePath%>/tk/createblank.do" method="post">
+                    <form class="form-horizontal" action="<%=basePath%>/tk/createjudge.do" method="post">
                         <div class="modal-body">
+                            <%--<input name="id" id="id" hidden="hidden"/>--%>
                             <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">题目：</span>
                                 <textarea class="form-control" rows="3" name="content" id="content"></textarea>
                             </div>
                             <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">答案：</span>
-                                <textarea class="form-control" rows="3" name="answer" id="answer"></textarea>
+                                <div class="col-sm-5">
+                                    <select class="form-control" id="answer" name="answer">
+                                        <option value="正确">正确</option>
+                                        <option value="错误">错误</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group input-group">
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">分析：</span>
@@ -276,10 +302,9 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">知识点</label>
                                 <div class="col-sm-6">
-                                    <select class="form-control" id="chapter" name = "chapter">
+                                    <select class="form-control" id="chapter" name="chapter">
                                     </select>
-                                    <select class="form-control" id="chaptertwo" name = "chaptertwo">
-                                    </select>
+                                    <select class="form-control" id="chaptertwo" name="chaptertwo"></select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -296,12 +321,16 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="submit" class="btn btn-primary" id = "addbut">提交</button>
+                            <button type="submit" class="btn btn-primary" id="addbut">提交</button>
                         </div>
                     </form>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
+        </td>
+        </tr>
         <!--删除的模态框-->
         <div class="modal fade" id="trashModal">
             <div class="modal-dialog">
@@ -325,22 +354,23 @@
             </div>
         </div>
 
-
         <!-- /.container-fluid -->
     </div>
-    <!-- /#page-wrapper -->
 
+    <!-- /#page-wrapper -->
 </div>
+
 <!-- /#wrapper -->
 <script>
     function add() {
         getpoint();
-        $("#addbl").modal({
+        $("#addch").modal({
             backdrop: "static"
         });
     };
-
     function getpoint() {
+        $("#chapter").empty();
+        $("#chaptertwo").empty();
         $.ajax({
             url: "<%=basePath%>/user/pointall.do",
             type: "GET",
@@ -376,7 +406,7 @@
     function edit(id) {
         // 先去查询数据
         $.ajax({
-            url: '<%=basePath%>/tk/findblankId.do',
+            url: '<%=basePath%>/tk/judgeId.do',
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json;charset=UTF-8',
@@ -390,48 +420,50 @@
                 $("#upanswer").val(data.answer);
                 $("#upanalysis").val(data.analysis);
                 $("#upchapter").val(data.chapter);
+                console.log("题目的chapter" + data.chapter);
+                console.log("select当前的value" +   $("#upchapter").val());
                 console.log(data.chapter);
                 $("#upchaptertwo").val(data.chaptertwo);
+                console.log(data.chaptertwo);
                 $("#updifficulty").val(data.difficulty);
-                $("#editbl").modal('show');
+                $("#editch").modal('show');
             },
             error: function () {
                 alert("错误");
             }
         });
     }
-
-    function getpt(blid) {
-        console.log("当前复选框" + blid);
+    function getpt(chid) {
+        console.log("当前复选框" + chid);
+        $("#upchapter").empty();
+        $("#upchaptertwo").empty();
         $.ajax({
-            url: "<%=basePath%>/user/pointall.do",
-            type: "GET",
-            success: function (data) {
+            url:"<%=basePath%>/user/pointall.do",
+            type:"GET",
+            success:function (data){
                 console.log(data);
                 var upchapter = $(document).find("#upchapter");
                 var upchaptertwo = $(document).find("#upchaptertwo");
-                for (var i = 0; i < data.length; i++) {
-                    upchapter.append("<option value='" + data[i].id + "'>" + data[i].pointname + "</option>")
-                }
-                for (var j = 0; j < data[blid - 1].point2.length; j++) {
-                    console.log("当前位置" + blid - 1 + "内容为" + data[blid - 1].point2[j].pname);
-                    upchaptertwo.append("<option value='" + data[blid - 1].point2[j].pname + "'>" + data[blid - 1].point2[j].pname + "</option>");
+                for(var i = 0; i < data.length; i++){
+                    console.log("当前select的option="+ data[i].id);
+                    upchapter.append("<option value='" + data[i].id + "'>" + data[i].pointname + "</option>");
+                    console.log("当前chapter的value" + data[i].id);
+                }for(var j = 0; j < data[chid-1].point2.length; j++) {
+                    upchaptertwo.append("<option value='" + data[chid-1].point2[j].pname + "'>" + data[chid-1].point2[j].pname + "</option>");
                 }
                 //select1绑定change事件
                 $("#upchapter").change(function () {
                     var p = this.value;
-                    console.log("第几个" + p);
-                    p = p - 1;
+                    p = p-1;
                     //删除原来的信息
                     $("#upchaptertwo").empty();
                     for (var j = 0; j < data[p].point2.length; j++) {
-                        upchaptertwo.append("<option value='" + data[p].point2[j].pname + "'>" + data[p].point2[j].pname + "</option>");
+                        upchaptertwo.append("<option value='" + data[p].point2[j].pname+ "'>" + data[p].point2[j].pname+ "</option>");
                     }
                 });
             }
         })
     }
-
     //删除
     function trash(id) {
         if (!id) {
@@ -439,10 +471,10 @@
         } else {
             $(".delSure").click(function () {
                 $.ajax({
-                    url: '<%=basePath%>/tk/deleteblank.do?id=' + id,
+                    url: '<%=basePath%>/tk/deletejudge.do?id=' + id,
                     type: 'POST',
                     success: function (data) {
-                        location.reload();
+                        $("body").html(data);
                     }
                 });
             });
@@ -460,6 +492,8 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
+
 </body>
+
 </html>
 

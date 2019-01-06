@@ -1,13 +1,7 @@
 package cn.ds.service.impl;
 
-import cn.ds.mapper.Tk.BlankMapper;
-import cn.ds.mapper.Tk.ProgramDesignMapper;
-import cn.ds.mapper.Tk.ProgramFillMapper;
-import cn.ds.mapper.Tk.ReadProgramMapper;
-import cn.ds.pojo.Tk.Blank;
-import cn.ds.pojo.Tk.ProgramDesign;
-import cn.ds.pojo.Tk.ProgramFill;
-import cn.ds.pojo.Tk.ReadProgram;
+import cn.ds.mapper.Tk.*;
+import cn.ds.pojo.Tk.*;
 import cn.ds.service.TkService;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +19,8 @@ public class TkServiceImpl implements TkService {
     ReadProgramMapper readProgramMapper;
      @Autowired
     ProgramDesignMapper programDesignMapper;
+     @Autowired
+    JudgeMapper judgeMapper;
     @Override
     public List<ProgramFill> ProgramFillAll() {
         List<ProgramFill>programFills = programFillMapper.ProgramFillAll();
@@ -152,5 +148,35 @@ public class TkServiceImpl implements TkService {
     @Override
     public void updateProgramDesign(ProgramDesign programDesign) {
         programDesignMapper.updateProgramDesign(programDesign);
+    }
+
+    @Override
+    public List<Judge> AllJudge() {
+        return judgeMapper.AllJudge();
+    }
+
+    @Override
+    public Judge findJudgeId(Long id) {
+        return judgeMapper.findJudgeId(id);
+    }
+
+    @Override
+    public void DeleteJudge(Long id) {
+          judgeMapper.DeleteJudge(id);
+    }
+
+    @Override
+    public void CreateJudge(Judge judge) {
+          judgeMapper.CreateJudge(judge);
+    }
+
+    @Override
+    public void UpdateJudge(Judge judge) {
+           judgeMapper.UpdateJudge(judge);
+    }
+
+    @Override
+    public void deleteManyJudge(String chk_value) {
+        judgeMapper.deleteManyJudge(chk_value);
     }
 }

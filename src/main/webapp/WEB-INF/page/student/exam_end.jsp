@@ -1,13 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: 小鸣ds
-  Date: 2018/12/20
-  Time: 8:40
+  Date: 2019/1/6
+  Time: 10:47
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ page import="java.io.*,java.util.*, javax.servlet.*" %>
 <%
     String path = request.getContextPath();
@@ -128,29 +129,17 @@
                 <th width="30%">考试名称</th>
                 <th width="15%">考试时间</th>
                 <th width="15%">时长</th>
-                <th width="10%">类型</th>
-                <th width="10%">状态</th>
+                <th width="10%">成绩</th>
                 <th width="10%">命题人</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${examInfo}" var="ex">
+            <c:forEach items="${examend}" var="ex">
                 <tr>
-                    <td><a onclick="disp_prompt(${ex.password},${ex.id})">${ex.examname}</a></td>
+                    <td><a href="<%=basePath%>/exam/examdetial.do?studentid=${sessionScope.studentsession.id}&examid=${ex.id}">${ex.examname}</a></td>
                     <td>${ex.begindate}&nbsp;${ex.enddate}</td>
                     <td>${ex.examtime}</td>
-                            <td><c:if test="${ex.password == null }">公开</c:if>
-                                <c:if test="${ex.password != null}">私有</c:if>
-                            </td>
-                    <% request.setAttribute("currentTime", new Date()); %>
-                    <c:choose>
-                        <c:when test="${ex.enddate < currentTime}">
-                            <td>已结束</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td>未开始</td>
-                        </c:otherwise>
-                    </c:choose>
+                    <td>${ex.allscore}</td>
                     <td>${ex.teacher}</td>
                 </tr>
             </c:forEach>
@@ -160,32 +149,6 @@
     <!-- /#page-wrapper -->
 
 </div>
-
-
-<script>
-    function disp_prompt(password,examid)
-    {
-        console.log("考试密码 " + password);
-        console.log("试卷id " + examid);
-        if(password ==null){
-            location.href = "<%=basePath%>/exam/exampaper.do?examid=" + examid;
-        }
-        else{
-            var name=prompt("请输入密码",""); // 弹出input框
-            console.log("输入的密码" + name);
-            if (name == password) {
-
-                location.href = "<%=basePath%>/exam/exampaper.do?examid=" + examid;
-            }
-            else {
-                alert("密码错误");
-            }
-        }
-
-
-
-    }
-</script>
 <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
 <script src="<%=basePath%>/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>/vendor/metisMenu/metisMenu.min.js"></script>

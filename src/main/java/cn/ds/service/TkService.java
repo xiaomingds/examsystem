@@ -1,9 +1,6 @@
 package cn.ds.service;
 
-import cn.ds.pojo.Tk.Blank;
-import cn.ds.pojo.Tk.ProgramDesign;
-import cn.ds.pojo.Tk.ProgramFill;
-import cn.ds.pojo.Tk.ReadProgram;
+import cn.ds.pojo.Tk.*;
 
 import java.util.List;
 
@@ -33,4 +30,12 @@ public interface TkService {
     void DeleteProgramDesign(Long id);
     void CreateProgramDesign(ProgramDesign programDesign);
     void updateProgramDesign(ProgramDesign programDesign);
+
+    List<Judge>AllJudge();
+    Judge findJudgeId(Long id);
+    void  DeleteJudge(Long id);
+    void  CreateJudge(Judge judge);
+    void UpdateJudge(Judge judge);
+    void deleteManyJudge(String chk_value);
+
 }

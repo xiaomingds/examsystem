@@ -72,7 +72,9 @@
                             <li>
                                 <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
                             </li>
-                            <li><a href="<%=basePath%>/tk/blankall.do">判断题查询</a>
+                            <li>
+                                <a href="<%=basePath%>/tk/alljudge.do">判断题查询</a>
+                            </li>
                             <%--</li>--%>
                             <%--<li>--%>
                                 <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>

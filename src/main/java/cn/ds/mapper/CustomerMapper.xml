@@ -59,7 +59,7 @@
     <if test="telephone != null">
         AND telephone LIKE CONCAT('%', #{telephone}, '%')
     </if>
-</select>
+    </select>
 
     <!--&lt;!&ndash; 分页查询 &ndash;&gt;-->
     <!--<select id="findByPage" parameterType="Map" resultMap="BaseResultMap">-->

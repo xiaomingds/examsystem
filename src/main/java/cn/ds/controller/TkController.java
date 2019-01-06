@@ -1,9 +1,6 @@
 package cn.ds.controller;
 
-import cn.ds.pojo.Tk.Blank;
-import cn.ds.pojo.Tk.ProgramDesign;
-import cn.ds.pojo.Tk.ProgramFill;
-import cn.ds.pojo.Tk.ReadProgram;
+import cn.ds.pojo.Tk.*;
 import cn.ds.service.TkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.jws.WebParam;
 import java.util.List;
 
 @Controller
@@ -169,6 +168,53 @@ public class TkController {
         System.out.println("后台请求的数据"+programDesign.getDifficulty());
         tkService.updateProgramDesign(programDesign);
         return "redirect:allPgDesign.do";
+    }
+
+
+    @RequestMapping("/alljudge")
+    public String AllJudge(Model model){
+
+        List<Judge>judges = tkService.AllJudge();
+        model.addAttribute("judge",judges);
+        return "page/admin/tk_judge";
+    }
+
+    @RequestMapping("/createjudge")
+    public String CreateJudge(Judge judge){
+        System.out.println("内容"+judge.getContent());
+        tkService.CreateJudge(judge);
+        return "redirect:alljudge.do";
+    }
+    @RequestMapping("/deletejudge")
+    public String DeleteJudge(@RequestParam Long id){
+        System.out.println("删除的id为"+id);
+        tkService.DeleteJudge(id);
+        return "redirect:alljudge.do";
+    }
+    @RequestMapping("/upjudge")
+    public String UpJudge(Judge judge){
+        System.out.println("后台的请求数据"+judge.getAnalysis());
+        System.out.println("后台请求的数据"+judge.getDifficulty());
+        tkService.UpdateJudge(judge);
+        return "redirect:alljudge.do";
+    }
+
+    @ResponseBody
+    @RequestMapping("judgeId")
+    public Judge findJudgeId(@RequestBody Judge judge){
+        Judge judges = tkService.findJudgeId(judge.getId());
+        System.out.println("这是找到的数据"+judges.getDifficulty());
+        if(judges != null){
+            return judges;
+        }else {
+            return null;
+        }
+    }
+    @RequestMapping("/deletemanyjudge")
+    public String ManyJudge(String chk_value){
+        System.out.println("获取的id——arr"+ chk_value);
+tkService.deleteManyJudge(chk_value);
+return "redirect:alljudge.do";
     }
 
 }

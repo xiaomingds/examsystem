@@ -28,26 +28,26 @@
     <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
     <script src="<%=basePath%>/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <style>
-        table{
-            border: 1px solid black;
-            border-collapse: collapse;
-            width: 500px;
-        }
-        table th {
-            border: 1px solid black;
-            width: 10%;
-        }
-        table td {
-            align-items: center;
-            border: 1px solid black;
-            width: 10%;
-        }
+    <%--<style>--%>
+        <%--table{--%>
+            <%--border: 1px solid black;--%>
+            <%--border-collapse: collapse;--%>
+            <%--width: 500px;--%>
+        <%--}--%>
+        <%--table th {--%>
+            <%--border: 1px solid black;--%>
+            <%--width: 10%;--%>
+        <%--}--%>
+        <%--table td {--%>
+            <%--align-items: center;--%>
+            <%--border: 1px solid black;--%>
+            <%--width: 10%;--%>
+        <%--}--%>
 
-        table th {
-            background-color: #c6d0e9;
-        }
-    </style>
+        <%--table th {--%>
+            <%--background-color: #c6d0e9;--%>
+        <%--}--%>
+    <%--</style>--%>
 
 
     <!-- Bootstrap Core CSS -->
@@ -125,7 +125,7 @@
                             <li>
                                 <a href="<%=basePath%>/tea_tk/tea_allReadProgram.do">读程序写结果查询</a>
                             </li><li>
-<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
+                            <a href="<%=basePath%>/tea_tk/allPgDesign.do">程序设计查询</a>                        </li>
 
                         </ul>
                         <!-- /.nav-second-level -->
@@ -134,10 +134,10 @@
                         <a href=""><i class="fa fa-table fa-fw"></i>考试<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<%=basePath%>/teacher/examall.do">查看考试信息</a>
+                                <a href="<%=basePath%>/exam/examall.do">查看考试信息</a>
                             </li>
                             <li>
-                                <a href="exam.html">创建新考试</a>
+                                <a href=<%=basePath%>/exam/addexam.do>创建新考试</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -163,63 +163,56 @@
     <div id="page-wrapper">
         <br>
         <br>
-        <table border="1" class="table table-bordered" id = "tab1">
+        <table border="1" class="table table-bordered" id = "tab1" style="text-align: center">
             <thead>
             <tr>
-                <th colspan="9">考试基础信息设置</th>
+                <th colspan="8" style="text-align:center;font-size: 20px ">考试基础信息设置</th>
             </tr>
             </thead>
-
             <tr>
-                <th>考试名称</th>
-                <th>开始时间</th>
-                <th>结束时间</th>
-                <th>类型</th>
-                <th>密码</th>
-                <th>状态</th>
-                <th>命题人</th>
-                <th>设置</th>
+                <th style="text-align: center">考试名称</th>
+                <th style="text-align: center">考试时间</th>
+                <th style="text-align: center">考试时长</th>
+                <th style="text-align: center">密码</th>
+                <th style="text-align: center">状态</th>
+                <th style="text-align: center">命题人</th>
+                <th style="text-align: center">操作</th>
             </tr>
-            <c:forEach items="${examInfo}" var="ex">
-                <tr>
-                    <td><a href="exam_score.html">${ex.examname}</a></td>
-                    <td>${ex.begindate}&nbsp;${ex.begintime}</td>
-                    <td>${ex.enddate}&nbsp;${ex.endtime}</td>
-                    <c:choose>
-                        <c:when test="${empty ex.password}">
-                            <td>公开</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td>私有</td>
-                        </c:otherwise>
-                    </c:choose>
-                    <c:choose>
-                        <c:when test="${empty ex.password}">
-                            <td>公开</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td>${ex.password}</td>
-                        </c:otherwise>
-                    </c:choose>
-                    <% request.setAttribute("currentTime", new Date()); %>
-                    <c:choose>
-                        <c:when test="${ex.enddate < currentTime}">
-                            <td>已结束</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td>未开始</td>
-                        </c:otherwise>
-                    </c:choose>
-                    <td>${ex.teacher}</td>
-                    <td >
-                        <input  class="btn btn-outline btn-primary" type="button" value="删除" onclick="return trash(${ex.id})" data-toggle="modal" data-target="#trashModal">
-                        <input  class="btn btn-outline btn-primary" type="button" value="更改" onclick="edit('${ex.id}')">
-                    </td>
-                </tr>
-            </c:forEach>
+<c:forEach items="${examInfo}" var="ex">
+            <tr>
+                <td><a href="check_exam_score.html">${ex.examname}</a></td>
+                <td>${ex.begindate}-${ex.enddate}</td>
+                <td>${ex.examtime}</td>
+                <c:choose>
+                    <c:when test="${empty ex.password}">
+                        <td>无</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td>${ex.password}</td>
+                    </c:otherwise>
+                </c:choose>
+                <% request.setAttribute("currentTime", new Date()); %>
+                <c:choose>
+                    <c:when test="${ex.enddate < currentTime}">
+                        <td>已结束</td>
+                    </c:when>
+                    <c:when test=" ${ex.enddate >= currentTime && ex.begindate <= currentTime}">
+                        <td>进行中</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td>未开始</td>
+                    </c:otherwise>
+                </c:choose>
+                <td>${ex.teacher}</td>
+                <td >
+                    <input  class="btn btn-outline btn-primary" type="button" value="查看详情"  data-toggle="modal" data-target="#myModa_n" >
+                    <input  class="btn btn-outline btn-primary" type="button" value="编辑"  data-toggle="modal" data-target="#myModa_n" >
+                    <input  class="btn btn-outline btn-primary" type="button" value="删除"  >
+                </td>
+            </tr>
+</c:forEach>
         </table>
         <br>
-
         <!-- /#page-wrapper -->
     </div>
     <!-- 更改模态框  data-toggle="modal" data-target="#myModa_n" -->

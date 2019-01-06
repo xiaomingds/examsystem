@@ -2,43 +2,97 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ds.mapper.exam.ExamMapper">
-    <insert id="insert" parameterType = "ExamInfo">
-        insert into exam_info(examname,begindate,begintime,enddate,endtime,password,state,teacher)
+
+    <!--创建考试-->
+    <insert id="CreateExam" parameterType = "ExamInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into exam_information(examname,begindate,enddate,password,examtime,teacher,chaptertwo,choicenum,choicescore,
+           judgenum,judgescore)
         values(#{examname},
          #{begindate},
-           #{begintime},
            #{enddate},
-                  #{endtime},
                   #{password},
-                   #{state},
-                    #{teacher})
+                   #{examtime},
+                    #{teacher},
+                    #{chaptertwo},
+                    #{choicenum},
+                    #{choicescore},
+                    #{judgenum},
+                    #{judgescore})
     </insert>
-    <select id="FindAll" resultType="ExamInfo">
-        select *from exam_info
+    <select id="AllExam" resultType="ExamInformation">
+        select *from exam_information
     </select>
-
-    <select id="findById" parameterType="Long" resultType="ExamInfo">
-        select * from exam_info where id = #{id}
+    <!--生成选择题-->
+    <select id="RandChoice" resultType="PaperChoice">
+         select content,aoption,boption,coption,doption,answer from tk_choice   where chaptertwo = #{chaptertwo} order by RAND() limit #{choicenum}
     </select>
-    <!--随机获取数据-->
-    <select id="RandId" resultType="Choice">
-         select * from tk_choice order by RAND() limit #{exnumber}
+    <select id="RandJudge" resultType="PaperJudge">
+         select content,answer from tk_judge   where chaptertwo = #{chaptertwo} order by RAND() limit #{judgenum}
     </select>
-    <!-- 更新的方法 -->
-    <update id="UpExaminfo" parameterType="ExamInfo">
-        update exam_info set
-            id = #{id},
-             begindate =  #{begindate},
-          begintime =  #{begintime},
-          enddate = #{enddate},
-          endtime = #{endtime},
-              password= #{password},
-                 state =  #{state},
-                   teacher=  #{teacher}
-        where id = #{id}
-    </update>
-    <!--删除考试-->
-    <delete id="DeleteExam" parameterType="Long" >
-        DELETE FROM exam_info  WHERE id = #{id}
-    </delete>
+    <!--批量新增-->
+    <insert id="insertRandChoice" parameterType="java.util.List" >
+        insert into paper_choice (content, aoption,boption,coption,doption, answer ,examid)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.content},#{item.aoption},#{item.boption},#{item.coption},#{item.doption},#{item.answer},#{item.examid})
+        </foreach>
+    </insert>
+    <insert id="insertRandJudge" parameterType="java.util.List">
+        insert into paper_judge(content,  answer ,examid)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.content},#{item.answer},#{item.examid})
+        </foreach>
+    </insert>
+    <select id="AllPaperChoice" resultType="PaperChoice">
+        select *from paper_choice where examid = #{examid}
+    </select>
+    <select id="AllPaperJudge" resultType="PaperJudge">
+        select *from paper_judge where examid = #{examid}
+    </select>
+    <select id="findById" parameterType="int" resultType="ExamInformation">
+        select  * from exam_information  where id = #{id}
+    </select>
+    <!--批量插入错题-->
+    <insert id="CreateAllAnswer" parameterType="java.util.List">
+        insert into exam_result (studentid, examid, stuanswer)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.studentid},
+            #{item.examid},
+            #{item.stuanswer})
+        </foreach>
+    </insert>
+    <insert id="CreateExamHistory" parameterType="ExamHistory">
+        insert into examhistory(examid,studentid,score)
+        values (#{examid},#{studentid},#{score})
+    </insert>
+    <!--<select id="WrongChoice" parameterType="int" resultType="WrongAnswer">-->
+        <!--select  * from wrong_result  where studentid = #{studentid} and type = 1-->
+    <!--</select>-->
+    <select id="AllAnswer" resultType="AllAnswer">
+            select  * from exam_result  where studentid = #{studentid} and examid = #{examid}
+    </select>
+  <!--根据学生id查找考试-->
+    <select id="ByStudentid" resultType="ExamHistory">
+        select *from examhistory where studentid = #{studentid}
+    </select>
+    <!--<select id="AlreadExam"  resultType="ExamInformation" parameterType="java.util.List">-->
+        <!--select *from exam_information-->
+        <!--where examid in-->
+        <!--<foreach collection="list" item="valueList" index="index" open="(" close=")" separator=",">-->
+            <!--#{valueList}-->
+        <!--</foreach>-->
+    <!--</select>-->
+    <select id="AlreadExam"   parameterType="java.util.List"  resultType="ExamInformation">
+        select * from exam_information
+        where id in
+        <foreach collection="list" index="index" item="item" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="DetilsExam" resultType="ExamHistory">
+            select  * from examhistory  where studentid = #{studentid} and examid = #{examid}
+    </select>
 </mapper>

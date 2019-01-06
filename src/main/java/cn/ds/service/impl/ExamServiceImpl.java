@@ -1,8 +1,7 @@
 package cn.ds.service.impl;
 
 import cn.ds.mapper.exam.ExamMapper;
-import cn.ds.pojo.Exam.ExamInfo;
-import cn.ds.pojo.Exam.Score;
+import cn.ds.pojo.Exam.*;
 import cn.ds.pojo.Tk.Choice;
 import cn.ds.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,39 +14,82 @@ public class ExamServiceImpl implements ExamService {
     @Autowired
      private ExamMapper examMapper;
 
+
     @Override
-    public void insert(ExamInfo examInfo) {
-        examMapper.insert(examInfo);
+    public void CreateExam(ExamInformation examInformation) {
+        examMapper.CreateExam(examInformation);
     }
 
     @Override
-    public List<ExamInfo> FindAll() {
-        return examMapper.FindAll();
+    public List<ExamInformation> AllExam() {
+        return examMapper.AllExam();
     }
 
     @Override
-    public ExamInfo findById(Long id) {
+    public List<PaperChoice> RandChoice(Long choicenum, String chaptertwo) {
+        return examMapper.RandChoice(choicenum,chaptertwo);
+    }
+
+    @Override
+    public List<PaperJudge> RandJudge(Long judgenum, String chaptertwo) {
+        return examMapper.RandJudge(judgenum,chaptertwo);
+    }
+
+    @Override
+    public void insertRandChoice(List<PaperChoice> choices) {
+        examMapper.insertRandChoice(choices);
+    }
+
+    @Override
+    public void insertRandJudge(List<PaperJudge> judges) {
+examMapper.insertRandJudge(judges);
+    }
+
+    @Override
+    public List<PaperChoice> AllPaperChoice(int examid) {
+        return examMapper.AllPaperChoice(examid);
+    }
+
+    @Override
+    public List<PaperJudge> AllPaperJudge(int examid) {
+        return examMapper.AllPaperJudge(examid);
+    }
+
+    @Override
+    public ExamInformation findById(int id) {
         return examMapper.findById(id);
     }
 
     @Override
-    public List<Choice> RandId(Long exnumber) {
-        return examMapper.RandId(exnumber);
+    public void CreateAllAnswer(List<AllAnswer> allAnswers) {
+        examMapper.CreateAllAnswer(allAnswers);
+    }
+
+
+    @Override
+    public void CreateExamHistory(ExamHistory examHistory) {
+           examMapper.CreateExamHistory(examHistory);
     }
 
     @Override
-    public void CreateScore(Score score) {
-        examMapper.CreateScore(score);
+    public List<AllAnswer> AllAnswer(int studentid, int examid) {
+        return examMapper.AllAnswer(studentid,examid);
     }
 
     @Override
-    public void UpExaminfo(ExamInfo examInfo) {
-        examMapper.UpExaminfo(examInfo);
+    public List<ExamHistory> ByStudentid(int studentid) {
+        return examMapper.ByStudentid(studentid);
+    }
+
+
+    @Override
+    public List<ExamInformation> AlreadExam(List<Long> longList) {
+        return examMapper.AlreadExam(longList);
     }
 
     @Override
-    public void DeleteExam(Long id) {
-        examMapper.DeleteExam(id);
+    public ExamHistory DetilsExam(int studentid, int examid) {
+        return examMapper.DetilsExam(studentid,examid);
     }
 
 

@@ -28,7 +28,7 @@
     <form>
         <fieldset id="fieldset3">
             <p>${ch.content}分数:${score}</p>
-            <input type="radio" name="radio"value="A"/>${ch.aoption}<br />
+            <input type="radio" name="radio" value="A"/>${ch.aoption}<br />
             <input type="radio" name="radio" value="B" />${ch.aoption}<br />
             <input type="radio" name="radio" value="C"/>${ch.aoption}<br />
             <input type="radio" name="radio" value="D"/>${ch.aoption}<br />
@@ -47,14 +47,13 @@
          var answer = new Array();
           <c:forEach items="${requestScope.choice}" var="ch">
                 answer.push('${ch.answer}')
-          console.log("答案" + '${ch.answer}')
           </c:forEach>
           console.log("length"+answer.length);
           var allscore = 0;
         for (i=0; i<radio.length; i++) {
             if (radio[i].checked) {
                 var b =answer.shift();
-               if( b == radio[i].value){
+               if(b == radio[i].value){
                    allscore += Number('${score}');
                }
             }
