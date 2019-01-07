@@ -108,15 +108,15 @@
                                 <a href="<%=basePath%>/tea_tk/tea_findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/tea_tk/tea_blankall.do">填空题查询</a>
+                                <a href="<%=basePath%>/tea_tk/tea_blankall.do">判断题查询</a>
                             </li>
-                            <li>
-                                <a href="<%=basePath%>/tea_tk/tea_allReadFill.do">程序填空查询</a>
-                            </li>
-                            <li>
-                                <a href="<%=basePath%>/tea_tk/tea_allReadProgram.do">读程序写结果查询</a>
-                            </li><li>
-                            <a href="<%=basePath%>/tea_tk/allPgDesign.do">程序设计查询</a>                        </li>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tea_tk/tea_allReadFill.do">程序填空查询</a>--%>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tea_tk/tea_allReadProgram.do">读程序写结果查询</a>--%>
+                            <%--</li><li>--%>
+                            <%--<a href="<%=basePath%>/tea_tk/allPgDesign.do">程序设计查询</a>                        </li>--%>
 
                         </ul>
                         <!-- /.nav-second-level -->
@@ -140,12 +140,11 @@
                                 <a href="<%=basePath%>/teacher/stuinfo.do">学生信息查询</a>
                             </li>
                             <li>
-                                <a href="score_query.html">学生成绩查询</a>
+                                <a href="<%=basePath%>/teacher/findstuscore.do">学生成绩查询</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

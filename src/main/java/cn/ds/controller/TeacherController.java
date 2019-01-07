@@ -67,5 +67,8 @@ public class TeacherController {
     public  String findexam(){
         return "redirect:allexam.do";
     }
-
+    @RequestMapping("findstuscore")
+    public String FindStuScore(){
+        return "page/teacher/student_score";
+    }
 }

@@ -95,22 +95,12 @@
                     <li>
                         <a href="#"><i class="fa fa-dashboard fa-fw"></i>首页</a>
                     </li>
-                    <%--<li>--%>
-                    <%--<a href="Special_practice.html"><i class="fa fa-bar-chart-o fa-fw"></i>专项练习</a>--%>
-                    <%--<!-- /.nav-second-level -->--%>
-                    <%--</li>
                     <li>
-                        <a href="mock_exam.html"><i class="fa fa-table fa-fw"></i>模拟考试</a>
-                    </li>--%>
-                    <li>
-                        <a href="<%=basePath%>/exam/examallstu.do"><i class="fa fa-gear fa-fw"></i>考试</a>
+                        <a href="<%=basePath%>/exam/examallstu.do?studentid=${sessionScope.studentsession.id}"><i class="fa fa-gear fa-fw"></i>考试</a>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-edit fa-fw"></i>错题集</a>
+                        <a href="<%=basePath%>/exam/examhistory.do?studentid=${sessionScope.studentsession.id}"><i class="fa fa-edit fa-fw"></i>试卷回顾</a>
                     </li>
-                    <%--<li>--%>
-                    <%--<a href="score_query.html"><i class="fa fa-wrench fa-fw"></i>成绩查询</a>--%>
-                    <%--</li>--%>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
@@ -136,19 +126,33 @@
             <tbody>
             <c:forEach items="${examInfo}" var="ex">
                 <tr>
-                    <td><a onclick="disp_prompt(${ex.password},${ex.id})">${ex.examname}</a></td>
+                    <td><c:choose>
+                        <c:when test="${empty ex.password}">
+                            <a href="<%=basePath%>/exam/exampaper.do?examid=${ex.id}">${ex.examname}</a>
+                    </c:when>
+                    <c:otherwise>   <a onclick="disp_prompt(${ex.password},${ex.id})">${ex.examname}</a>
+                    </c:otherwise>
+                    </c:choose>
+                   </td>
                     <td>${ex.begindate}&nbsp;${ex.enddate}</td>
                     <td>${ex.examtime}</td>
-                            <td><c:if test="${ex.password == null }">公开</c:if>
-                                <c:if test="${ex.password != null}">私有</c:if>
+                            <td>
+                                <c:choose>
+                                <c:when test="${empty ex.password}">
+                                         无
+                                         </c:when>
+                                      <c:otherwise>
+                                    私有
+                                   </c:otherwise>
+                                 </c:choose>
                             </td>
                     <% request.setAttribute("currentTime", new Date()); %>
                     <c:choose>
                         <c:when test="${ex.enddate < currentTime}">
-                            <td>已结束</td>
+                            <td style="color:red">已结束</td>
                         </c:when>
                         <c:otherwise>
-                            <td>未开始</td>
+                            <td style="color:green">未开始</td>
                         </c:otherwise>
                     </c:choose>
                     <td>${ex.teacher}</td>
@@ -167,10 +171,6 @@
     {
         console.log("考试密码 " + password);
         console.log("试卷id " + examid);
-        if(password ==null){
-            location.href = "<%=basePath%>/exam/exampaper.do?examid=" + examid;
-        }
-        else{
             var name=prompt("请输入密码",""); // 弹出input框
             console.log("输入的密码" + name);
             if (name == password) {
@@ -180,7 +180,6 @@
             else {
                 alert("密码错误");
             }
-        }
 
 
 

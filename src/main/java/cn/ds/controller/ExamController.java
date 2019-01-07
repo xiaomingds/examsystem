@@ -1,8 +1,10 @@
 package cn.ds.controller;
 
 import cn.ds.pojo.Exam.*;
+import cn.ds.pojo.Student;
 import cn.ds.pojo.Teacher;
 import cn.ds.service.ExamService;
+import cn.ds.service.StudentService;
 import cn.ds.service.TeacherService;
 import cn.ds.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +28,8 @@ public class ExamController {
     private ExamService examService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private StudentService studentService;
     //2019.1.3添加
     @RequestMapping("/addexam")
     public  String addexam(Model model){
@@ -75,7 +81,6 @@ public class ExamController {
                   if (examHistories.get(j).getExamid() == examInfos.get(i).getId()){
                       System.out.println("已经考的id +" + examHistories.get(j).getExamid()+ "考试信息的id "+ examInfos.get(i).getId());
                       examInfos.remove(examInfos.get(i));
-                      break;
                   }
               }
           }
@@ -142,7 +147,7 @@ public class ExamController {
        examHistory.setScore(allscore);
        examService.CreateExamHistory(examHistory);
        System.out.println("当前考试总分为" + allscore);
-        return "redirect:examallstu.do";
+        return "redirect:examallstu.do?studentid="+studentid;
     }
 
     @RequestMapping("examhistory")
@@ -158,8 +163,7 @@ public class ExamController {
            examInformations.get(i).setAllscore((int) examHistories.get(i).getScore());
        }
        model.addAttribute("examend",examInformations);
-
-    return "page/student/exam_end";
+       return "page/student/exam_end";
     }
     @RequestMapping("examdetial")
     public  String ExamHistory(@RequestParam int studentid,@RequestParam int examid, Model model){
@@ -185,4 +189,40 @@ public class ExamController {
         return "page/student/exam_historypaper";
     }
 
+    @ResponseBody
+   @RequestMapping("stuscore")
+    public List<ExamInformation> StuScore(@RequestParam String name){
+        System.out.println("查询的name" + name);
+        List<FindStudentScore>studentScores = new ArrayList<FindStudentScore>();
+        List<ExamInformation> examInformations = new ArrayList<ExamInformation>();
+        Student student = new Student();
+        List<Long>longList = new ArrayList<Long>();
+        if(name.length() <5){
+             student = studentService.login(name);
+        }
+        else{
+           student = studentService.ByNum(name);
+        }
+        long id = student.getId();
+        List<ExamHistory>examHistories = examService.ByStudentid((int) id);
+        System.out.println("");
+        System.out.println("总共有 @@@@@" + examHistories.size() + "考试");
+        if(examHistories.size() ==0){
+            System.out.println("到这儿了" + examInformations.size());
+            return examInformations;
+        }
+        else {
+            for (int i = 0; i < examHistories.size(); i++) {
+                longList.add(examHistories.get(i).getExamid());
+            }
+            examInformations = examService.AlreadExam(longList);
+            System.out.println("有" + examInformations.size() + "考试信息");
+            for (int i = 0; i < examInformations.size(); i++) {
+                examInformations.get(i).setAllscore((int) examHistories.get(i).getScore());
+                examInformations.get(i).setStudentname(student.getUsername());
+            }
+            System.out.println("总共有 " + examInformations.size() + "考试");
+            return examInformations;
+        }
+   }
 }

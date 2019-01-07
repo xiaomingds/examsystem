@@ -78,18 +78,13 @@
                     <li>
                         <a href="#"><i class="fa fa-dashboard fa-fw"></i>首页</a>
                     </li>
-                    <%--<li>--%>
-                        <%--<a href="Special_practice.html"><i class="fa fa-bar-chart-o fa-fw"></i>专项练习</a>--%>
-                        <%--<!-- /.nav-second-level -->--%>
-                    <%--</li>
                     <li>
-                        <a href="mock_exam.html"><i class="fa fa-table fa-fw"></i>模拟考试</a>
-                    </li>--%>
-                    <li>
-                        <a href="<%=basePath%>/exam/examallstu.do?studentid=${sessionScope.studentsession.id}"><i class="fa fa-gear fa-fw"></i>考试</a>
+                        <a href="<%=basePath%>/exam/examallstu.do?studentid=${sessionScope.studentsession.id}">
+                            <i class="fa fa-gear fa-fw"></i>考试</a>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/exam/examhistory.do?studentid=${sessionScope.studentsession.id}"><i class="fa fa-edit fa-fw"></i>试卷回顾</a>
+                        <a href="<%=basePath%>/exam/examhistory.do?studentid=${sessionScope.studentsession.id}">
+                            <i class="fa fa-edit fa-fw"></i>试卷回顾</a>
                     </li>
                 </ul>
             </div>

@@ -4,6 +4,7 @@ import java.sql.Date;
 
 
 public class ExamInformation {
+    private String studentname;
     private int id;
     private String examname;
     private String teacher;
@@ -124,5 +125,14 @@ public class ExamInformation {
 
     public void setAllscore(int allscore) {
         this.allscore = allscore;
+    }
+
+
+    public String getStudentname() {
+        return studentname;
+    }
+
+    public void setStudentname(String studentname) {
+        this.studentname = studentname;
     }
 }

@@ -17,4 +17,5 @@ public interface StudentMapper {
     void UpStudent(Student student);
     List<Student>ByClass(String classname);
     void CreatStu(Student student);
+    Student ByNum(String num);
 }

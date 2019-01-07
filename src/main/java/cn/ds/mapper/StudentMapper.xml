@@ -67,4 +67,8 @@
     values (#{id}, #{username}, #{password},
             #{classname}, #{num})
   </insert>
+    <select id="ByNum" resultType="Student" parameterType="String">
+        select   * from student
+        where num = #{num}
+    </select>
 </mapper>

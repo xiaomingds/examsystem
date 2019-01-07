@@ -15,5 +15,5 @@ public interface StudentService {
 
    Student selectByPrimaryKey(Long id);
    void CreatStu(Student student);
-
+   Student ByNum(String num);
 }

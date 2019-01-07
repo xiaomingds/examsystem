@@ -112,4 +112,9 @@ public class StudentServiceImpl implements StudentService {
     public void CreatStu(Student student) {
         studentmapper.CreatStu(student);
     }
+
+    @Override
+    public Student ByNum(String num) {
+        return studentmapper.ByNum(num);
+    }
 }
