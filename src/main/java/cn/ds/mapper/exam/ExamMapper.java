@@ -24,12 +24,14 @@ public interface ExamMapper {
     List<PaperChoice>AllPaperChoice(int examid);
     List<PaperJudge>AllPaperJudge(int examid);
     ExamInformation findById(int id);
-
     void CreateAllAnswer(List<AllAnswer>allAnswers);
     void CreateExamHistory(ExamHistory examHistory);
     List<ExamHistory> ByStudentid(int studentid);
     ExamHistory DetilsExam(@Param("studentid")int studentid,@Param("examid")int examid);
     List<ExamInformation> AlreadExam(List<Long>longList);
     List<AllAnswer>AllAnswer(@Param("studentid")int studentid,@Param("examid")int examid);
+    void DeletePaperChoice(int examid);
+    void DeletePaperJudge(int examid);
+    void DeleteExamInfo(int examid);
 //     List<WrongAnswer> insertWrongAnswer(Map<String, Object> map);
 }

@@ -1,6 +1,7 @@
 package cn.ds.service;
 
 import cn.ds.pojo.BasicInfo.Blass;
+import cn.ds.pojo.BasicInfo.Depart;
 import cn.ds.pojo.BasicInfo.Major;
 import cn.ds.pojo.BasicInfo.Semester;
 import cn.ds.pojo.Student;
@@ -22,4 +23,8 @@ public interface BasicInfoService {
     void DeleteMajor(Long maid);
     void DeleteYear(Long seid);
 
+
+    List<Depart> AllDepart();
+    void InsertDepart(Depart depart);
+    void deleteDepart(int id);
 }

@@ -6,6 +6,7 @@
   Time: 10:15
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
@@ -28,29 +29,7 @@
     <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
     <script src="<%=basePath%>/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <style>
-        table{
-            border: 1px solid black;
-            border-collapse: collapse;
-            width: 500px;
-        }
-        table th {
-            border: 1px solid black;
-            width: 10%;
-        }
-        table td {
-            align-items: center;
-            border: 1px solid black;
-            width: 10%;
-        }
-
-        table th {
-            background-color: #c6d0e9;
-        }
-    </style>
-
-
-    <!-- Bootstrap Core CSS -->
+    >
     <link href="<%=basePath%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
@@ -62,9 +41,6 @@
     <!-- Custom Fonts -->
     <link href="<%=basePath%>/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
     <script src="<%=basePath%>/vendor/js/123.js"></script>
     <script src="<%=basePath%>/vendor/js/456.js"></script>
     <![endif]-->
@@ -83,26 +59,6 @@
             <a class="navbar-brand" href="#">C语言在线考试系统</a>
         </div>
         <!-- /.navbar-header -->
-
-        <ul class="nav navbar-top-links navbar-right">
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="../login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-        </ul>
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -116,15 +72,17 @@
                                 <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/tk/blankall.do">填空题查询</a>
+                                <a href="<%=basePath%>/tk/alljudge.do">判断题查询</a>
                             </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>--%>
+                            <%--</li><li>--%>
+                            <%--<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>--%>
                             </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>
-                            </li><li>
-<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -135,52 +93,52 @@
                         <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/teacher/allexam.do"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
+                        <a href=""><i class="fa fa-table fa-fw"></i>考试管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/exam/allexam.do">查看考试信息</a>
+                            </li>
+                            <li>
+                                <a href=<%=basePath%>/exam/adminaddexam.do>创建新考试</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
                     </li>
+
+
                 </ul>
             </div>
         </div>
-        <!-- /.navbar-static-side -->
     </nav>
     <div id="page-wrapper">
         <br>
         <br>
-        <table border="1" class="table table-bordered" id = "tab1">
+        <table border="1" class="table table-bordered" id = "tab1" style="text-align: center">
             <thead>
             <tr>
-                <th colspan="9">考试基础信息设置</th>
+                <th colspan="8" style="text-align:center;font-size: 20px ">考试基础信息设置</th>
             </tr>
             </thead>
-
             <tr>
-                <th>考试名称</th>
-                <th>开始时间</th>
-                <th>结束时间</th>
-                <th>类型</th>
-                <th>密码</th>
-                <th>状态</th>
-                <th>命题人</th>
-                <th>设置</th>
+                <th style="text-align: center">考试名称</th>
+                <th style="text-align: center">考试时间</th>
+                <th style="text-align: center">考试时长</th>
+                <th style="text-align: center">密码</th>
+                <th style="text-align: center">状态</th>
+                <th style="text-align: center">命题人</th>
+                <th style="text-align: center">操作</th>
             </tr>
             <c:forEach items="${examInfo}" var="ex">
                 <tr>
-                    <td><a href="exam_score.html">${ex.examname}</a></td>
-                    <td>${ex.begindate}&nbsp;${ex.begintime}</td>
-                    <td>${ex.enddate}&nbsp;${ex.endtime}</td>
+                        <%--<td><a href="check_exam_score.html">${ex.examname}</a></td>--%>
+                    <td>${ex.examname}</td>
+                    <td>${ex.begindate}-${ex.enddate}</td>
+                    <td>${ex.examtime}</td>
                     <c:choose>
                         <c:when test="${empty ex.password}">
-                            <td>公开</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td>私有</td>
-                        </c:otherwise>
-                    </c:choose>
-                    <c:choose>
-                        <c:when test="${empty ex.password}">
-                            <td>公开</td>
+                            <td>无</td>
                         </c:when>
                         <c:otherwise>
                             <td>${ex.password}</td>
@@ -189,70 +147,70 @@
                     <% request.setAttribute("currentTime", new Date()); %>
                     <c:choose>
                         <c:when test="${ex.enddate < currentTime}">
-                        <td>已结束</td>
-                      </c:when>
-                        <c:when test="${ex.begindate < currentTime&&ex.enddate > currentTime}">
-                            <td>正在进行</td>
+                            <td>已结束</td>
+                        </c:when>
+                        <c:when test=" ${ex.enddate >= currentTime && ex.begindate <= currentTime}">
+                            <td>进行中</td>
                         </c:when>
                         <c:otherwise>
                             <td>未开始</td>
                         </c:otherwise>
                     </c:choose>
                     <td>${ex.teacher}</td>
-                    <td>
-                        <input  class="btn btn-outline btn-primary" type="button" value="删除" onclick="return trash(${ex.id})" data-toggle="modal" data-target="#trashModal">
-                        <input  class="btn btn-outline btn-primary" type="button" value="更改" onclick="edit('${ex.id}')">
+                    <td >
+                        <input  class="btn btn-outline btn-primary" type="button" value="查看详情"  onclick = "window.location.href = '<%=basePath%>/exam/admindetail.do?examid=${ex.id}'" >
+                            <%--<input  class="btn btn-outline btn-primary" type="button" value="编辑"  data-toggle="modal" data-target="#myModa_n" >--%>
+                        <input  class="btn btn-outline btn-primary" type="button" value="删除"  onclick="trash(${ex.id})" data-toggle="modal" data-target="#trashModal">
                     </td>
                 </tr>
             </c:forEach>
         </table>
         <br>
-
         <!-- /#page-wrapper -->
     </div>
     <!-- 更改模态框  data-toggle="modal" data-target="#myModa_n" -->
     <div class="modal fade" id="editexam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form action="<%=basePath%>/teacher/upexam.do" method="post">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">考试信息更改</h4>
-                </div>
-                <div class="modal-body" style="text-align:left">
-                    <input name="id" id="id" hidden="hidden"/>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入考试名称：</span>
-                        <input type="text" style="height: 40px" class="form-control" id="upexamname" name="examname">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">考试信息更改</h4>
                     </div>
-                    <div class="form-group has-success" >
-                        <label  >请选择更改后的考试开始时间:</label>
-                        <div >
-                            <input style="width: 45%" type="date" id="upbegindate" name="begindate" value="2018-09-24"/>
-                            <input style="width: 45%" type="time" id="upbegintime" name="begintime" value="13:00:59"/>
+                    <div class="modal-body" style="text-align:left">
+                        <input name="id" id="id" hidden="hidden"/>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入考试名称：</span>
+                            <input type="text" style="height: 40px" class="form-control" id="upexamname" name="examname">
                         </div>
+                        <div class="form-group has-success" >
+                            <label  >请选择更改后的考试开始时间:</label>
+                            <div >
+                                <input style="width: 45%" type="date" id="upbegindate" name="begindate" value="2018-09-24"/>
+                                <input style="width: 45%" type="time" id="upbegintime" name="begintime" value="13:00:59"/>
+                            </div>
 
-                        <label >请选择更改后的考试结束时间:</label>
-                        <div>
-                            <input style="width: 45%" type="date" id="upenddate" name="enddate" value="2018-12-24"/>
-                            <input style="width: 45%" type="time" id="upendtime" name="endtime" value="13:00:59"/>
+                            <label >请选择更改后的考试结束时间:</label>
+                            <div>
+                                <input style="width: 45%" type="date" id="upenddate" name="enddate" value="2018-12-24"/>
+                                <input style="width: 45%" type="time" id="upendtime" name="endtime" value="13:00:59"/>
+                            </div>
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入考试密码：</span>
+                            <input type="text" style="height: 40px" class="form-control" id="uppassword" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label>请选择考试命题人</label>
+                            <select class="form-control" id="upteacher" name="teacher">
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入考试密码：</span>
-                        <input type="text" style="height: 40px" class="form-control" id="uppassword" name="password">
-                    </div>
-                    <div class="form-group">
-                        <label>请选择考试命题人</label>
-                        <select class="form-control" id="upteacher" name="teacher">
-                        </select>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
+                        <button type="submit"  class="btn btn-outline btn-primary">确定</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
-                    <button type="submit"  class="btn btn-outline btn-primary">确定</button>
-                </div>
-            </div>
             </form>
             <!-- /.modal-content -->
         </div>
@@ -270,7 +228,7 @@
                 </div>
                 <!-- 模糊框主体 -->
                 <div class="modal-body">
-                    <strong>你确定要删除吗？</strong>
+                    <strong>你将删除此次考试的全部信息！</strong>
                 </div>
                 <!-- 模糊框底部 -->
                 <div class="modal-footer">
@@ -280,7 +238,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 </div>
 <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
@@ -291,13 +249,13 @@
 <script>
 
     //删除
-    function trash(id) {
+    function trash(examid) {
         if (!id) {
             alert("error");
         } else {
             $(".delSure").click(function () {
                 $.ajax({
-                    url: '<%=basePath%>/teacher/deleteexam.do?id=' + id,
+                    url: '<%=basePath%>/exam/admindeleteexam.do?examid=' + examid,
                     type: 'POST',
                     success: function (data) {
                         $("body").html(data);
@@ -318,8 +276,8 @@
                 id: id
             }),
             success: function (data) {
-                 getteacher();
-                 console.log("数据" + data.examname);
+                getteacher();
+                console.log("数据" + data.examname);
                 $("#id").val(data.id);
                 $("#upexamname").val(data.examname);
                 $("#uppassword").val(data.password);
@@ -351,7 +309,8 @@
                 }
 
             }
-            });
+        });
     }
 </script>
 </html>
+

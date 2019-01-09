@@ -148,6 +148,7 @@
     function findstu() {
             $("#tab1 tbody").html("");
         var name = document.getElementById("username").value;
+        $("#tishi").attr("style","display:none;");
         if((name.length >4 &&name.length <10)||name.length > 10){
             document.getElementById("tishi").innerHTML="<font color='red'>请输入正确的学号或姓名</font>";
         }
@@ -160,13 +161,12 @@
                 dataType: "json",
                 success: function (data) {
                     var tempHtml = "";
-                    alert("接受的长度" + data.length);
                     if(0==data.length){
-                        tempHtml +="<div class=\"jumbotron\" ><h4>"+ "暂无此学生考试信息!"+"</h4></div>";
+                        tempHtml +="<div id=\"hid\"><h4>"+ "暂无此学生考试信息!"+"</h4></div>";
                     }else{
                     for(var i = 0;i < data.length;i++){
                         tempHtml += "<tr><td>"+ data[i].studentname+"</td><td>"+ data[i].examname+ "</td><td>"+
-                            data[i].allscore +"</td><td>"  + data[i].teacher +"</td></tr>";
+                            data[i].teacher +"</td><td>"  + data[i].allscore  +"</td></tr>";
                      }
                   }
                   $("table").append(tempHtml);

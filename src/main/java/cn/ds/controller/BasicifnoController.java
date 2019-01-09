@@ -1,6 +1,7 @@
 package cn.ds.controller;
 
 import cn.ds.pojo.BasicInfo.Blass;
+import cn.ds.pojo.BasicInfo.Depart;
 import cn.ds.pojo.BasicInfo.Major;
 import cn.ds.pojo.BasicInfo.Semester;
 import cn.ds.pojo.Student;
@@ -147,5 +148,24 @@ public class BasicifnoController {
         basicInfoService.DeleteYear(seid);
 
     }
+    @RequestMapping("alldepart")
+    public  String AllDepart(Model model){
+        List<Depart>departs = basicInfoService.AllDepart();
+        model.addAttribute("depart",departs);
+        return "page/admin/base_depart";
+    }
+    @RequestMapping("adddepart")
+    public String AddDepart(Depart depart){
+         System.out.println("添加院系" + depart);
+        basicInfoService.InsertDepart(depart);
+        return "redirect:alldepart.do";
+    }
+    @RequestMapping("deletedepart")
+    public String DeleteDepart(@RequestParam int id){
+        System.out.println("删除院系" + id);
+        basicInfoService.deleteDepart(id);
+        return "redirect:alldepart.do";
+    }
+
 }
 

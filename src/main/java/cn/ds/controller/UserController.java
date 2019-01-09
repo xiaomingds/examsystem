@@ -3,6 +3,7 @@ package cn.ds.controller;
 import cn.ds.pojo.*;
 import cn.ds.pojo.Tk.Choice;
 import cn.ds.pojo.Tk.ReadProgram;
+import cn.ds.service.TeacherService;
 import cn.ds.service.UserService;
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class UserController {
     //注入service
     @Autowired
     private UserService userService;
-
+     @Autowired
+    TeacherService teacherService;
     // 用户登录
     @RequestMapping(value = "/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
@@ -57,6 +59,12 @@ public class UserController {
         }
         model.addAttribute("teachers",teachers);
         return  "page/admin/teacher";
+    }
+    @RequestMapping("/deletemanyteacher")
+    public String ManyTeacher(String chk_value){
+        System.out.println("获取的id——arr"+ chk_value);
+        teacherService.deleteManyTeacher(chk_value);
+        return "redirect:findallteacher.do";
     }
     @ResponseBody
     @RequestMapping("/listteacher")

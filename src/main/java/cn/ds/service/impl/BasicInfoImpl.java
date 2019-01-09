@@ -2,6 +2,7 @@ package cn.ds.service.impl;
 
 import cn.ds.mapper.BasicInfoMapper;
 import cn.ds.pojo.BasicInfo.Blass;
+import cn.ds.pojo.BasicInfo.Depart;
 import cn.ds.pojo.BasicInfo.Major;
 import cn.ds.pojo.BasicInfo.Semester;
 import cn.ds.pojo.Student;
@@ -75,6 +76,21 @@ public class BasicInfoImpl implements BasicInfoService {
     @Override
     public void DeleteYear(Long seid) {
         basicInfoMapper.DeleteYear(seid);
+    }
+
+    @Override
+    public List<Depart> AllDepart() {
+        return basicInfoMapper.AllDepart();
+    }
+
+    @Override
+    public void InsertDepart(Depart depart) {
+         basicInfoMapper.InsertDepart(depart);
+    }
+
+    @Override
+    public void deleteDepart(int id) {
+       basicInfoMapper.deleteDepart(id);
     }
 
 

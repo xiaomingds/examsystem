@@ -37,6 +37,12 @@ public class ExamController {
         model.addAttribute("teacher",teachers);
         return "page/teacher/addexam";
     }
+    @RequestMapping("/adminaddexam")
+    public  String AdminAddExam(Model model){
+        List<Teacher> teachers = userService.findTeacherAll();
+        model.addAttribute("teacher",teachers);
+        return "page/admin/addexam";
+    }
 
     @RequestMapping("/examadd") //添加考试
     public  String examadd(ExamInformation examInformation){
@@ -58,11 +64,68 @@ public class ExamController {
         System.out.println("判断题生成成功");
         return "redirect:examall.do";
     }
+    @RequestMapping("/adminexamadd") //添加考试
+    public  String Adminexamadd(ExamInformation examInformation){
+        examService.CreateExam(examInformation);
+        List<PaperJudge>paperJudges = examService.RandJudge((long) examInformation.getJudgenum(),examInformation.getChaptertwo());
+        List<PaperChoice>paperChoices = examService.RandChoice((long) examInformation.getChoicenum(),examInformation.getChaptertwo());
+        System.out.println("返回的id" + examInformation.getId());
+        for (int i = 0;i<paperChoices.size();i++){
+            System.out.println("生成的题目" +paperChoices.get(i).getContent());
+            paperChoices.get(i).setExamid(examInformation.getId());
+        }
+        examService.insertRandChoice(paperChoices);
+        System.out.println("选择题生成成功");
+        for (int i = 0;i<paperJudges.size();i++){
+            System.out.println("生成的题目" +paperJudges.get(i).getContent());
+            paperJudges.get(i).setExamid(examInformation.getId());
+        }
+        examService.insertRandJudge(paperJudges);
+        System.out.println("判断题生成成功");
+        return "redirect:allexam.do";
+    }
     @RequestMapping("/examall")
     public String ExamAll(Model model){
         List<ExamInformation>examInfos = examService.AllExam();
         model.addAttribute("examInfo",examInfos);
         return "page/teacher/exam_info";
+    }
+    @RequestMapping("detail")
+    public String ExamDetail(@RequestParam int examid, Model model){
+        System.out.println("考试id" +examid);
+        List<PaperChoice>paperChoices = examService.AllPaperChoice(examid);
+        List<PaperJudge>paperJudges = examService.AllPaperJudge(examid);
+       ExamInformation examInformations = examService.findById(examid);
+        model.addAttribute("choice",paperChoices);
+        model.addAttribute("judge",paperJudges);
+        model.addAttribute("examinfo",examInformations);
+        return "page/teacher/exam_detail";
+    }
+    @RequestMapping("admindetail")
+    public String AdminExamDetail(@RequestParam int examid, Model model){
+
+        List<PaperChoice>paperChoices = examService.AllPaperChoice(examid);
+        List<PaperJudge>paperJudges = examService.AllPaperJudge(examid);
+        ExamInformation examInformations = examService.findById(examid);
+        model.addAttribute("choice",paperChoices);
+        model.addAttribute("judge",paperJudges);
+        model.addAttribute("examinfo",examInformations);
+        return "page/admin/exam_detail";
+    }
+    @RequestMapping("deleteexam")
+    public String DeleteExam(@RequestParam int examid){
+        examService.DeletePaperChoice(examid);
+        examService.DeletePaperJudge(examid);
+        examService.DeleteExamInfo(examid);
+        return "redirect:examall.do";
+    }
+    @RequestMapping("admindeleteexam")
+    public String AdminDeleteExam(@RequestParam int examid){
+        System.out.println("删除的考试id"+ examid);
+        examService.DeletePaperChoice(examid);
+        examService.DeletePaperJudge(examid);
+        examService.DeleteExamInfo(examid);
+        return "redirect:allexam.do";
     }
     //管理员查询
     @RequestMapping("/allexam")

@@ -58,83 +58,7 @@
         }
     </style>
     <script>
-        //文档准备就绪
-        $(function () {
-            //设置 所有 td 居中
-            $('table td').attr("align", "center");
-            //标签+属性选择所有<编辑>按钮
-            $('input[value="编辑"]').click(function () {
-                //获取每一个<编辑>按钮的 下标（从0开始 所以需要+2 = 按钮在表格的所在行数）
-                var numId = $('input[value="编辑"]').index($(this)) + 2;
-                //选择表格中的所有tr 通过eq方法取得当前tr
-                var ttr = $('table tr').eq(numId);
-                /*当前行使用find方法找到每一个td列
-                 each方法为每一个td设置function
-                 */
-                ttr.find("td").each(function () {
-                    /*过滤 td中的元素
-                     checkbox 、 button、text 不需要执行append
-                     注意 return 为 跳出当前 each
-                     return false 为 跳出整个 each
-                     */
-                    if ($(this).children("input[type='checkbox']").length > 0) {
-                        return;
-                    }
-                    if ($(this).children("input[type='button']").length > 0) {
-                        return;
-                    }
-                    if ($(this).children("input[type='text']").length > 0) {
-                        return;
-                    }
-                    var tdText = $(this).html();
-                    $(this).html("");
-                    var inputObj = $("<input type='text'>");
-                    inputObj.appendTo($(this));
-                    inputObj.css("width", "95%");
-                    inputObj.val(tdText);
-                });
-            });
-            //为每一个确定按钮设置点击事件
-            $('input[value="确定"]').click(function () {
-                /*通过parents方法获取<确定>按钮的父容器tr
-                 再为 tr中的每一个text设置function
-                 */
-                var ttr = $(this).parents("tr");
-                ttr.find('input[type="text"]').each(function () {
-                    var inputVal = $(this).val();
-                    $(this).parents('td').html(inputVal);
-                })
-            });
-            //全选/反选
-            $('#cha').click(function () {
-                //判断checkbox是否选中
-                if ($(this).is(':checked')) {
-                    $('input[type="checkbox"]').attr("checked", "true");
-                } else {
-                    $('input[type="checkbox"]').removeAttr("checked");
-                }
-            });
-            //增加一行
-            $('#add').click(function () {
-                $('#tab1 tr').eq(2).clone(true).appendTo("#tab1");
-            });
 
-            //删除最后一行
-            $('#delete').click(function () {
-                $('table tr:last').remove();
-            });
-            //$('#deleteone').click(function () {
-            //   $('input[type="checkbox"]');
-            //});
-            // $(function(){
-            //    $("input[type='button']").click(function() {
-            //       $("input[id=\"cha\"]:checked").each(function() { // 遍历选中的checkbox
-            //           n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
-            //            $("table#test_table").find("tr:eq("+n+")").remove();
-            //        });
-            //    });
-            // });
-        })
 
     </script>
 
@@ -159,7 +83,32 @@
     <![endif]-->
 
 </head>
+<script type="text/javascript">
+    $(function(){
+        //实现全选与反选 var ids=[];
+        $("#allAndNotAll").click(function() {
+            if (this.checked){
+                $("input[name='items']:checkbox").each(function(){
+                    $(this).attr("checked", true);
+                });
+            } else {
+                $("input[name='items']:checkbox").each(function() {
+                    $(this).attr("checked", false);
+                });
+            }
+        });
+        //获取被选中的id
 
+        $('#getAllSelectedId').click(function(){
+            var ids=new Array();
+            $("input[name='items']:checked").each(function(){
+                ids.push($(this).attr("id"));
+            });
+            var chk_value=ids.join(",");
+            location.href = "<%=basePath%>/user/deletemanyteacher.do?chk_value="+chk_value;
+        });
+    });
+</script>
 <body>
 
 <div id="wrapper">
@@ -241,7 +190,7 @@
                     <thead>
                     <tr>
                         <th colspan="7"><button class="line btn btn-primary btn-sm" id="teacheradd">添加老师</button>
-                            &nbsp;&nbsp;&nbsp; <button class="line btn btn-primary btn-sm" >批量删除</button></th>
+                            &nbsp;&nbsp;&nbsp; <button class="line btn btn-primary btn-sm" id="getAllSelectedId" >批量删除</button></th>
                     </tr>
                     <tr>
                         <td ><input type="checkbox" id="allAndNotAll" />全选/反选</td>
@@ -256,7 +205,7 @@
                     <tbody>
                     <c:forEach items="${requestScope.teachers}" var="ts">
                         <tr class="text-center">
-                            <td><input type="checkbox" name=items id="${ts.id}"/></td>
+                            <td><input type="checkbox" name="items" id="${ts.id}"/></td>
                             <td>${ts.username}</td>
                             <td>${ts.major}</td>
                             <td>${ts.level}</td>
@@ -443,12 +392,6 @@
     })*/
     //点击新增按钮弹出模态框。
     $("#teacheradd").click(function () {
-        //清除表单数据（表单完整重置（表单的数据，表单的样式））
-        //reset_form("#empAddModal form");
-        //s$("")[0].reset();
-        //发送ajax请求，查出部门信息，显示在下拉列表中
-        // getDepts("#empAddModal select");
-        //弹出模态框
         $("#tchadd").modal({
             backdrop: "static"
         });
@@ -507,14 +450,8 @@
 
 <!-- jQuery -->
 <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
 <script src="<%=basePath%>/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
 <script src="<%=basePath%>/vendor/metisMenu/metisMenu.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
 
 </html>

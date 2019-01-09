@@ -92,5 +92,20 @@ examMapper.insertRandJudge(judges);
         return examMapper.DetilsExam(studentid,examid);
     }
 
+    @Override
+    public void DeletePaperChoice(int examid) {
+     examMapper.DeletePaperChoice(examid);
+    }
+
+    @Override
+    public void DeletePaperJudge(int examid) {
+examMapper.DeletePaperJudge(examid);
+    }
+
+    @Override
+    public void DeleteExamInfo(int examid) {
+     examMapper.DeleteExamInfo(examid);
+    }
+
 
 }

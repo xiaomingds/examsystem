@@ -97,15 +97,26 @@
                         <a href=""><i class="fa fa-table fa-fw"></i>考试管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<%=basePath%>/exam/examall.do">查看考试信息</a>
+                                <a href="<%=basePath%>/exam/allexam.do">查看考试信息</a>
                             </li>
                             <li>
-                                <a href=<%=basePath%>/exam/addexam.do>创建新考试</a>
+                                <a href=<%=basePath%>/exam/adminaddexam.do>创建新考试</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/admin/findstuscore.do">学生成绩查询</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
+                        <a href=""><i class="fa fa-table fa-fw"></i>基础信息<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                   <a href="<%=basePath%>/basic/allsemester.do">学生信息</a>
+                            </li>
+                             <li>
+                                  <a href="<%=basePath%>/basic/alldepart.do">院系信息</a>
+                            </li>
+                        </ul>
                     </li>
 
 

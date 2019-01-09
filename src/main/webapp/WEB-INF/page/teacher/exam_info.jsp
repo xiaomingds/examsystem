@@ -28,29 +28,7 @@
     <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
     <script src="<%=basePath%>/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <%--<style>--%>
-        <%--table{--%>
-            <%--border: 1px solid black;--%>
-            <%--border-collapse: collapse;--%>
-            <%--width: 500px;--%>
-        <%--}--%>
-        <%--table th {--%>
-            <%--border: 1px solid black;--%>
-            <%--width: 10%;--%>
-        <%--}--%>
-        <%--table td {--%>
-            <%--align-items: center;--%>
-            <%--border: 1px solid black;--%>
-            <%--width: 10%;--%>
-        <%--}--%>
 
-        <%--table th {--%>
-            <%--background-color: #c6d0e9;--%>
-        <%--}--%>
-    <%--</style>--%>
-
-
-    <!-- Bootstrap Core CSS -->
     <link href="<%=basePath%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
@@ -62,9 +40,6 @@
     <!-- Custom Fonts -->
     <link href="<%=basePath%>/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
     <script src="<%=basePath%>/vendor/js/123.js"></script>
     <script src="<%=basePath%>/vendor/js/456.js"></script>
     <![endif]-->
@@ -157,6 +132,7 @@
             </div>
             <!-- /.sidebar-collapse -->
         </div>
+    </nav>
     <div id="page-wrapper">
         <br>
         <br>
@@ -177,7 +153,8 @@
             </tr>
 <c:forEach items="${examInfo}" var="ex">
             <tr>
-                <td><a href="check_exam_score.html">${ex.examname}</a></td>
+                <%--<td><a href="check_exam_score.html">${ex.examname}</a></td>--%>
+                <td>${ex.examname}</td>
                 <td>${ex.begindate}-${ex.enddate}</td>
                 <td>${ex.examtime}</td>
                 <c:choose>
@@ -202,9 +179,9 @@
                 </c:choose>
                 <td>${ex.teacher}</td>
                 <td >
-                    <input  class="btn btn-outline btn-primary" type="button" value="查看详情"  data-toggle="modal" data-target="#myModa_n" >
-                    <input  class="btn btn-outline btn-primary" type="button" value="编辑"  data-toggle="modal" data-target="#myModa_n" >
-                    <input  class="btn btn-outline btn-primary" type="button" value="删除"  >
+                    <input  class="btn btn-outline btn-primary" type="button" value="查看详情"  onclick = "window.location.href = '<%=basePath%>/exam/detail.do?examid=${ex.id}'" >
+                    <%--<input  class="btn btn-outline btn-primary" type="button" value="编辑"  data-toggle="modal" data-target="#myModa_n" >--%>
+                    <input  class="btn btn-outline btn-primary" type="button" value="删除"  onclick="trash(${ex.id})" data-toggle="modal" data-target="#trashModal">
                 </td>
             </tr>
 </c:forEach>
@@ -261,28 +238,28 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- 删除的模态框 -->
-    <div class="modal fade" id="trashModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- 模糊框头部 -->
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
-                    </button>
-                    <h4 class="modal-title">删除！</h4>
-                </div>
-                <!-- 模糊框主体 -->
-                <div class="modal-body">
-                    <strong>你确定要删除吗？</strong>
-                </div>
-                <!-- 模糊框底部 -->
-                <div class="modal-footer">
-                    <button type="button" class="delSure btn btn-info" data-dismiss="modal">确定</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+        <div class="modal fade" id="trashModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- 模糊框头部 -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                        </button>
+                        <h4 class="modal-title">删除！</h4>
+                    </div>
+                    <!-- 模糊框主体 -->
+                    <div class="modal-body">
+                        <strong>你将删除此次考试的全部信息！</strong>
+                    </div>
+                    <!-- 模糊框底部 -->
+                    <div class="modal-footer">
+                        <button type="button" class="delSure btn btn-info" data-dismiss="modal">确定</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
 
 </div>
 <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
@@ -293,13 +270,13 @@
 <script>
 
     //删除
-    function trash(id) {
+    function trash(examid) {
         if (!id) {
             alert("error");
         } else {
             $(".delSure").click(function () {
                 $.ajax({
-                    url: '<%=basePath%>/teacher/deleteexam.do?id=' + id,
+                    url: '<%=basePath%>/exam/deleteexam.do?examid=' + examid,
                     type: 'POST',
                     success: function (data) {
                         $("body").html(data);

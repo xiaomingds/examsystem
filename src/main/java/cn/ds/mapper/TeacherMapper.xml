@@ -21,4 +21,9 @@
             password= #{password}
         where id = #{id}
     </update>
+    <!--批量删除老师-->
+    <delete id="deleteManyTeacher" parameterType="String">
+        delete from teacher where id in
+        (${_parameter})
+    </delete>
 </mapper>

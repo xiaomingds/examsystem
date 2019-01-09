@@ -46,4 +46,15 @@
     <delete id="DeleteYear" parameterType="Long">
         DELETE FROM semester WHERE seid=#{seid}
     </delete>
+
+
+    <select id="AllDepart"  resultType="Depart">
+        select * from depart
+    </select>
+    <delete id="deleteDepart" parameterType="int">
+        DELETE FROM depart WHERE id=#{id}
+    </delete>
+    <insert id="InsertDepart" parameterType="Depart">
+        insert into depart(depart) values (#{depart})
+    </insert>
 </mapper>

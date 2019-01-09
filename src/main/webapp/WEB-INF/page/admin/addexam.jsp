@@ -78,7 +78,6 @@
         </li>
         <!-- /.dropdown -->
     </ul>
-    <!-- /.navbar-top-links -->
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
@@ -89,49 +88,47 @@
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>题库<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<%=basePath%>/tea_tk/tea_findallchoice.do">选择题查询</a>
+                            <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
                         </li>
                         <li>
-                            <a href="<%=basePath%>/tea_tk/tea_blankall.do">判断题查询</a>
+                            <a href="<%=basePath%>/tk/alljudge.do">判断题查询</a>
                         </li>
-                        <%--<li>--%>
-                        <%--<a href="<%=basePath%>/tea_tk/tea_allReadFill.do">程序填空查询</a>--%>
                         <%--</li>--%>
                         <%--<li>--%>
-                        <%--<a href="<%=basePath%>/tea_tk/tea_allReadProgram.do">读程序写结果查询</a>--%>
+                        <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>
+                        <%--</li>--%>
+                        <%--<li>--%>
+                        <%--<a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>--%>
                         <%--</li><li>--%>
-                        <%--<a href="<%=basePath%>/tea_tk/allPgDesign.do">程序设计查询</a>                        </li>--%>
+                        <%--<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>--%>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
+                </li>
+                <li>
+                    <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
+                </li>
+                <li>
+                    <a href=""><i class="fa fa-table fa-fw"></i>考试管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="<%=basePath%>/exam/allexam.do">查看考试信息</a>
+                        </li>
+                        <li>
+                            <a href=<%=basePath%>/exam/adminaddexam.do>创建新考试</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
+                </li>
 
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href=""><i class="fa fa-table fa-fw"></i>考试<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="<%=basePath%>/exam/examall.do">查看考试信息</a>
-                        </li>
-                        <li>
-                            <a href=<%=basePath%>/exam/addexam.do>创建新考试</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>学生<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="<%=basePath%>/teacher/stuinfo.do">学生信息查询</a>
-                        </li>
-                        <li>
-                            <a href="<%=basePath%>/teacher/findstuscore.do">学生成绩查询</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
+
             </ul>
         </div>
-        <!-- /.sidebar-collapse -->
     </div>
 </nav>
 <br>
@@ -140,7 +137,7 @@
     <div class="container">
         <div class="row clearfix">
             <div class="col-md-12 column">
-                <form class="form-horizontal" role="form" id="examPaperAction" action="<%=basePath%>/exam/examadd.do" method="post">
+                <form class="form-horizontal" role="form" id="examPaperAction" action="<%=basePath%>/exam/adminexamadd.do" method="post">
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">试卷名称</label>
                         <div class="col-sm-3">

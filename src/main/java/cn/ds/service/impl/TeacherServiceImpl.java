@@ -16,7 +16,10 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherMapper.login(username);
     }
 
-
+    @Override
+    public void deleteManyTeacher(String chk_value) {
+        teacherMapper.deleteManyTeacher(chk_value);
+    }
 
 
 }

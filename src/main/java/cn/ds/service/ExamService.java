@@ -25,7 +25,9 @@ public interface ExamService {
     List<ExamHistory> ByStudentid(int studentid);
     List<ExamInformation> AlreadExam(List<Long>longList);
     ExamHistory DetilsExam(int studentid,int examid);
-
+    void DeletePaperChoice(int examid);
+    void DeletePaperJudge(int examid);
+    void DeleteExamInfo(int examid);
 //    List<WrongAnswer>WrongChoice(int studentid);
 //    List<WrongAnswer>WrongJudge(int studentid);
 

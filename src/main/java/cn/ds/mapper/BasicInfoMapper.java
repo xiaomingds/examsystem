@@ -19,4 +19,9 @@ public interface BasicInfoMapper {
    void DeleteClass(String cname);
     void DeleteMajor(Long maid);
     void DeleteYear(Long seid);
+
+    List<Depart> AllDepart();
+    void InsertDepart(Depart depart);
+    void deleteDepart(int id);
+
 }
