@@ -1,9 +1,6 @@
 package cn.ds.service;
 
-import cn.ds.pojo.BasicInfo.Blass;
-import cn.ds.pojo.BasicInfo.Depart;
-import cn.ds.pojo.BasicInfo.Major;
-import cn.ds.pojo.BasicInfo.Semester;
+import cn.ds.pojo.BasicInfo.*;
 import cn.ds.pojo.Student;
 
 import java.util.List;
@@ -27,4 +24,10 @@ public interface BasicInfoService {
     List<Depart> AllDepart();
     void InsertDepart(Depart depart);
     void deleteDepart(int id);
+    void updateDepart(Depart depart);
+
+    List<Sit> AllSit();
+    void InsertSit(Sit sit);
+    void deleteSit(int id);
+    void updateSit(Sit sit);
 }

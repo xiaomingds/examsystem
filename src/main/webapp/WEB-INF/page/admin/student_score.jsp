@@ -60,6 +60,7 @@
             </li>
             <!-- /.dropdown -->
         </ul>
+
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -88,13 +89,13 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点<span class="fa arrow"></span></a>
                     </li>
                     <li>
                         <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-table fa-fw"></i>考试管理<span class="fa arrow"></span></a>
+                        <a href=""><i class="fa fa-table fa-fw"></i>考试管理</a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="<%=basePath%>/exam/allexam.do">查看考试信息</a>
@@ -108,7 +109,18 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
+                        <a href=""><i class="fa fa-wrench fa-fw"></i>基础信息</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/basic/allsemester.do">学生信息</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/basic/alldepart.do">院系信息</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/basic/allsit.do">职称信息</a>
+                            </li>
+                        </ul>
                     </li>
 
 
@@ -120,12 +132,12 @@
         <br>
         <h2 >学生成绩查询：</h2>
         &nbsp;&nbsp;&nbsp;
-        <div class="input-group col-md-4" style="margin-top:0px positon:relative">
-            <input type="text" class="form-control"placeholder="请输入姓名或学号" id="username"/ >
-            <span id="tishi"></span>
+        <div class="input-group col-md-4" style="margin-top:0px;positon:relative">
+            <input type="text" class="form-control" placeholder="请输入姓名或学号" id="username" > <span id="tishi"></span>
             <span class="input-group-btn">
                <button class="btn btn-info btn-search" onclick="findstu()" id="btu">查找</button>
             </span>
+
         </div>
         <br>
         <br>
@@ -149,7 +161,6 @@
     function findstu() {
             $("#tab1 tbody").html("");
         var name = document.getElementById("username").value;
-        $("#tishi").attr("style","display:none;");
         if((name.length >4 &&name.length <10)||name.length > 10){
             document.getElementById("tishi").innerHTML="<font color='red'>请输入正确的学号或姓名</font>";
         }

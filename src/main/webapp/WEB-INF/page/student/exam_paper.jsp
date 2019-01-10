@@ -75,7 +75,7 @@
                     <td valign="top">
                         <div class="tm_paper">
                             <div class="tm_paper_head">
-                                <h5 style="background:#a6b4cd; color: #ffffff; padding:15px 0; font-size:14px; font-weight:bold" >
+                                <h5 style="background:#a6b4cd; color: #ffffff; padding:15px 0; font-size:14px; font-weight:bold; text-align: center" >
                                   ${examinfo.examname}
                                 </h5>
                                 <h5>

@@ -140,7 +140,7 @@
             </li>
             <!-- /.dropdown -->
         </ul>
-        <!-- /.navbar-top-links -->
+
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -154,30 +154,56 @@
                                 <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/tk/blankall.do">填空题查询</a>
+                                <a href="<%=basePath%>/tk/alljudge.do">判断题查询</a>
                             </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>--%>
+                            <%--</li><li>--%>
+                            <%--<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>--%>
                             </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>
-                            </li><li>
-<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点<span class="fa arrow"></span></a>
                     </li>
                     <li>
                         <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/teacher/allexam.do"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
+                        <a href=""><i class="fa fa-table fa-fw"></i>考试管理</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/exam/allexam.do">查看考试信息</a>
+                            </li>
+                            <li>
+                                <a href=<%=basePath%>/exam/adminaddexam.do>创建新考试</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/admin/findstuscore.do">学生成绩查询</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
+                        <a href=""><i class="fa fa-wrench fa-fw"></i>基础信息</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/basic/allsemester.do">学生信息</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/basic/alldepart.do">院系信息</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/basic/allsit.do">职称信息</a>
+                            </li>
+                        </ul>
                     </li>
+
+
                 </ul>
             </div>
         </div>
@@ -252,19 +278,16 @@
                                     <label class="col-sm-2 control-label">系别</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" id="major" name="major">
-                                            <option value="计算机科学与技术">计算机科学与技术</option>
-                                            <option value="软件工程">软件工程</option>
+
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label class="col-sm-2 control-label">职称</label>
                                     <div class="col-sm-5">
+
                                         <select class="form-control" id="level" name="level">
-                                            <option value="助教">助教</option>
-                                            <option value="讲师">讲师</option>
-                                            <option value="副教授">副教授</option>
-                                            <option value="教授">教授</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -339,9 +362,6 @@
                                     <label class="col-sm-2 control-label">系别</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" id="upmajor" name="major">
-                                            <option value="软件工程">软件工程</option>
-                                            <option value="计算机科学与技术">计算机科学与技术</option>
-                                            <option value="大数据">大数据</option>
                                         </select>
                                     </div>
                                 </div>
@@ -349,10 +369,6 @@
                                     <label class="col-sm-2 control-label">职称</label>
                                     <div class="col-sm-5">
                                         <select class="form-control" id="uplevel" name="level">
-                                            <option value="助教">助教</option>
-                                            <option value="讲师">讲师</option>
-                                            <option value="副教授">副教授</option>
-                                            <option value="教授">教授</option>
                                         </select>
                                     </div>
                                 </div>
@@ -392,6 +408,25 @@
     })*/
     //点击新增按钮弹出模态框。
     $("#teacheradd").click(function () {
+        $.ajax({
+            url: '<%=basePath%>/basic/sit.do',
+            type: 'POST',
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#level").append("<option value='" + data[i].sit + "'>" + data[i].sit + "</option>");
+                }
+            }
+        });
+
+        $.ajax({
+            url: '<%=basePath%>/basic/depart.do',
+            type: 'POST',
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#major").append("<option value='" + data[i].depart + "'>" + data[i].depart + "</option>");
+                }
+            }
+        });
         $("#tchadd").modal({
             backdrop: "static"
         });
@@ -416,6 +451,25 @@
 
     // 编辑信息的方法
     function edit(id) {
+        $.ajax({
+            url: '<%=basePath%>/basic/sit.do',
+            type: 'POST',
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#uplevel").append("<option value='" + data[i].sit + "'>" + data[i].sit + "</option>");
+                }
+            }
+        });
+
+        $.ajax({
+            url: '<%=basePath%>/basic/depart.do',
+            type: 'POST',
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#upmajor").append("<option value='" + data[i].depart + "'>" + data[i].depart + "</option>");
+                }
+            }
+        });
         if (!id) {
             alert("error");
         } else {

@@ -1,10 +1,7 @@
 package cn.ds.service.impl;
 
 import cn.ds.mapper.BasicInfoMapper;
-import cn.ds.pojo.BasicInfo.Blass;
-import cn.ds.pojo.BasicInfo.Depart;
-import cn.ds.pojo.BasicInfo.Major;
-import cn.ds.pojo.BasicInfo.Semester;
+import cn.ds.pojo.BasicInfo.*;
 import cn.ds.pojo.Student;
 import cn.ds.service.BasicInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +88,31 @@ public class BasicInfoImpl implements BasicInfoService {
     @Override
     public void deleteDepart(int id) {
        basicInfoMapper.deleteDepart(id);
+    }
+
+    @Override
+    public void updateDepart(Depart depart) {
+         basicInfoMapper.updateDepart(depart);
+    }
+
+    @Override
+    public List<Sit> AllSit() {
+        return basicInfoMapper.AllSit();
+    }
+
+    @Override
+    public void InsertSit(Sit sit) {
+     basicInfoMapper.InsertSit(sit);
+    }
+
+    @Override
+    public void deleteSit(int id) {
+ basicInfoMapper.deleteSit(id);
+    }
+
+    @Override
+    public void updateSit(Sit sit) {
+basicInfoMapper.updateSit(sit);
     }
 
 

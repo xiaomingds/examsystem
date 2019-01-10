@@ -144,31 +144,56 @@
                                 <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/tk/blankall.do">填空题查询</a>
+                                <a href="<%=basePath%>/tk/alljudge.do">判断题查询</a>
                             </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>--%>
+                            <%--</li><li>--%>
+                            <%--<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>--%>
                             </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>
-                            </li><li>
-                            <a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>
-                        </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点<span class="fa arrow"></span></a>
                     </li>
                     <li>
                         <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/teacher/allexam.do"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
+                        <a href=""><i class="fa fa-table fa-fw"></i>考试管理</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/exam/allexam.do">查看考试信息</a>
+                            </li>
+                            <li>
+                                <a href=<%=basePath%>/exam/adminaddexam.do>创建新考试</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/admin/findstuscore.do">学生成绩查询</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
+                        <a href=""><i class="fa fa-wrench fa-fw"></i>基础信息</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/basic/allsemester.do">学生信息</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/basic/alldepart.do">院系信息</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/basic/allsit.do">职称信息</a>
+                            </li>
+                        </ul>
                     </li>
+
+
                 </ul>
             </div>
         </div>

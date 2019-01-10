@@ -87,7 +87,7 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-table fa-fw"></i>考试<span class="fa arrow"></span></a>
+                        <a href=""><i class="fa fa-table fa-fw"></i>考试</a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="<%=basePath%>/exam/examall.do">查看考试信息</a>

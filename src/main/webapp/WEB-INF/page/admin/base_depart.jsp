@@ -34,7 +34,7 @@
         table{
             border: 1px solid black;
             border-collapse: collapse;
-            width: 500px;
+            width: 300px;
             text-align: center;
         }
         table th {
@@ -144,30 +144,56 @@
                                 <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/tk/blankall.do">填空题查询</a>
+                                <a href="<%=basePath%>/tk/alljudge.do">判断题查询</a>
                             </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>--%>
+                            <%--</li><li>--%>
+                            <%--<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>--%>
                             </li>
-                            <li>
-                                <a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>
-                            </li><li>
-                            <a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>                        </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点<span class="fa arrow"></span></a>
                     </li>
                     <li>
                         <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/teacher/allexam.do"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
+                        <a href=""><i class="fa fa-table fa-fw"></i>考试管理</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/exam/allexam.do">查看考试信息</a>
+                            </li>
+                            <li>
+                                <a href=<%=basePath%>/exam/adminaddexam.do>创建新考试</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/admin/findstuscore.do">学生成绩查询</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
+                        <a href=""><i class="fa fa-wrench fa-fw"></i>基础信息</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/basic/allsemester.do">学生信息</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/basic/alldepart.do">院系信息</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/basic/allsit.do">职称信息</a>
+                            </li>
+                        </ul>
                     </li>
+
+
                 </ul>
             </div>
         </div>
@@ -181,28 +207,29 @@
         <table border="1" class="table table-bordered" id = "tab1">
             <thead>
             <tr>
-                <th colspan="4">专业设置</th>
+                <th colspan="4">院系设置</th>
             </tr>
             </thead>
 
             <tr>
                 <th>院系</th>
-                <th>操作</th>
+                <th>操作&nbsp;
+                     &nbsp;<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >
+                </th>
             </tr>
             <c:forEach items="${depart}" var="ma">
                 <tr>
-                    <td style="margin-top: 50%"  ><a href="<%=basePath%>/basic/allclass.do?maid=${ma.id}">${ma.depart}</a></td>
-                    <td >
-                        <%--<input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="编辑" data-toggle="modal" data-target="#myModal" >--%>
+                    <td style="margin-top: 50%"  >${ma.depart}</td>
+                    <td ><input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="编辑"  onclick="edit('${ma.depart}','${ma.id}')">
                         <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deletemajor('${ma.id}') " data-toggle="modal" data-target="#trashModal" >
                     </td>
                 </tr>
             </c:forEach>
         </table>
-        <div align="center">
-            <input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >
-            <%--<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="todelete()"/>--%>
-        </div>
+        <%--<div align="center">--%>
+            <%--<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >--%>
+            <%--&lt;%&ndash;<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="todelete()"/>&ndash;%&gt;--%>
+        <%--</div>--%>
         <br>
     </div>
     <!-- 删除的模态框 -->
@@ -230,24 +257,27 @@
     <!-- 编辑-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
+            <form action="<%=basePath%>/basic/updepart.do" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">专业更改</h4>
+                    <h4 class="modal-title" id="myModalLabel">院系更改</h4>
                 </div>
+                <input name="id" id="id"   hidden="hidden"/>
                 <div class="modal-body" style="text-align:left">
 
                     <div class="form-group input-group">
-                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入更改后的专业:</span>
-                        <input type="text" style="height: 40px " class="form-control">
+                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入更改后的院系:</span>
+                        <input type="text" style="height: 40px " class="form-control" name="depart" id="depart">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
-                    <button type="button"  class="btn btn-outline btn-primary">确定</button>
+                    <button type="submit"  class="btn btn-outline btn-primary">确定</button>
 
                 </div>
             </div>
+            </form>
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
@@ -306,6 +336,12 @@
 
 </body>
 <script>
+    function edit(depart,id) {
+        console.log("编辑都depart" + depart);
+        $("#depart").val(depart);
+        $("#id").val(id);
+        $("#myModal").modal('show');
+    }
     function deletemajor(id) {
         console.log("删除的班级" + id);
         $(".delSure").click(function () {

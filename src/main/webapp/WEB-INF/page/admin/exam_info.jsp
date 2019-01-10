@@ -28,8 +28,6 @@
     <link rel="stylesheet" href="<%=basePath%>/vendor/bootstrap/css/bootstrap.min.css">
     <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
     <script src="<%=basePath%>/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    >
     <link href="<%=basePath%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
@@ -59,6 +57,7 @@
             <a class="navbar-brand" href="#">C语言在线考试系统</a>
         </div>
         <!-- /.navbar-header -->
+
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -87,13 +86,13 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
+                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点<span class="fa arrow"></span></a>
                     </li>
                     <li>
                         <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-table fa-fw"></i>考试管理<span class="fa arrow"></span></a>
+                        <a href=""><i class="fa fa-table fa-fw"></i>考试管理</a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="<%=basePath%>/exam/allexam.do">查看考试信息</a>
@@ -101,10 +100,24 @@
                             <li>
                                 <a href=<%=basePath%>/exam/adminaddexam.do>创建新考试</a>
                             </li>
+                            <li>
+                                <a href="<%=basePath%>/admin/findstuscore.do">学生成绩查询</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>
+                        <a href=""><i class="fa fa-wrench fa-fw"></i>基础信息</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<%=basePath%>/basic/allsemester.do">学生信息</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/basic/alldepart.do">院系信息</a>
+                            </li>
+                            <li>
+                                <a href="<%=basePath%>/basic/allsit.do">职称信息</a>
+                            </li>
+                        </ul>
                     </li>
 
 

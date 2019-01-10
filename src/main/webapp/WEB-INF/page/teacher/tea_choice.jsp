@@ -17,7 +17,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,8 +24,6 @@
     <meta name="author" content="">
 
     <title>教师首页</title>
-
-
     <!-- Bootstrap Core CSS -->
     <link href="<%=basePath%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -41,11 +38,7 @@
     <script language="javascript" type="text/javascript" src="<%=basePath%>/vendor/js/editTable.js"></script>
     <!-- Custom Fonts -->
     <link href="<%=basePath%>/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
 
-    <![endif]-->
 
 </head>
 <style>
@@ -95,6 +88,7 @@
             </li>
             <!-- /.dropdown -->
         </ul>
+
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -108,7 +102,7 @@
                                 <a href="<%=basePath%>/tea_tk/tea_findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/tea_tk/tea_blankall.do">判断题查询</a>
+                                <a href="<%=basePath%>/tea_tk/alljudge.do">判断题查询</a>
                             </li>
                             <%--<li>--%>
                             <%--<a href="<%=basePath%>/tea_tk/tea_allReadFill.do">程序填空查询</a>--%>

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 小鸣ds
-  Date: 2018/12/11
-  Time: 8:40
+  Date: 2019/1/10
+  Time: 11:26
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -34,14 +34,13 @@
         table{
             border: 1px solid black;
             border-collapse: collapse;
-            width: 500px;
+            width: 300px;
             text-align: center;
         }
         table th {
             border: 1px solid black;
             width: 2%;
             text-align: center;
-
         }
         table td {
             align-items: center;
@@ -50,55 +49,7 @@
             text-align: center;
         }
     </style>
-    <script>
-        //批量删除
-        function getCheckAdIds() {
-            var chk_value = new Array();
-            $("input:checkbox[name=check_name]:checked").each(function(i){
-                    console.log("xuanzhong"+ $(this).val())
-                    chk_value.push($(this).val());
-            });
-            location.href = "<%=basePath%>/basic/deletesemester.do?chk_value=" + chk_value;
-            alert(chk_value);
-        }
 
-         $(function () {
-            //设置 所有 td 居中
-            $('table td').attr("align","center");
-            //为每一个确定按钮设置点击事件
-            $('input[value="确定"]').click(function () {
-                /*通过parents方法获取<确定>按钮的父容器tr
-                 再为 tr中的每一个text设置function
-                 */
-                var ttr=$(this).parents("tr");
-                ttr.find('input[type="text"]').each(function () {
-                    var inputVal = $(this).val();
-                    $(this).parents('td').html(inputVal);
-                })
-            });
-            //全选/反选
-            $('#cha').click(function () {
-                //判断checkbox是否选中
-                if($(this).is(':checked')){
-                    $('input[type="checkbox"]').attr("checked","true");
-                }else{
-                    $('input[type="checkbox"]').removeAttr("checked");
-                }
-            });
-            $('#deleteone').click(function () {
-              $('input[type="checkbox"]');
-            });
-            $(function(){
-               $("input[type='button']").click(function() {
-                  $("input[id=\"cha\"]:checked").each(function() { // 遍历选中的checkbox
-                      n = $(this).parents("tr").value;  // 获取checkbox所在行的顺序
-                       alert("zhishi" + n);
-                   });
-               });
-            });
-        })
-
-    </script>
 
     <!-- Bootstrap Core CSS -->
     <link href="<%=basePath%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -112,6 +63,9 @@
     <!-- Custom Fonts -->
     <link href="<%=basePath%>/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
     <script src="<%=basePath%>/vendor/js/123.js"></script>
     <script src="<%=basePath%>/vendor/js/456.js"></script>
     <![endif]-->
@@ -121,6 +75,8 @@
 <body>
 
 <div id="wrapper">
+
+    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -142,11 +98,12 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="../login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
             </li>
+            <!-- /.dropdown -->
         </ul>
 
         <div class="navbar-default sidebar" role="navigation">
@@ -215,6 +172,7 @@
                 </ul>
             </div>
         </div>
+        <!-- /.navbar-static-side -->
     </nav>
 
     <!-- Page Content -->
@@ -224,90 +182,120 @@
         <table border="1" class="table table-bordered" id = "tab1">
             <thead>
             <tr>
-                <th colspan="4">学年设置</th>
+                <th colspan="4">职称信息</th>
             </tr>
             </thead>
+
             <tr>
-                <th>入学时间</th>
-                <th>操作</th>
+                <th>职称</th>
+                <th>操作&nbsp;
+                    &nbsp;<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >
+                </th>
             </tr>
-            <c:forEach items="${semester}" var="se">
-            <tr>
-                <td style="margin-top: 50%"  ><a href="<%=basePath%>/basic/allmajor.do?seid=${se.seid}">${se.sename}</a></td>
-                <td >
-                    <input style="width: 25%" class="btn btn-outline btn-primary"type="button" value="编辑" data-toggle="modal" data-target="#myModal" >
-                    <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deleteyear(${se.seid})" >
-                </td>
-            </tr>
+            <c:forEach items="${sit}" var="ma">
+                <tr>
+                    <td style="margin-top: 50%"  >${ma.sit}</td>
+                    <td ><input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="编辑"  onclick="edit('${ma.sit}','${ma.id}')">
+                        <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deletemajor('${ma.id}') " data-toggle="modal" data-target="#trashModal" >
+                    </td>
+                </tr>
             </c:forEach>
         </table>
-        <div align="center">
-            <input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增" data-toggle="modal" data-target="#myModa_n">
-            <%--<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="getCheckAdIds()"/>--%>
-        </div>
+        <%--<div align="center">--%>
+        <%--<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >--%>
+        <%--&lt;%&ndash;<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="todelete()"/>&ndash;%&gt;--%>
+        <%--</div>--%>
         <br>
-
     </div>
-    <!--编辑模态框-->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- 删除的模态框 -->
+    <div class="modal fade" id="trashModal">
         <div class="modal-dialog">
-
-            <form action="<%=basePath%>/basic/insertse.do" method="post">
             <div class="modal-content">
+                <!-- 模糊框头部 -->
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">年级更改</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title">删除！</h4>
                 </div>
-                <div class="modal-body" style="text-align:left">
-                    <div class="form-group input-group">
-                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入更改后的年级：</span>
-                        <input type="text" style="height: 40px" class="form-control">
-                    </div>
-
+                <!-- 模糊框主体 -->
+                <div class="modal-body">
+                    <strong>你确定要删除吗？</strong>
                 </div>
+                <!-- 模糊框底部 -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="submit" class="btn btn-primary">确定</button>
+                    <button type="button" class="delSure btn btn-info" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- 编辑-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="<%=basePath%>/basic/upsit.do" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">职称更改</h4>
+                    </div>
+                    <input name="id" id="id"   hidden="hidden"/>
+                    <div class="modal-body" style="text-align:left">
+
+                        <div class="form-group input-group">
+                            <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入更改后的职称:</span>
+                            <input type="text" style="height: 40px " class="form-control" name="sit" id="sit">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
+                        <button type="submit"  class="btn btn-outline btn-primary">确定</button>
+
+                    </div>
+                </div>
             </form>
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
 
     </div>
-    <!-- /#新增 -->
+    <!-- /#wrapper -->
     <br>
-    <tr class="append-row">
-        <td colspan="5" align="right">
-            <!-- Modal -->
-            <div class="modal fade" id="myModa_n" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <form action="<%=basePath%>/basic/insertse.do" method="post">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabe2" style="text-align:center">添加选项</h4>
-                        </div>
-                        <div class="modal-body" style="text-align:left">
-                            <div class="form-group input-group">
-                                <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入新的年级：</span>
-                                <input type="text" style="height: 40px" class="form-control"  name="sename">
+    <div>
+        <tr class="append-row">
+            <td colspan="5" align="right">
+                <!-- Modal -->
+                <div class="modal fade" id="myModa_n" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form action="<%=basePath%>/basic/addsit.do" method="post">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <%--<input name="seid" id="seid"  value="${seid}" hidden="hidden"/>--%>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabe2" style="text-align:center">添加选项</h4>
+                                </div>
+                                <div class="modal-body" style="text-align:left">
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入院系:</span>
+                                        <input type="text" style="height: 40px " class="form-control" name="sit">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
+                                    <button type="submit"  class="btn btn-outline btn-primary">确定</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="submit" class="btn btn-primary">确定</button>
-                        </div>
+                        </form>
+                        <!-- /.modal-content -->
                     </div>
-                    </form>
-                    <!-- /.modal-content -->
+                    <!-- /.modal-dialog -->
                 </div>
-                <!-- /.modal-dialog -->
-            </div>
-        </td>
-    </tr>
+            </td>
+        </tr>
+    </div>
+
+
 </div>
+<!-- /#wrapper -->
 
 <!-- jQuery -->
 <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
@@ -323,30 +311,24 @@
 
 </body>
 <script>
-    function deleteyear(seid) {
-        console.log("删除的学年" + seid);
-        $.ajax({
-            url: '<%=basePath%>/basic/findmaall.do?seid='+seid,
-            type: 'POST',
-            success: function (data) {
-                if (0 != data.length){
-                    alert("请先删除此班级下的所有专业"+data.length);
-                }
-                else {
-                    $.ajax({
-                        url: '<%=basePath%>/basic/deleteyear.do?seid='+ seid,
-                        type: 'POST',
-                        success: function (data) {
-                            location.reload();
-                           // alert("删除成功");
-                        }
-                    });
+    function edit(sit,id) {
+        console.log("编辑都depart" + sit);
+        $("#sit").val(sit);
+        $("#id").val(id);
+        $("#myModal").modal('show');
+    }
+    function deletemajor(id) {
+        console.log("删除的班级" + id);
+        $(".delSure").click(function () {
+            $.ajax({
+                url: '<%=basePath%>/basic/deletesit.do?id='+ id,
+                type: 'POST',
+                contentType: 'application/json;charset=UTF-8',
+                success: function (data) {
                     location.reload();
-                    alert("删除成功");
                 }
-            }
+            });
         });
     }
 </script>
 </html>
-

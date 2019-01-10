@@ -1,9 +1,6 @@
 package cn.ds.controller;
 
-import cn.ds.pojo.BasicInfo.Blass;
-import cn.ds.pojo.BasicInfo.Depart;
-import cn.ds.pojo.BasicInfo.Major;
-import cn.ds.pojo.BasicInfo.Semester;
+import cn.ds.pojo.BasicInfo.*;
 import cn.ds.pojo.Student;
 import cn.ds.service.BasicInfoService;
 import cn.ds.service.StudentService;
@@ -154,6 +151,12 @@ public class BasicifnoController {
         model.addAttribute("depart",departs);
         return "page/admin/base_depart";
     }
+    @ResponseBody
+    @RequestMapping("depart")
+    public List<Depart> Depart(){
+        List<Depart>departs = basicInfoService.AllDepart();
+        return departs;
+    }
     @RequestMapping("adddepart")
     public String AddDepart(Depart depart){
          System.out.println("添加院系" + depart);
@@ -166,6 +169,43 @@ public class BasicifnoController {
         basicInfoService.deleteDepart(id);
         return "redirect:alldepart.do";
     }
+    @RequestMapping("updepart")
+    public String UpDepart(Depart depart){
+        System.out.println("删除院系" + depart.getId());
+        basicInfoService.updateDepart(depart);
+        return "redirect:alldepart.do";
+    }
 
+
+    @RequestMapping("allsit")
+    public  String AllSit(Model model){
+        List<Sit>sits = basicInfoService.AllSit();
+        model.addAttribute("sit",sits);
+        return "page/admin/base_sit";
+    }
+    @ResponseBody
+    @RequestMapping("sit")
+    public List<Sit> Sit(){
+        List<Sit>sits = basicInfoService.AllSit();
+        return sits;
+    }
+    @RequestMapping("addsit")
+    public String AddSit(Sit sit){
+        System.out.println("添加职称" + sit);
+        basicInfoService.InsertSit(sit);
+        return "redirect:allsit.do";
+    }
+    @RequestMapping("deletesit")
+    public String DeleteSit(@RequestParam int id){
+        System.out.println("删除" + id);
+        basicInfoService.deleteSit(id);
+        return "redirect:allsit.do";
+    }
+    @RequestMapping("upsit")
+    public String UpSit(Sit sit){
+        System.out.println("删除院系" + sit.getId());
+        basicInfoService.updateSit(sit);
+        return "redirect:allsit.do";
+    }
 }
 

@@ -1,8 +1,11 @@
 package cn.ds.controller;
 
 import cn.ds.pojo.*;
+import cn.ds.pojo.BasicInfo.Depart;
+import cn.ds.pojo.BasicInfo.Sit;
 import cn.ds.pojo.Tk.Choice;
 import cn.ds.pojo.Tk.ReadProgram;
+import cn.ds.service.BasicInfoService;
 import cn.ds.service.TeacherService;
 import cn.ds.service.UserService;
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,6 +32,8 @@ public class UserController {
     private UserService userService;
      @Autowired
     TeacherService teacherService;
+     @Autowired
+    BasicInfoService basicInfoService;
     // 用户登录
     @RequestMapping(value = "/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {

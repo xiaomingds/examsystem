@@ -57,4 +57,27 @@
     <insert id="InsertDepart" parameterType="Depart">
         insert into depart(depart) values (#{depart})
     </insert>
+    <!-- 更新depart的方法 -->
+    <update id="updateDepart" parameterType="Depart">
+        update depart set
+            depart= #{depart}
+        where id = #{id}
+    </update>
+
+
+    <select id="AllSit"  resultType="Sit">
+        select * from sit
+    </select>
+    <delete id="deleteSit" parameterType="int">
+        DELETE FROM sit WHERE id=#{id}
+    </delete>
+    <insert id="InsertSit" parameterType="Sit">
+        insert into sit(sit) values (#{sit})
+    </insert>
+    <!-- 更新depart的方法 -->
+    <update id="updateSit" parameterType="Sit">
+        update sit set
+            sit= #{sit}
+        where id = #{id}
+    </update>
 </mapper>

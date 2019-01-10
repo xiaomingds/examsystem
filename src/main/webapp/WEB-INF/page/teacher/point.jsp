@@ -60,6 +60,7 @@
             </li>
             <!-- /.dropdown -->
         </ul>
+
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -73,7 +74,7 @@
                                 <a href="<%=basePath%>/tea_tk/tea_findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/tea_tk/tea_blankall.do">判断题查询</a>
+                                <a href="<%=basePath%>/tea_tk/alljudge.do">判断题查询</a>
                             </li>
                             <%--<li>--%>
                             <%--<a href="<%=basePath%>/tea_tk/tea_allReadFill.do">程序填空查询</a>--%>

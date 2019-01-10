@@ -23,5 +23,10 @@ public interface BasicInfoMapper {
     List<Depart> AllDepart();
     void InsertDepart(Depart depart);
     void deleteDepart(int id);
+   void updateDepart(Depart depart);
 
+    List<Sit> AllSit();
+    void InsertSit(Sit sit);
+    void deleteSit(int id);
+    void updateSit(Sit sit);
 }
