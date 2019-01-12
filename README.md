@@ -1,5 +1,5 @@
 # examsystem
-SSM(Bootstrap+Jquery)C语言在线考试系统
+SSM(Bootstrap+Jquery)在线考试系统
 Java版本：1.8   
 数据库：MySQL  
 框架：Spring + Spring MVC + MyBatis  
