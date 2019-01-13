@@ -50,6 +50,21 @@ public class BasicInfoImpl implements BasicInfoService {
     }
 
     @Override
+    public void UpSemester(Semester semester) {
+        basicInfoMapper.UpSemester(semester);
+    }
+
+    @Override
+    public void UpMajor(Major major) {
+basicInfoMapper.UpMajor(major);
+    }
+
+    @Override
+    public void UpBlass(Blass blass) {
+basicInfoMapper.UpBlass(blass);
+    }
+
+    @Override
     public void CreateStudent(Student student) {
         basicInfoMapper.CreateStudent(student);
     }

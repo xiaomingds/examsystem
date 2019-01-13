@@ -174,6 +174,18 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">难度</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="difficulty" name = "difficulty">
+                                <option value="1">热血青铜</option>
+                                <option value="2">不屈白银</option>
+                                <option value="3">英勇黄金</option>
+                                <option value="4">超级王牌</option>
+                                <option value="5">无敌战神</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label  class="col-sm-2 control-label">选择数量</label>
                         <div class="col-sm-5">
                             <input class="form-control" id="choicenum" name="choicenum" type="text"  placeholder="试卷中的试题总量" />

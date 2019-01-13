@@ -44,15 +44,12 @@
         }
 
         table td {
+            text-align: center;
             align-items: center;
             border: 1px solid black;
             width: 14%;
         }
-        table td1 {
-            align-items: center;
-            border: 1px solid black;
-            width:8%;
-        }
+
         table th {
             background-color: #c6d0e9;
         }
@@ -221,7 +218,7 @@
                     </tr>
                     <tr>
                         <td ><input type="checkbox" id="allAndNotAll" />全选/反选</td>
-                        <td>教师姓名</td>
+                        <td >教师姓名</td>
                         <td>院系</td>
                         <td>职称</td>
                         <td>邮箱</td>

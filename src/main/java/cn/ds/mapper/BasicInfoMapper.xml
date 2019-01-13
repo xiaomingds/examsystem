@@ -11,6 +11,24 @@
     <select id="findCiAll" parameterType="Long" resultType="Blass">
         select cid,cname from class where maid = #{maid}
     </select>
+    <!--update操作-->
+    <update id="UpSemester" parameterType="Semester">
+        update semester set
+            sename= #{sename}
+        where seid = #{seid}
+    </update>
+    <update id="UpMajor" parameterType="Major">
+        update major set
+            maname= #{maname}
+        where maid = #{maid}
+    </update>
+    <update id="UpBlass" parameterType="Blass">
+        update class set
+            cname= #{cname}
+        where cid = #{cid}
+    </update>
+
+
     <insert id="CreateSemester" parameterType="Semester">
         insert into semester(sename) values (#{sename})
     </insert>

@@ -44,8 +44,8 @@ public class ExamController {
     @RequestMapping("/examadd") //添加考试
     public  String examadd(ExamInformation examInformation){
         examService.CreateExam(examInformation);
-        List<PaperJudge>paperJudges = examService.RandJudge((long) examInformation.getJudgenum(),examInformation.getChaptertwo());
-        List<PaperChoice>paperChoices = examService.RandChoice((long) examInformation.getChoicenum(),examInformation.getChaptertwo());
+        List<PaperJudge>paperJudges = examService.RandJudge((long) examInformation.getJudgenum(),examInformation.getChaptertwo(),examInformation.getDifficulty());
+        List<PaperChoice>paperChoices = examService.RandChoice((long) examInformation.getChoicenum(),examInformation.getChaptertwo(),examInformation.getDifficulty());
         System.out.println("返回的id" + examInformation.getId());
          for (int i = 0;i<paperChoices.size();i++){
              System.out.println("生成的题目" +paperChoices.get(i).getContent());
@@ -64,8 +64,8 @@ public class ExamController {
     @RequestMapping("/adminexamadd") //添加考试
     public  String Adminexamadd(ExamInformation examInformation){
         examService.CreateExam(examInformation);
-        List<PaperJudge>paperJudges = examService.RandJudge((long) examInformation.getJudgenum(),examInformation.getChaptertwo());
-        List<PaperChoice>paperChoices = examService.RandChoice((long) examInformation.getChoicenum(),examInformation.getChaptertwo());
+        List<PaperJudge>paperJudges = examService.RandJudge((long) examInformation.getJudgenum(),examInformation.getChaptertwo(),examInformation.getDifficulty());
+        List<PaperChoice>paperChoices = examService.RandChoice((long) examInformation.getChoicenum(),examInformation.getChaptertwo(),examInformation.getDifficulty());
         System.out.println("返回的id" + examInformation.getId());
         for (int i = 0;i<paperChoices.size();i++){
             System.out.println("生成的题目" +paperChoices.get(i).getContent());
@@ -138,27 +138,67 @@ public class ExamController {
         Map<Long, Long> map = new HashMap<>();
       List<ExamHistory>examHistories = examService.ByExamId(examid);
         List<Long>longList = new ArrayList<Long>();
+        List<Student>students = new ArrayList<Student>();
         for(int i = 0;i < examHistories.size();i++){
            map.put(examHistories.get(i).getStudentid(),examHistories.get(i).getScore());
             longList.add(examHistories.get(i).getStudentid());
         }
-        List<Student>students = studentService.AllStudent(longList);
-        for(int i = 0;i < examHistories.size();i++){
-            students.get(i).setId(map.get(students.get(i).getId()));
+        if(longList.isEmpty()){
+          students.add(null);
         }
-        Collections.sort(students, new Comparator<Student>(){//按score排序
-            public int compare(Student p1, Student p2) {
-                if(p1.getId() < p2.getId()){
-                    return 1;
-                }
-                if(p1.getId() == p2.getId()){
-                    return 0;
-                }
-                return -1;
+        else {
+            students = studentService.AllStudent(longList);
+            for (int i = 0; i < examHistories.size(); i++) {
+                students.get(i).setId(map.get(students.get(i).getId()));
             }
-        });
+            Collections.sort(students, new Comparator<Student>() {//按score排序
+                public int compare(Student p1, Student p2) {
+                    if (p1.getId() < p2.getId()) {
+                        return 1;
+                    }
+                    if (p1.getId() == p2.getId()) {
+                        return 0;
+                    }
+                    return -1;
+                }
+            });
+        }
         model.addAttribute("student",students);
         return "page/admin/exam_allstudent";
+    }
+    //老师页根据考试id查询所有参加过考试的学生
+    @RequestMapping("/allstuexam")
+    public String AllStuExam(@RequestParam int examid,Model model){
+        Map<Long, Long> map = new HashMap<>();
+        List<ExamHistory>examHistories = examService.ByExamId(examid);
+        List<Long>longList = new ArrayList<Long>();
+        List<Student>students = new ArrayList<Student>();
+        for(int i = 0;i < examHistories.size();i++){
+            map.put(examHistories.get(i).getStudentid(),examHistories.get(i).getScore());
+            longList.add(examHistories.get(i).getStudentid());
+        }
+        if(longList.isEmpty()){
+            students.add(null);
+        }
+        else {
+            students = studentService.AllStudent(longList);
+            for (int i = 0; i < examHistories.size(); i++) {
+                students.get(i).setId(map.get(students.get(i).getId()));
+            }
+            Collections.sort(students, new Comparator<Student>() {//按score排序
+                public int compare(Student p1, Student p2) {
+                    if (p1.getId() < p2.getId()) {
+                        return 1;
+                    }
+                    if (p1.getId() == p2.getId()) {
+                        return 0;
+                    }
+                    return -1;
+                }
+            });
+        }
+        model.addAttribute("student",students);
+        return "page/teacher/exam_allstudent";
     }
     //学生查询
     @RequestMapping("/examallstu")

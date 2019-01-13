@@ -153,7 +153,7 @@
 <c:forEach items="${examInfo}" var="ex">
             <tr>
                 <%--<td><a href="check_exam_score.html">${ex.examname}</a></td>--%>
-                <td>${ex.examname}</td>
+                <td><a href="<%=basePath%>/exam/allstuexam.do?examid=${ex.id}">${ex.examname}</a></td>
                 <td>${ex.begindate}-${ex.enddate}</td>
                 <td>${ex.examtime}</td>
                 <c:choose>
@@ -165,17 +165,15 @@
                     </c:otherwise>
                 </c:choose>
                 <% request.setAttribute("currentTime", new Date()); %>
-                <c:choose>
-                    <c:when test="${ex.enddate < currentTime}">
-                        <td>已结束</td>
-                    </c:when>
-                    <c:when test=" ${ex.enddate >= currentTime && ex.begindate <= currentTime}">
-                        <td>进行中</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>未开始</td>
-                    </c:otherwise>
-                </c:choose>
+                    <c:choose>
+                        <c:when test="${ex.enddate < currentTime}">
+                            <td ><font color="red">已结束</font></td>
+                        </c:when>
+                        <c:when test="${ex.begindate >currentTime }"><td > <font color="yellow">未开始</font></td></c:when>
+                        <c:otherwise>
+                            <td ><font color="green">进行中</font></td>
+                        </c:otherwise>
+                    </c:choose>
                 <td>${ex.teacher}</td>
                 <td >
                     <input  class="btn btn-outline btn-primary" type="button" value="查看详情"  onclick = "window.location.href = '<%=basePath%>/exam/detail.do?examid=${ex.id}'" >

@@ -121,13 +121,16 @@
             </tr>
             </thead>
             <tbody>
+            <% request.setAttribute("currentTime", new Date()); %>
             <c:forEach items="${examInfo}" var="ex">
                 <tr>
-                    <td><c:choose>
+                    <td>
+                        <c:choose>
                         <c:when test="${empty ex.password}">
                             <a href="<%=basePath%>/exam/exampaper.do?examid=${ex.id}">${ex.examname}</a>
                     </c:when>
-                    <c:otherwise>   <a onclick="disp_prompt(${ex.password},${ex.id})">${ex.examname}</a>
+                    <c:otherwise>
+                        <a onclick="disp_prompt(${ex.password},${ex.id})">${ex.examname}</a>
                     </c:otherwise>
                     </c:choose>
                    </td>
@@ -143,13 +146,15 @@
                                    </c:otherwise>
                                  </c:choose>
                             </td>
-                    <% request.setAttribute("currentTime", new Date()); %>
                     <c:choose>
                         <c:when test="${ex.enddate < currentTime}">
                             <td style="color:red">已结束</td>
                         </c:when>
+                        <c:when test="${ex.begindate > currentTime}">
+                            <td style="color:yellow">未开始</td>
+                        </c:when>
                         <c:otherwise>
-                            <td style="color:green">未开始</td>
+                            <td style="color:green">进行中</td>
                         </c:otherwise>
                     </c:choose>
                     <td>${ex.teacher}</td>

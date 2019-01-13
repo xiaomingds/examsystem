@@ -12,8 +12,8 @@ public interface ExamService {
 
     void CreateExam(ExamInformation examInformation);
     List<ExamInformation> AllExam();
-    List<PaperChoice> RandChoice(Long choicenum, String chaptertwo);
-    List<PaperJudge> RandJudge(Long judgenum, String chaptertwo);
+    List<PaperChoice> RandChoice(Long choicenum, String chaptertwo,int difficulty);
+    List<PaperJudge> RandJudge(Long judgenum, String chaptertwo,int difficulty);
     void insertRandChoice(List<PaperChoice> paperChoices);
     void insertRandJudge(List<PaperJudge> paperJudges);
     List<PaperChoice>AllPaperChoice(int examid);

@@ -145,6 +145,31 @@ public class BasicifnoController {
         basicInfoService.DeleteYear(seid);
 
     }
+//    基本信息更新操作
+    @RequestMapping("upse")
+    public String UpSe(Semester semester){
+        System.out.println("更新的学年" + semester.getSeid());
+        basicInfoService.UpSemester(semester);
+        return "redirect:allsemester.do";
+    }
+    @RequestMapping("upma")
+    public String UpMa(Major major,Model model){
+        System.out.println("更新的学年" + major.getSeid());
+        basicInfoService.UpMajor(major);
+        model.addAttribute("seid",major.getSeid());
+        return "redirect:allmajor.do";
+    }
+    @RequestMapping("upcl")
+    public String UpMa(Blass blass,Model model){
+        System.out.println("更新的班级" + blass.getMaid());
+        basicInfoService.UpBlass(blass);
+        model.addAttribute("maid",blass.getMaid());
+        return "redirect:allclass.do";
+    }
+
+
+
+
     @RequestMapping("alldepart")
     public  String AllDepart(Model model){
         List<Depart>departs = basicInfoService.AllDepart();

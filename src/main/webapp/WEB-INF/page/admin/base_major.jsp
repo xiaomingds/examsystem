@@ -213,22 +213,20 @@
 
             <tr>
                 <th>专业</th>
-                <th>操作</th>
+                <th>操作&nbsp;<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="添加"  data-toggle="modal" data-target="#myModa_n" >
+                </th>
             </tr>
             <c:forEach items="${major}" var="ma">
             <tr>
                 <td style="margin-top: 50%"  ><a href="<%=basePath%>/basic/allclass.do?maid=${ma.maid}">${ma.maname}</a></td>
                 <td >
-                    <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="编辑" data-toggle="modal" data-target="#myModal" >
+                    <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="编辑" onclick="edit('${ma.maid}','${ma.maname}','${seid}')" >
                     <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deletemajor(${ma.maid})" >
                 </td>
             </tr>
             </c:forEach>
         </table>
-        <div align="center">
-            <input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >
-            <%--<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="todelete()"/>--%>
-        </div>
+
         <br>
     </div>
 
@@ -236,22 +234,23 @@
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                <form action="<%=basePath%>/basic/upma.do" method="post">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">专业更改</h4>
                 </div>
                 <div class="modal-body" style="text-align:left">
-
+                    <input name="maid" id="maid"   hidden="hidden"/>
+                    <input name="seid" id="seid"   hidden="hidden"/>
                     <div class="form-group input-group">
                         <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入更改后的专业:</span>
-                        <input type="text" style="height: 40px " class="form-control">
+                        <input type="text" style="height: 40px " class="form-control" id="maname" name="maname">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
-                    <button type="button"  class="btn btn-outline btn-primary">确定</button>
-
-                </div>
+                    <button type="submit"  class="btn btn-outline btn-primary">确定</button>
+                </div></form>
             </div>
             <!-- /.modal-content -->
         </div>
@@ -311,6 +310,12 @@
 
 </body>
 <script>
+    function edit(maid,maname,seid) {
+        $("#maid").val(maid);
+        $("#seid").val(seid);
+        $("#maname").val(maname);
+        $("#myModal").modal('show');
+    }
     function deletemajor(maid) {
         console.log("删除的班级" + maid);
         $.ajax({

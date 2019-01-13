@@ -6,7 +6,7 @@
     <!--创建考试-->
     <insert id="CreateExam" parameterType = "ExamInformation" useGeneratedKeys="true" keyProperty="id">
         insert into exam_information(examname,begindate,enddate,password,examtime,teacher,chaptertwo,choicenum,choicescore,
-           judgenum,judgescore)
+           judgenum,judgescore,difficulty)
         values(#{examname},
          #{begindate},
            #{enddate},
@@ -17,17 +17,18 @@
                     #{choicenum},
                     #{choicescore},
                     #{judgenum},
-                    #{judgescore})
+                    #{judgescore},
+                    #{difficulty})
     </insert>
     <select id="AllExam" resultType="ExamInformation">
         select *from exam_information
     </select>
     <!--生成选择题-->
     <select id="RandChoice" resultType="PaperChoice">
-         select content,aoption,boption,coption,doption,answer from tk_choice   where chaptertwo = #{chaptertwo} order by RAND() limit #{choicenum}
+         select content,aoption,boption,coption,doption,answer from tk_choice   where chaptertwo = #{chaptertwo} and  difficulty=#{difficulty} order by RAND() limit #{choicenum}
     </select>
     <select id="RandJudge" resultType="PaperJudge">
-         select content,answer from tk_judge   where chaptertwo = #{chaptertwo} order by RAND() limit #{judgenum}
+         select content,answer from tk_judge   where chaptertwo = #{chaptertwo} and  difficulty=#{difficulty} order by RAND() limit #{judgenum}
     </select>
     <!--批量新增-->
     <insert id="insertRandChoice" parameterType="java.util.List" >

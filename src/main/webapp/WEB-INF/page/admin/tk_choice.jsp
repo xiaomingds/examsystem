@@ -223,9 +223,7 @@
                            data-toggle="modal" data-target="#trashModal">
                             <span class="fa fa-trash-o fa-fw"></span>
                         </a>
-                        <a href="#">
-                            <span class="glyphicon glyphicon-plus" onclick="add()"></span>
-                        </a>
+
                     </td>
                 </tr>
             </c:forEach>

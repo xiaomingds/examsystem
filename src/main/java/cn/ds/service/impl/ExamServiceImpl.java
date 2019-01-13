@@ -26,13 +26,13 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public List<PaperChoice> RandChoice(Long choicenum, String chaptertwo) {
-        return examMapper.RandChoice(choicenum,chaptertwo);
+    public List<PaperChoice> RandChoice(Long choicenum, String chaptertwo,int difficulty) {
+        return examMapper.RandChoice(choicenum,chaptertwo,difficulty);
     }
 
     @Override
-    public List<PaperJudge> RandJudge(Long judgenum, String chaptertwo) {
-        return examMapper.RandJudge(judgenum,chaptertwo);
+    public List<PaperJudge> RandJudge(Long judgenum, String chaptertwo,int difficulty) {
+        return examMapper.RandJudge(judgenum,chaptertwo,difficulty);
     }
 
     @Override

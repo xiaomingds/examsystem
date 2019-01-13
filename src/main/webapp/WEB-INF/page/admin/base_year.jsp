@@ -230,22 +230,23 @@
             </thead>
             <tr>
                 <th>入学时间</th>
-                <th>操作</th>
+                <th>操作&nbsp;<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增" data-toggle="modal" data-target="#myModa_n">
+                </th>
             </tr>
             <c:forEach items="${semester}" var="se">
             <tr>
                 <td style="margin-top: 50%"  ><a href="<%=basePath%>/basic/allmajor.do?seid=${se.seid}">${se.sename}</a></td>
                 <td >
-                    <input style="width: 25%" class="btn btn-outline btn-primary"type="button" value="编辑" data-toggle="modal" data-target="#myModal" >
+                    <input style="width: 25%" class="btn btn-outline btn-primary"type="button" value="编辑" onclick="edit('${se.seid}','${se.sename}')" >
                     <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deleteyear(${se.seid})" >
                 </td>
             </tr>
             </c:forEach>
         </table>
-        <div align="center">
-            <input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增" data-toggle="modal" data-target="#myModa_n">
-            <%--<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="getCheckAdIds()"/>--%>
-        </div>
+        <%--<div align="center">--%>
+            <%--<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增" data-toggle="modal" data-target="#myModa_n">--%>
+            <%--&lt;%&ndash;<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="getCheckAdIds()"/>&ndash;%&gt;--%>
+        <%--</div>--%>
         <br>
 
     </div>
@@ -253,18 +254,18 @@
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
 
-            <form action="<%=basePath%>/basic/insertse.do" method="post">
+            <form action="<%=basePath%>/basic/upse.do" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">年级更改</h4>
                 </div>
+                <input name="seid" id="seid"   hidden="hidden"/>
                 <div class="modal-body" style="text-align:left">
                     <div class="form-group input-group">
                         <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入更改后的年级：</span>
-                        <input type="text" style="height: 40px" class="form-control">
+                        <input type="text" style="height: 40px" class="form-control" id="sename" name="sename">
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -324,6 +325,11 @@
 
 </body>
 <script>
+    function edit(seid,sename) {
+        $("#seid").val(seid);
+        $("#sename").val(sename);
+        $("#myModal").modal('show');
+    }
     function deleteyear(seid) {
         console.log("删除的学年" + seid);
         $.ajax({

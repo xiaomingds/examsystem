@@ -102,7 +102,7 @@
                                     &nbsp;&nbsp;
 
                                     <b>倒计时(分钟)</b> :
-                                    <em id="timer"  align="right" style="colo :red"></em>
+                                    <em id="timer"  align="right" style="color :red"></em>
                                     <em id="warring" style="color:red"></em>
                                     &nbsp;&nbsp;
                                 </h5>
@@ -192,9 +192,14 @@
                 answerjudge.push(radio1[i].value);
             }
         }
+        if(answerchoice.length < ${examinfo.choicenum}||answerjudge.length< ${examinfo.judgenum}){
+            alert("还有未选择的题目");
+        }
+        else{
         location.href = "<%=basePath%>/exam/saveexam.do?examid=" + ${examinfo.id}+
             '&studentid='+${sessionScope.studentsession.id} + '&answerchoice='+ answerchoice+'&answerjudge='+ answerjudge;
-        alert("选择答案" +  answerchoice + "填空题答案" + answerjudge);
+        // alert("选择答案" +  answerchoice + "填空题答案" + answerjudge);
+        }
     }
 </script>
 </html>

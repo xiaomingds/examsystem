@@ -17,8 +17,10 @@ public interface ExamMapper {
 
     void CreateExam(ExamInformation examInformation);
     List<ExamInformation> AllExam();
-    List<PaperChoice> RandChoice(@Param("choicenum")Long choicenum, @Param("chaptertwo")String chaptertwo);
-    List<PaperJudge> RandJudge(@Param("judgenum")Long judgenum, @Param("chaptertwo")String chaptertwo);
+
+    List<PaperChoice> RandChoice(@Param("choicenum")Long choicenum, @Param("chaptertwo")String chaptertwo,@Param("difficulty")int difficulty);
+    List<PaperJudge> RandJudge(@Param("judgenum")Long judgenum, @Param("chaptertwo")String chaptertwo,@Param("difficulty")int difficulty);
+
    void insertRandChoice(List<PaperChoice>paperChoices);
     void insertRandJudge(List<PaperJudge>paperJudges);
     List<PaperChoice>AllPaperChoice(int examid);

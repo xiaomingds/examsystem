@@ -209,9 +209,7 @@
                            data-toggle="modal" data-target="#trashModal">
                             <span class="fa fa-trash-o fa-fw"></span>
                         </a>
-                        <a href="#">
-                            <span class="glyphicon glyphicon-plus" onclick="add()"></span>
-                        </a>
+
                     </td>
                 </tr>
             </c:forEach>
@@ -237,8 +235,8 @@
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">答案：</span>
                                 <div class="col-sm-5">
                                     <select class="form-control" id="upanswer" name="answer">
-                                        <option value="正确">正确</option>
-                                        <option value="错误">错误</option>
+                                        <option value="true">正确</option>
+                                        <option value="false">错误</option>
                                     </select>
                                 </div>
                             </div>
@@ -300,8 +298,8 @@
                                 <span class="input-group-addon" style="height: 40px ; tab-size: 16px ">答案：</span>
                                 <div class="col-sm-5">
                                     <select class="form-control" id="answer" name="answer">
-                                        <option value="正确">正确</option>
-                                        <option value="错误">错误</option>
+                                        <option value="true">正确</option>
+                                        <option value="false">错误</option>
                                     </select>
                                 </div>
                             </div>

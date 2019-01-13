@@ -108,6 +108,12 @@ public class Tk_TeacherController {
         model.addAttribute("choice",choice);
         return  "page/teacher/tea_choice";
     }
+    @RequestMapping("/deletechoiceall")
+    public String ManyChoice(String chk_value){
+        System.out.println("获取的id——arr"+ chk_value);
+        userService.deleteManyChoice(chk_value);
+        return "redirect:tea_findallchoice.do";
+    }
     @ResponseBody
     @RequestMapping("/tea_findBychId")
     public Choice findBychId(@RequestBody Choice choice) {
