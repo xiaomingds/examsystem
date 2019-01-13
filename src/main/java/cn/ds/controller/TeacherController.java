@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.*;
@@ -40,8 +41,23 @@ public class TeacherController {
             return "page/loginInfo";
         }
     }
-
-
+    @RequestMapping("/uppass")
+    public String UpPass(@RequestParam String username,Model model){
+        Teacher teacher = teacherService.login(username);
+        model.addAttribute("teacher",teacher);
+         return "page/teacher/uppassword";
+    }
+    @RequestMapping("/uppassword")
+    public String UpPassord(Teacher teacher){
+        teacherService.Upteacer(teacher);
+        return "page/teacher/home";
+    }
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.removeAttribute("teachersession");
+        return "index";
+    }
 
 
 //    @RequestMapping("/byexamid")

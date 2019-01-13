@@ -71,4 +71,18 @@
         select   * from student
         where num = #{num}
     </select>
+    <update id="Updatestu" parameterType="cn.ds.pojo.Student" >
+    update student
+    set
+      password = #{password}
+    where id = #{id}
+  </update>
+    <select id="AllStudent"   parameterType="java.util.List"  resultType="Student">
+        select * from student
+        where id in
+        <foreach collection="list" index="index" item="item" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

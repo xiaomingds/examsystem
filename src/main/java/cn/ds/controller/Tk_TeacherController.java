@@ -170,8 +170,7 @@ public class Tk_TeacherController {
     }
     @RequestMapping("/tea_updg")
     public String UpDg(ReadProgram readProgram){
-        System.out.println("后台的请求数据"+readProgram.getAnalysis());
-        System.out.println("后台的数据请求"+readProgram.getDifficulty());
+
         tkService.updateReadProgram(readProgram);
         return "redirect:tea_allReadProgram.do";
     }

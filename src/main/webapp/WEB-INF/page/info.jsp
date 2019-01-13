@@ -43,7 +43,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand"  style="font-size: 25px">C语言在线考试系统</a>
+            <a class="navbar-brand"  style="font-size: 25px">在线考试系统</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav"> <!-- 下列class="active"  为那个高亮 -->

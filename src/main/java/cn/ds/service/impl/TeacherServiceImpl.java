@@ -21,5 +21,10 @@ public class TeacherServiceImpl implements TeacherService {
         teacherMapper.deleteManyTeacher(chk_value);
     }
 
+    @Override
+    public void Upteacer(Teacher teacher) {
+        teacherMapper.Upteacer(teacher);
+    }
+
 
 }

@@ -104,4 +104,8 @@
     <delete id="DeleteExamInfo" parameterType="int">
         DELETE FROM exam_information WHERE id=#{examid}
     </delete>
+
+    <select id="ByExamId" resultType="ExamHistory">
+            select  * from examhistory  where examid = #{examid} order by score desc
+    </select>
 </mapper>

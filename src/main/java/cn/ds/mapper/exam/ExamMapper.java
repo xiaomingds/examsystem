@@ -33,5 +33,6 @@ public interface ExamMapper {
     void DeletePaperChoice(int examid);
     void DeletePaperJudge(int examid);
     void DeleteExamInfo(int examid);
+    List<ExamHistory>ByExamId(int examid);
 //     List<WrongAnswer> insertWrongAnswer(Map<String, Object> map);
 }

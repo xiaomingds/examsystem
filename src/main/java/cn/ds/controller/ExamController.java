@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/exam")
@@ -133,6 +130,35 @@ public class ExamController {
         List<ExamInformation>examInfos = examService.AllExam();
         model.addAttribute("examInfo",examInfos);
         return "page/admin/exam_info";
+    }
+    //根据考试id查询所有参加过考试的学生
+    @RequestMapping("/allexamstu")
+    public String AllExamStu(@RequestParam int examid,Model model){
+
+        Map<Long, Long> map = new HashMap<>();
+      List<ExamHistory>examHistories = examService.ByExamId(examid);
+        List<Long>longList = new ArrayList<Long>();
+        for(int i = 0;i < examHistories.size();i++){
+           map.put(examHistories.get(i).getStudentid(),examHistories.get(i).getScore());
+            longList.add(examHistories.get(i).getStudentid());
+        }
+        List<Student>students = studentService.AllStudent(longList);
+        for(int i = 0;i < examHistories.size();i++){
+            students.get(i).setId(map.get(students.get(i).getId()));
+        }
+        Collections.sort(students, new Comparator<Student>(){//按score排序
+            public int compare(Student p1, Student p2) {
+                if(p1.getId() < p2.getId()){
+                    return 1;
+                }
+                if(p1.getId() == p2.getId()){
+                    return 0;
+                }
+                return -1;
+            }
+        });
+        model.addAttribute("student",students);
+        return "page/admin/exam_allstudent";
     }
     //学生查询
     @RequestMapping("/examallstu")

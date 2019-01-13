@@ -117,4 +117,14 @@ public class StudentServiceImpl implements StudentService {
     public Student ByNum(String num) {
         return studentmapper.ByNum(num);
     }
+
+    @Override
+    public void Updatestu(Student student) {
+        studentmapper.Updatestu(student);
+    }
+
+    @Override
+    public List<Student> AllStudent(List<Long> longList) {
+        return studentmapper.AllStudent(longList);
+    }
 }

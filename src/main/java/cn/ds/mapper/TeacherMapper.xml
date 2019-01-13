@@ -26,4 +26,11 @@
         delete from teacher where id in
         (${_parameter})
     </delete>
+    <!-- 更新老师信息的方法 -->
+    <update id="Upteacer" parameterType="Teacher">
+        update teacher set
+
+            password= #{password}
+        where id = #{id}
+    </update>
 </mapper>

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 小鸣ds
-  Date: 2018/12/10
-  Time: 8:54
+  Date: 2019/1/12
+  Time: 10:21
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -79,13 +79,13 @@
                             </li>
                             <%--</li>--%>
                             <%--<li>--%>
-                                <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>
                             <%--</li>--%>
                             <%--<li>--%>
-                                <%--<a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>--%>
+                            <%--<a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>--%>
                             <%--</li><li>--%>
                             <%--<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>--%>
-                        </li>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -113,10 +113,10 @@
                         <a href=""><i class="fa fa-wrench fa-fw"></i>基础信息<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                   <a href="<%=basePath%>/basic/allsemester.do">学生信息</a>
+                                <a href="<%=basePath%>/basic/allsemester.do">学生信息</a>
                             </li>
-                             <li>
-                                  <a href="<%=basePath%>/basic/alldepart.do">院系信息</a>
+                            <li>
+                                <a href="<%=basePath%>/basic/alldepart.do">院系信息</a>
                             </li>
                             <li>
                                 <a href="<%=basePath%>/basic/allsit.do">职称信息</a>
@@ -131,10 +131,33 @@
         <!-- /.navbar-static-side -->
     </nav>
 
-    <!-- Page Content -->
-    <div id="page-wrapper">
+    <div class="container">
 
-        <!-- /.container-fluid -->
+        <br/>
+        <form class="form-inline text-center" action="<%=basePath%>/user/newpass.do" method="post" onsubmit="return check()">
+            <input name="id" id="id" hidden="hidden" value="${user.id}"/>
+            <div class="form-group form-inline">
+                <label>原密码：</label>
+                <input type="password" name="pass" id="pass" class="form-control" placeholder="请输入旧密码"/>
+            </div>
+            <br/>
+            <br/>
+            <div class="form-group form-inline">
+                <label>新密码：</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="请输入新密码"/>
+            </div>
+            <br/>
+            <br/>
+            <div class="form-group form-inline">
+                <label>重复密码：</label>
+                <input type="password" name="password2" id="password2" class="form-control" placeholder="请重复新密码"/>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <input type="submit" class="btn btn-info text-center"/>
+            <input type="reset" class="btn btn-info text-center"/>
+        </form>
     </div>
     <!-- /#page-wrapper -->
 
@@ -154,6 +177,24 @@
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
 
 </body>
+<script>
+function check() {
+    var old = "${user.password}";
+   var pass = document.getElementById("pass").value;
+    var password = document.getElementById("password").value;
+    var password2 = document.getElementById("password2").value;
+    if(pass == "") {
+        alert("请输入原密码");return false;}
+    if(old !=pass) {
+        alert("初始密码不正确");return false;}
+    if(password == "") {
+        alert("请输入新密码");return false;}
+    if(password2 == "") {
+        alert("请重复输入新密码");return false;}
+        if(password2 != password){
+            alert("两次密码输入不一致");return false;}
 
+}
+</script>
 </html>
 

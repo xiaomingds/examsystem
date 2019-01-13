@@ -55,6 +55,18 @@ public class UserController {
             return "page/loginInfo";
         }
     }
+    @RequestMapping("uppass")
+    public String UpPass(@RequestParam String username, Model model){
+        User user = userService.login(username);
+        model.addAttribute("user",user);
+        return "page/admin/uppassword";
+    }
+    @RequestMapping("newpass")
+    public String NewPass(User user,Model model){
+       userService.updateuser(user);
+        model.addAttribute("message", "密码更新成功");
+        return "page/admin/home";
+    }
 
    //显示所有老师
     @RequestMapping("/findallteacher")

@@ -8,6 +8,7 @@ public class PaperChoice {
     private String coption;
     private String doption;
     private String answer;
+   private int difficulty;
     private int examid;
   private  String myanswer;
 
@@ -81,5 +82,13 @@ public class PaperChoice {
 
     public void setMyanswer(String myanswer) {
         this.myanswer = myanswer;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 }

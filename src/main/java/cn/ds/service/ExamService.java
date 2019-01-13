@@ -28,6 +28,8 @@ public interface ExamService {
     void DeletePaperChoice(int examid);
     void DeletePaperJudge(int examid);
     void DeleteExamInfo(int examid);
+    List<ExamHistory>ByExamId(int examid);
+
 //    List<WrongAnswer>WrongChoice(int studentid);
 //    List<WrongAnswer>WrongJudge(int studentid);
 

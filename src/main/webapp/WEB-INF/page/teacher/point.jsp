@@ -39,27 +39,27 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">C语言在线考试系统</a>
+            <a class="navbar-brand" href="#">在线考试系统</a>
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-user fa-fw"></i> ${sessionScope.teachersession.username}&nbsp;<i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    <li><a href="<%=basePath%>/teacher/uppass.do?username=${sessionScope.teachersession.username}">
+                        <i class="fa fa-gear fa-fw"></i> 更改密码</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="../login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="<%=basePath%>/teacher/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
             </li>
             <!-- /.dropdown -->
         </ul>
+
 
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">

@@ -107,5 +107,10 @@ examMapper.DeletePaperJudge(examid);
      examMapper.DeleteExamInfo(examid);
     }
 
+    @Override
+    public List<ExamHistory> ByExamId(int examid) {
+        return examMapper.ByExamId(examid);
+    }
+
 
 }

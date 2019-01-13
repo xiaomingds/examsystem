@@ -1,48 +1,28 @@
 <%--
   Created by IntelliJ IDEA.
   User: 小鸣ds
-  Date: 2019/1/6
-  Time: 10:47
+  Date: 2019/1/12
+  Time: 12:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<%@ page import="java.io.*,java.util.*, javax.servlet.*" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>考试</title>
-
-    <style>
-        .table th{
-            text-align: center;
-        }
-        .table td{
-            text-align: center;
-        }
-    </style>
-
+    <title>学生首页</title>
     <!-- Bootstrap Core CSS -->
     <link href="<%=basePath%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
     <link href="<%=basePath%>/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="<%=basePath%>/vendor/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -89,6 +69,8 @@
             </li>
             <!-- /.dropdown -->
         </ul>
+        <!-- /.navbar-top-links -->
+
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -109,40 +91,60 @@
         </div>
         <!-- /.navbar-static-side -->
     </nav>
+    <div class="container">
 
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <br>
-        <table class="table table-striped" style="width: 90% " align="center">
-            <caption></caption>
-            <thead>
-            <tr>
-                <th width="30%">考试名称</th>
-                <th width="15%">考试时间</th>
-                <th width="15%">时长</th>
-                <th width="10%">成绩</th>
-                <th width="10%">命题人</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${examend}" var="ex">
-                <tr>
-                    <td><a href="<%=basePath%>/exam/examdetial.do?studentid=${sessionScope.studentsession.id}&examid=${ex.id}">${ex.examname}</a></td>
-                    <td>${ex.begindate}&nbsp;${ex.enddate}</td>
-                    <td>${ex.examtime}</td>
-                    <td>${ex.allscore}</td>
-                    <td>${ex.teacher}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+        <br/>
+        <form class="form-inline text-center" action="<%=basePath%>/student/upstudent.do" method="post" onsubmit="return check()">
+            <input name="id" id="id" hidden="hidden" value="${student.id}"/>
+            <div class="form-group form-inline">
+                <label>原密码：</label>
+                <input type="password" name="pass" id="pass" class="form-control" placeholder="请输入旧密码"/>
+            </div>
+            <br/>
+            <br/>
+            <div class="form-group form-inline">
+                <label>新密码：</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="请输入新密码"/>
+            </div>
+            <br/>
+            <br/>
+            <div class="form-group form-inline">
+                <label>重复密码：</label>
+                <input type="password" name="password2" id="password2" class="form-control" placeholder="请重复新密码"/>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <input type="submit" class="btn btn-info text-center"/>
+            <input type="reset" class="btn btn-info text-center"/>
+        </form>
     </div>
     <!-- /#page-wrapper -->
 
 </div>
+<!-- jQuery -->
 <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
 <script src="<%=basePath%>/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>/vendor/metisMenu/metisMenu.min.js"></script>
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
 </body>
+<script>
+    function check() {
+        var old = "${student.password}";
+        var pass = document.getElementById("pass").value;
+        var password = document.getElementById("password").value;
+        var password2 = document.getElementById("password2").value;
+        if(pass == "") {
+            alert("请输入原密码");return false;}
+        if(pass!=old) {
+            alert("初始密码不正确");return false;}
+        if(password == "") {
+            alert("请输入新密码");return false;}
+        if(password2 == "") {
+            alert("请重复输入新密码");return false;}
+        if(password2 != password){
+            alert("两次密码输入不一致");return false;}
+    }
+</script>
 </html>
+

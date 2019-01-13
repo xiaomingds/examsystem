@@ -11,6 +11,7 @@ import java.util.List;
  * @date 业务层
  */
 public interface UserService extends BaseService<User> {
+    void updateuser(User user);
     void CreateAdmin(User user);
     User login(String username);
     List<Teacher> findTeacherAll();

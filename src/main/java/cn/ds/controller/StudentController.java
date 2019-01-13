@@ -40,7 +40,17 @@ public class StudentController {
             return "page/loginInfo";
         }
     }
-
+    @RequestMapping("studentup")
+    public String UpStudent(@RequestParam String username,Model model){
+        Student student = studentService.login(username);
+        model.addAttribute("student",student);
+      return "page/student/uppassword";
+    }
+    @RequestMapping("upstudent")
+    public String UpStudent(Student student){
+        studentService.Updatestu(student);
+        return "page/student/home";
+    }
     @ResponseBody
    @RequestMapping("/byclassname")
    public List<Student> ByClass(@RequestParam String classname){
@@ -97,3 +107,4 @@ public class StudentController {
          return studentService.ajaxUploadExcel(request, response);
     }
 }
+

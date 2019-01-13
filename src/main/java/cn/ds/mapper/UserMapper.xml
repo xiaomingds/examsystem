@@ -12,6 +12,11 @@
     <insert id="CreateAdmin" parameterType="User">
         insert into tb_user( username,password) values( #{username},#{password})
     </insert>
+    <update id="updateuser" parameterType="User">
+        update tb_user set
+            password= #{password}
+        where id = #{id}
+    </update>
     <!-- -查询 -->
     <select id="findTeacherAll" resultType="cn.ds.pojo.Teacher">
         select * from teacher

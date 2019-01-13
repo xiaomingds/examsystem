@@ -1,5 +1,6 @@
 package cn.ds.mapper;
 
+import cn.ds.pojo.Exam.ExamInformation;
 import cn.ds.pojo.Student;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface StudentMapper {
     List<Student>ByClass(String classname);
     void CreatStu(Student student);
     Student ByNum(String num);
+    void Updatestu(Student student);
+    List<Student>AllStudent(List<Long>longList);
+
 }

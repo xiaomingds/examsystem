@@ -1,8 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: 小鸣ds
-  Date: 2019/1/10
-  Time: 11:26
+  Date: 2019/1/12
+  Time: 19:16
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: 小鸣ds
+  Date: 2018/12/11
+  Time: 9:01
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -23,10 +30,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>基础设置</title>
-
-    <link rel="stylesheet" href="<%=basePath%>/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
     <script src="<%=basePath%>/vendor/jquery/jquery.min.js"></script>
     <script src="<%=basePath%>/vendor/bootstrap/js/bootstrap.min.js"></script>
 
@@ -34,22 +39,98 @@
         table{
             border: 1px solid black;
             border-collapse: collapse;
-            width: 300px;
+            width: 500px;
             text-align: center;
         }
         table th {
             border: 1px solid black;
-            width: 2%;
+            width:2%;
             text-align: center;
+
         }
         table td {
             align-items: center;
             border: 1px solid black;
-            width: 25%;
+            width: 20%;
             text-align: center;
         }
-    </style>
 
+    </style>
+    <script>
+        //文档准备就绪
+        $(function () {
+            //设置 所有 td 居中
+            $('table td').attr("align","center");
+            //标签+属性选择所有<编辑>按钮
+            /*
+            $('input[value="编辑"]').click(function () {
+                //获取每一个<编辑>按钮的 下标（从0开始 所以需要+2 = 按钮在表格的所在行数）
+                var numId = $('input[value="编辑"]').index($(this))+2;
+                //选择表格中的所有tr 通过eq方法取得当前tr
+                var ttr = $('table tr').eq(numId);
+
+                ttr.find("td").each(function () {
+
+                    if($(this).children("input[type='checkbox']").length>0){
+                        return ;
+                    }
+                    if($(this).children("input[type='button']").length>0){
+                        return ;
+                    }
+                    if($(this).children("input[type='text']").length>0){
+                        return ;
+                    }
+                    var tdText = $(this).html();
+                    $(this).html("");
+                    var inputObj = $("<input type='text'>");
+                    inputObj.appendTo($(this));
+                    inputObj.css("width","95%");
+                    inputObj.val(tdText);
+                });
+            });
+            */
+            //为每一个确定按钮设置点击事件
+            $('input[value="确定"]').click(function () {
+                /*通过parents方法获取<确定>按钮的父容器tr
+                 再为 tr中的每一个text设置function
+                 */
+                var ttr=$(this).parents("tr");
+                ttr.find('input[type="text"]').each(function () {
+                    var inputVal = $(this).val();
+                    $(this).parents('td').html(inputVal);
+                })
+            });
+            //全选/反选
+            $('#cha').click(function () {
+                //判断checkbox是否选中
+                if($(this).is(':checked')){
+                    $('input[type="checkbox"]').attr("checked","true");
+                }else{
+                    $('input[type="checkbox"]').removeAttr("checked");
+                }
+            });
+            //增加一行
+            $('#add').click(function () {
+                $('#tab1 tr').eq(3).clone(true).appendTo("#tab1");
+            });
+            //删除最后一行
+            $('#delete').click(function () {
+                $('table tr:last').remove();
+            });
+            //$('#deleteone').click(function () {
+            //   $('input[type="checkbox"]');
+            //});
+            // $(function(){
+            //    $("input[type='button']").click(function() {
+            //       $("input[id=\"cha\"]:checked").each(function() { // 遍历选中的checkbox
+            //           n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+            //            $("table#test_table").find("tr:eq("+n+")").remove();
+            //        });
+            //    });
+            // });
+        })
+
+    </script>
 
     <!-- Bootstrap Core CSS -->
     <link href="<%=basePath%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -84,6 +165,8 @@
             </button>
             <a class="navbar-brand" href="#">在线考试系统</a>
         </div>
+        <!-- /.navbar-header -->
+
         <ul class="nav navbar-top-links navbar-right">
             <!-- /.dropdown -->
             <li class="dropdown">
@@ -105,6 +188,7 @@
             </li>
             <!-- /.dropdown -->
         </ul>
+        <!-- /.navbar-top-links -->
 
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
@@ -180,117 +264,26 @@
         <br>
         <br>
         <table border="1" class="table table-bordered" id = "tab1">
-            <thead>
-            <tr>
-                <th colspan="4">职称信息</th>
-            </tr>
-            </thead>
+            <%--<thead>--%>
+            <%--<tr>--%>
+                <%--<th colspan="3" style="text-align: center;font-size: 20px ">${cname}学生信息设置</th>--%>
+            <%--</tr>--%>
+            <%--</thead>--%>
 
             <tr>
-                <th>职称</th>
-                <th>操作&nbsp;
-                    &nbsp;<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >
-                </th>
+                <td>学号</td>
+                <td>姓名</td>
+                <td>成绩</td>
             </tr>
-            <c:forEach items="${sit}" var="ma">
+            <c:forEach items="${student}" var="st">
                 <tr>
-                    <td style="margin-top: 50%"  >${ma.sit}</td>
-                    <td ><input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="编辑"  onclick="edit('${ma.sit}','${ma.id}')">
-                        <input style="width: 30%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="deletemajor('${ma.id}') " data-toggle="modal" data-target="#trashModal" >
-                    </td>
+                    <td style="margin-top: 50%"  >${st.num}</td>
+                    <td>${st.username}</td>
+                    <td>${st.id}</td>
                 </tr>
             </c:forEach>
         </table>
-        <%--<div align="center">--%>
-        <%--<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="新增"  data-toggle="modal" data-target="#myModa_n" >--%>
-        <%--&lt;%&ndash;<input style="width: 20%" class="btn btn-outline btn-primary" type="button" value="删除" onclick="todelete()"/>&ndash;%&gt;--%>
-        <%--</div>--%>
         <br>
-    </div>
-    <!-- 删除的模态框 -->
-    <div class="modal fade" id="trashModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- 模糊框头部 -->
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
-                    </button>
-                    <h4 class="modal-title">删除！</h4>
-                </div>
-                <!-- 模糊框主体 -->
-                <div class="modal-body">
-                    <strong>你确定要删除吗？</strong>
-                </div>
-                <!-- 模糊框底部 -->
-                <div class="modal-footer">
-                    <button type="button" class="delSure btn btn-info" data-dismiss="modal">确定</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 编辑-->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form action="<%=basePath%>/basic/upsit.do" method="post">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">职称更改</h4>
-                    </div>
-                    <input name="id" id="id"   hidden="hidden"/>
-                    <div class="modal-body" style="text-align:left">
-
-                        <div class="form-group input-group">
-                            <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入更改后的职称:</span>
-                            <input type="text" style="height: 40px " class="form-control" name="sit" id="sit">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
-                        <button type="submit"  class="btn btn-outline btn-primary">确定</button>
-
-                    </div>
-                </div>
-            </form>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-
-    </div>
-    <!-- /#wrapper -->
-    <br>
-    <div>
-        <tr class="append-row">
-            <td colspan="5" align="right">
-                <!-- Modal -->
-                <div class="modal fade" id="myModa_n" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <form action="<%=basePath%>/basic/addsit.do" method="post">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <%--<input name="seid" id="seid"  value="${seid}" hidden="hidden"/>--%>
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="myModalLabe2" style="text-align:center">添加选项</h4>
-                                </div>
-                                <div class="modal-body" style="text-align:left">
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入院系:</span>
-                                        <input type="text" style="height: 40px " class="form-control" name="sit">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button"  class="btn btn-outline btn-primary" data-dismiss="modal">关闭</button>
-                                    <button type="submit"  class="btn btn-outline btn-primary">确定</button>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-            </td>
-        </tr>
     </div>
 
 
@@ -310,25 +303,6 @@
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
 
 </body>
-<script>
-    function edit(sit,id) {
-        console.log("编辑都depart" + sit);
-        $("#sit").val(sit);
-        $("#id").val(id);
-        $("#myModal").modal('show');
-    }
-    function deletemajor(id) {
-        console.log("删除的班级" + id);
-        $(".delSure").click(function () {
-            $.ajax({
-                url: '<%=basePath%>/basic/deletesit.do?id='+ id,
-                type: 'POST',
-                contentType: 'application/json;charset=UTF-8',
-                success: function (data) {
-                    location.reload();
-                }
-            });
-        });
-    }
-</script>
+
 </html>
+

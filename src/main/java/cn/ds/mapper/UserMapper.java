@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface UserMapper {
    void CreateAdmin(User user);
+    void updateuser(User user);
     User login(String username);
     void create(Teacher teacher);
     void delete(Long id);

@@ -9,6 +9,10 @@
 <head>
     <meta charset="utf-8">
     <title>登陆界面</title>
+    <%--<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/index/normalize.css" />--%>
+    <%--<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/index/demo.css" />--%>
+    <%--<!--必要样式-->--%>
+    <%--<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/index/component.css" />--%>
     <style>
         html {
             background-image: url(<%=basePath%>/images/demo-1-bg.jpg);
@@ -158,8 +162,10 @@
         }
     }
 </script>
-<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="<%=basePath%>/js/index/TweenLite.min.js"></script>
+<script src="<%=basePath%>/js/index/EasePack.min.js"></script>
+<script src="<%=basePath%>/js/index/rAF.js"></script>
+<script src="<%=basePath%>/js/index/demo-1.js"></script>
 <script>
     $(function(){
         $("#username").keyup(function()

@@ -5,6 +5,7 @@ public class ExamHistory {
     private long examid;
     private  long studentid;
     private long score;
+   private String username;
 
     public long getId() {
         return id;
@@ -36,5 +37,13 @@ public class ExamHistory {
 
     public void setScore(long score) {
         this.score = score;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

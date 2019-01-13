@@ -66,7 +66,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">C语言在线考试系统</a>
+            <a class="navbar-brand" href="#">在线考试系统</a>
         </div>
         <!-- /.navbar-header -->
 

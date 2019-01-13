@@ -6,6 +6,7 @@ public class PaperJudge  {
     private String content;
     private String answer;
     private int examid;
+    private int difficulty;
 
     private  String myanswer;
 
@@ -48,5 +49,13 @@ public class PaperJudge  {
 
     public void setMyanswer(String myanswer) {
         this.myanswer = myanswer;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 }

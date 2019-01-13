@@ -23,6 +23,11 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
+    public void updateuser(User user) {
+        userMapper.updateuser(user);
+    }
+
+    @Override
     public void CreateAdmin(User user) {
         userMapper.CreateAdmin(user);
     }

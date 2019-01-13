@@ -73,7 +73,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">C语言在线考试系统</a>
+            <a class="navbar-brand" href="#">在线考试系统</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -129,7 +129,7 @@
                         <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
                     </li>
                     <li>
-                        <a href="<%=basePath%>/teacher/allexam.do"><i class="fa fa-pencil fa-fw"></i>考试管理</a>
+                        <a href="<%=basePath%>/teacher/allexam.do"><i class="fa fa-pencil fa-fw"></i>考试管理<span class="fa arrow"></span></a>
                     </li>
                     <li>
                         <a href="<%=basePath%>/basic/allsemester.do"><i class="fa fa-wrench fa-fw"></i>基础设置</a>

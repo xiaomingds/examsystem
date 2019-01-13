@@ -1,11 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: 小鸣ds
-  Date: 2018/12/10
-  Time: 8:54
+  Date: 2019/1/12
+  Time: 12:44
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: 小鸣ds
+  Date: 2018/12/14
+  Time: 8:35
+  To change this template use File | Settings | File Templates.
+--%><%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath();
@@ -14,6 +20,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,17 +51,14 @@
             <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i>${sessionScope.usersession.username}&nbsp;<i class="fa fa-caret-down"></i>
+                    <i class="fa fa-user fa-fw"></i> ${sessionScope.teachersession.username}&nbsp;<i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <%--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>--%>
-                    <%--</li>--%>
-                    <li><a href="<%=basePath%>/user/uppass.do?username=${sessionScope.usersession.username}">
-                        <i class="fa fa-gear fa-fw"></i> 密码修改</a>
+                    <li><a href="<%=basePath%>/teacher/uppass.do?username=${sessionScope.teachersession.username}">
+                        <i class="fa fa-gear fa-fw"></i> 更改密码</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="<%=basePath%>/user/logout.do">
-                        <i class="fa fa-sign-out fa-fw"></i> 退出</a>
+                    <li><a href="<%=basePath%>/teacher/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -72,71 +76,80 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>题库<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<%=basePath%>/user/findallchoice.do">选择题查询</a>
+                                <a href="<%=basePath%>/tea_tk/tea_findallchoice.do">选择题查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/tk/alljudge.do">判断题查询</a>
+                                <a href="<%=basePath%>/tea_tk/alljudge.do">判断题查询</a>
                             </li>
+                            <%--<li>--%>
+                            <%--<a href="<%=basePath%>/tea_tk/tea_allReadFill.do">程序填空查询</a>--%>
                             <%--</li>--%>
                             <%--<li>--%>
-                                <%--<a href="<%=basePath%>/tk/allReadFill.do">程序填空查询</a>--%>
-                            <%--</li>--%>
-                            <%--<li>--%>
-                                <%--<a href="<%=basePath%>/tk/allReadProgram.do">读程序写结果查询</a>--%>
+                            <%--<a href="<%=basePath%>/tea_tk/tea_allReadProgram.do">读程序写结果查询</a>--%>
                             <%--</li><li>--%>
-                            <%--<a href="<%=basePath%>/tk/allPgDesign.do">程序设计查询</a>--%>
-                        </li>
+                            <%--<a href="<%=basePath%>/tea_tk/allPgDesign.do">程序设计查询</a>                        </li>--%>
+
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
-                    </li>
-                    <li>
-                        <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
-                    </li>
-                    <li>
-                        <a href=""><i class="fa fa-table fa-fw"></i>考试管理<span class="fa arrow"></span></a>
+                        <a href=""><i class="fa fa-table fa-fw"></i>考试<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<%=basePath%>/exam/allexam.do">查看考试信息</a>
+                                <a href="<%=basePath%>/exam/examall.do">查看考试信息</a>
                             </li>
                             <li>
-                                <a href=<%=basePath%>/exam/adminaddexam.do>创建新考试</a>
-                            </li>
-                            <li>
-                                <a href="<%=basePath%>/admin/findstuscore.do">学生成绩查询</a>
+                                <a href=<%=basePath%>/exam/addexam.do>创建新考试</a>
                             </li>
                         </ul>
+                        <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-wrench fa-fw"></i>基础信息<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>学生<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                   <a href="<%=basePath%>/basic/allsemester.do">学生信息</a>
-                            </li>
-                             <li>
-                                  <a href="<%=basePath%>/basic/alldepart.do">院系信息</a>
+                                <a href="<%=basePath%>/teacher/stuinfo.do">学生信息查询</a>
                             </li>
                             <li>
-                                <a href="<%=basePath%>/basic/allsit.do">职称信息</a>
+                                <a href="<%=basePath%>/teacher/findstuscore.do">学生成绩查询</a>
                             </li>
                         </ul>
+                        <!-- /.nav-second-level -->
                     </li>
-
-
                 </ul>
             </div>
+            <!-- /.sidebar-collapse -->
         </div>
-        <!-- /.navbar-static-side -->
     </nav>
 
-    <!-- Page Content -->
-    <div id="page-wrapper">
+    <div class="container">
 
-        <!-- /.container-fluid -->
+        <br/>
+        <form class="form-inline text-center" action="<%=basePath%>/teacher/uppassword.do" method="post" onsubmit="return check()">
+            <input name="id" id="id" hidden="hidden" value="${teacher.id}"/>
+            <div class="form-group form-inline">
+                <label>原密码：</label>
+                <input type="password" name="pass" id="pass" class="form-control" placeholder="请输入旧密码"/>
+            </div>
+            <br/>
+            <br/>
+            <div class="form-group form-inline">
+                <label>新密码：</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="请输入新密码"/>
+            </div>
+            <br/>
+            <br/>
+            <div class="form-group form-inline">
+                <label>重复密码：</label>
+                <input type="password" name="password2" id="password2" class="form-control" placeholder="请重复新密码"/>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <input type="submit" class="btn btn-info text-center"/>
+            <input type="reset" class="btn btn-info text-center"/>
+        </form>
     </div>
-    <!-- /#page-wrapper -->
 
 </div>
 <!-- /#wrapper -->
@@ -154,6 +167,23 @@
 <script src="<%=basePath%>/vendor/dist/js/sb-admin-2.js"></script>
 
 </body>
-
+<script>
+    function check() {
+        var old = "${teacher.password}";
+        var pass = document.getElementById("pass").value;
+        var password = document.getElementById("password").value;
+        var password2 = document.getElementById("password2").value;
+        if(pass == "") {
+            alert("请输入原密码");return false;}
+        if(pass!=old) {
+            alert("初始密码不正确");return false;}
+        if(password == "") {
+            alert("请输入新密码");return false;}
+        if(password2 == "") {
+            alert("请重复输入新密码");return false;}
+        if(password2 != password){
+            alert("两次密码输入不一致");return false;}
+    }
+</script>
 </html>
 

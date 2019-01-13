@@ -17,7 +17,7 @@ public class ExamInformation {
     private int choicescore;
     private int judgenum;
     private  int judgescore;
-
+    private int difficulty;
     private int allscore;
 
 
@@ -134,5 +134,13 @@ public class ExamInformation {
 
     public void setStudentname(String studentname) {
         this.studentname = studentname;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 }

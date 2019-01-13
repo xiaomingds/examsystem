@@ -55,30 +55,30 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">C语言在线考试系统</a>
+        <a class="navbar-brand" href="#">在线考试系统</a>
     </div>
     <!-- /.navbar-header -->
-
     <ul class="nav navbar-top-links navbar-right">
         <!-- /.dropdown -->
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                <i class="fa fa-user fa-fw"></i>${sessionScope.usersession.username}&nbsp;<i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                </li>
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                <%--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>--%>
+                <%--</li>--%>
+                <li><a href="<%=basePath%>/user/uppass.do?username=${sessionScope.usersession.username}">
+                    <i class="fa fa-gear fa-fw"></i> 密码修改</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="../login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="<%=basePath%>/user/logout.do">
+                    <i class="fa fa-sign-out fa-fw"></i> 退出</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
         </li>
         <!-- /.dropdown -->
     </ul>
-
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
@@ -107,13 +107,13 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点<span class="fa arrow"></span></a>
+                    <a href="<%=basePath%>/user/findpoint1.do"><i class="fa fa-table fa-fw"></i>知识点</a>
                 </li>
                 <li>
                     <a href="<%=basePath%>/user/findallteacher.do"><i class="fa fa-edit fa-fw"></i>教师</a>
                 </li>
                 <li>
-                    <a href=""><i class="fa fa-table fa-fw"></i>考试管理</a>
+                    <a href=""><i class="fa fa-table fa-fw"></i>考试管理<span class="fa arrow"></span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="<%=basePath%>/exam/allexam.do">查看考试信息</a>
@@ -127,7 +127,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href=""><i class="fa fa-wrench fa-fw"></i>基础信息</a>
+                    <a href=""><i class="fa fa-wrench fa-fw"></i>基础信息<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="<%=basePath%>/basic/allsemester.do">学生信息</a>
@@ -183,6 +183,18 @@
                             <select class="form-control" name="chapter" id="chapter" data-live-search="true">
                             </select>
                             <select class="form-control" name="chaptertwo" id="chaptertwo" data-live-search="true">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">难度</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="difficulty" name = "difficulty">
+                                <option value="1">热血青铜</option>
+                                <option value="2">不屈白银</option>
+                                <option value="3">英勇黄金</option>
+                                <option value="4">超级王牌</option>
+                                <option value="5">无敌战神</option>
                             </select>
                         </div>
                     </div>
