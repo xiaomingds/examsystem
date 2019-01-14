@@ -22,11 +22,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--
-全局异常处理器
-只要类实现了HandlerExceptionResolver接口，就是一个全局异常处理器哦
 
-    <bean class="cn.ds.exception.CustomExceptionResolver"/>-->
 
     <mvc:resources mapping="/images/**" location="/images/" />
 
@@ -42,4 +38,9 @@
             <bean class="cn.ds.controller.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>-->
+    <!--
+全局异常处理器
+只要类实现了HandlerExceptionResolver接口，就是一个全局异常处理器哦-->
+
+<bean class="cn.ds.exception.CustomExceptionResolver"/>
 </beans>

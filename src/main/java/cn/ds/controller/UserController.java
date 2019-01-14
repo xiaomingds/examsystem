@@ -8,6 +8,8 @@ import cn.ds.pojo.Tk.ReadProgram;
 import cn.ds.service.BasicInfoService;
 import cn.ds.service.TeacherService;
 import cn.ds.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -218,10 +220,12 @@ public class UserController {
 
     //显示所有选择题
     @RequestMapping("/findallchoice")
-    public String findChoiceAll(Model model){
+    public String findChoiceAll(Model model,@RequestParam(defaultValue = "1") int pn){
+        PageHelper.startPage(pn,6);//显示个数
+
         List<Choice>choice = userService.findChoiceAll();
-        System.out.println("啦啦啦"+choice);
-        model.addAttribute("choice",choice);
+        PageInfo pageInfo = new PageInfo(choice,5);//显示前后页数
+        model.addAttribute("pageInfo",pageInfo);
         return  "page/admin/tk_choice";
     }
     //根据id查询选择

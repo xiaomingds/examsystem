@@ -148,17 +148,24 @@
 <script>
     function login() {
         var r = document.getElementsByName('group');
-        if(r[0].checked){
-            document.getElementById("downloadDocId").action = "<%=basePath%>/user/login.do";
-            document.getElementById("downloadDocId").submit();
+        var password = document.getElementById("password").value;
+        var username = document.getElementById("username").value;
+        if(password == ""||username == "") {
+            alert("请输入用户名或密码");
         }
-        else if(r[1].checked){
-            document.getElementById("downloadDocId").action = "<%=basePath%>/teacher/login.do";
-            document.getElementById("downloadDocId").submit();
-        }
-        else{
-            document.getElementById("downloadDocId").action = "<%=basePath%>/student/login.do";
-            document.getElementById("downloadDocId").submit();
+        else {
+            if (r[0].checked) {
+                document.getElementById("downloadDocId").action = "<%=basePath%>/user/login.do";
+                document.getElementById("downloadDocId").submit();
+            }
+            else if (r[1].checked) {
+                document.getElementById("downloadDocId").action = "<%=basePath%>/teacher/login.do";
+                document.getElementById("downloadDocId").submit();
+            }
+            else {
+                document.getElementById("downloadDocId").action = "<%=basePath%>/student/login.do";
+                document.getElementById("downloadDocId").submit();
+            }
         }
     }
 </script>

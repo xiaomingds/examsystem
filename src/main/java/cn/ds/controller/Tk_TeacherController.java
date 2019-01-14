@@ -3,6 +3,8 @@ package cn.ds.controller;
 import cn.ds.pojo.Tk.*;
 import cn.ds.service.TkService;
 import cn.ds.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -102,10 +104,12 @@ public class Tk_TeacherController {
         return "redirect:tea_findallchoice.do";
     }
     @RequestMapping("/tea_findallchoice")
-    public String findChoiceAll(Model model){
-        List<Choice> choice = userService.findChoiceAll();
-        System.out.println("啦啦啦"+choice);
-        model.addAttribute("choice",choice);
+    public String findChoiceAll(Model model,@RequestParam(defaultValue = "1") int pn){
+        PageHelper.startPage(pn,6);//显示个数
+
+        List<Choice>choice = userService.findChoiceAll();
+        PageInfo pageInfo = new PageInfo(choice,5);//显示前后页数
+        model.addAttribute("pageInfo",pageInfo);
         return  "page/teacher/tea_choice";
     }
     @RequestMapping("/deletechoiceall")
@@ -243,10 +247,12 @@ public class Tk_TeacherController {
     }
     //add judge
     @RequestMapping("/alljudge")
-    public String AllJudge(Model model){
+    public String AllJudge(Model model,@RequestParam(defaultValue = "1") int pn){
 
+        PageHelper.startPage(pn,6);//显示个数
         List<Judge>judges = tkService.AllJudge();
-        model.addAttribute("judge",judges);
+        PageInfo pageInfo = new PageInfo(judges,5);//显示前后页数
+        model.addAttribute("pageInfo",pageInfo);
         return "page/teacher/tea_judge";
     }
 

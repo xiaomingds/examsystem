@@ -2,6 +2,8 @@ package cn.ds.controller;
 
 import cn.ds.pojo.Tk.*;
 import cn.ds.service.TkService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -172,10 +174,13 @@ public class TkController {
 
 
     @RequestMapping("/alljudge")
-    public String AllJudge(Model model){
+    public String AllJudge(Model model,@RequestParam(defaultValue = "1") int pn){
 
+        PageHelper.startPage(pn,6);//显示个数
         List<Judge>judges = tkService.AllJudge();
-        model.addAttribute("judge",judges);
+        PageInfo pageInfo = new PageInfo(judges,5);//显示前后页数
+        model.addAttribute("pageInfo",pageInfo);
+//        pageInfo.getNavigatepageNums();
         return "page/admin/tk_judge";
     }
 
@@ -213,8 +218,8 @@ public class TkController {
     @RequestMapping("/deletemanyjudge")
     public String ManyJudge(String chk_value){
         System.out.println("获取的id——arr"+ chk_value);
-tkService.deleteManyJudge(chk_value);
-return "redirect:alljudge.do";
+     tkService.deleteManyJudge(chk_value);
+     return "redirect:alljudge.do";
     }
 
 }

@@ -208,7 +208,7 @@
                 <td>难度</td>
                 <td class="del-col">操作</td>
             </tr>
-            <c:forEach items="${requestScope.choice}" var="ch">
+            <c:forEach items="${pageInfo.list}" var="ch">
                 <tr>
                     <td ><input type="checkbox" name=items id="${ch.id}"/></td>
                     <c:set var="index" value="${index+1}"/>
@@ -229,6 +229,41 @@
             </c:forEach>
             </tbody>
         </table>
+        <!-- 显示分页信息 -->
+        <div class="row">
+            <!--分页文字信息  -->
+            <div class="col-md-6">当前 ${pageInfo.pageNum }页,总${pageInfo.pages }
+                页,总 ${pageInfo.total } 道题目</div>
+            <!-- 分页条信息 -->
+            <div class="col-md-6">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li><a href="<%=basePath%>/user/findallchoice.do?pn=1">首页</a></li>
+                        <c:if test="${pageInfo.hasPreviousPage }">
+                            <li><a href="<%=basePath%>/user/findallchoice.do?pn=${pageInfo.pageNum-1}"
+                                   aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+                            </a></li>
+                        </c:if>
+
+                        <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
+                            <c:if test="${page_Num == pageInfo.pageNum }">
+                                <li class="active"><a href="#">${page_Num }</a></li>
+                            </c:if>
+                            <c:if test="${page_Num != pageInfo.pageNum }">
+                                <li><a href="<%=basePath%>/user/findallchoice.do?pn=${page_Num }">${page_Num }</a></li>
+                            </c:if>
+
+                        </c:forEach>
+                        <c:if test="${pageInfo.hasNextPage }">
+                            <li><a href="<%=basePath%>/user/findallchoice.do?pn=${pageInfo.pageNum+1 }"
+                                   aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+                            </a></li>
+                        </c:if>
+                        <li><a href="<%=basePath%>/user/findallchoice.do?pn=${pageInfo.pages}">末页</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
         <!-- Modal编辑模态框 -->
         <div class="modal fade" id="editch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
@@ -288,11 +323,11 @@
                                 <label class="col-sm-2 control-label">难度</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" id="updifficulty" name = "difficulty">
-                                        <option value="1">热血青铜</option>
-                                        <option value="2">不屈白银</option>
-                                        <option value="3">英勇黄金</option>
-                                        <option value="4">超级王牌</option>
-                                        <option value="5">无敌战神</option></select>
+                                        <option value="1">容易</option>
+                                        <option value="2">中等</option>
+                                        <option value="3">较难</option>
+                                        <option value="4">困难</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -369,11 +404,11 @@
                                 <label class="col-sm-2 control-label">难度</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" id="difficulty" name = "difficulty">
-                                        <option value="1">热血青铜</option>
-                                        <option value="2">不屈白银</option>
-                                        <option value="3">英勇黄金</option>
-                                        <option value="4">超级王牌</option>
-                                        <option value="5">无敌战神</option></select>
+                                        <option value="1">容易</option>
+                                        <option value="2">中等</option>
+                                        <option value="3">较难</option>
+                                        <option value="4">困难</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

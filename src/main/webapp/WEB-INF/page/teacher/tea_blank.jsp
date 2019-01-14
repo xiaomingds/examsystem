@@ -230,7 +230,7 @@
                                 <label class="col-sm-2 control-label">难度</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" id="updifficulty" name="difficulty">
-                                        <option value="1">热血青铜</option>
+
                                         <option value="2">不屈白银</option>
                                         <option value="3">英勇黄金</option>
                                         <option value="4">超级王牌</option>
