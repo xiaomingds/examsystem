@@ -7,4 +7,4 @@ Java版本：1.8
 前端：bootstrap+jquery
 开发工具：Idea 2018  
 版本管理工具：Maven  
-版本控制工具：GitHub  
+版本控制工具：Git
